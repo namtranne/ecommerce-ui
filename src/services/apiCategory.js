@@ -9,7 +9,7 @@ export async function getCategoriesProductsPage(id) {
     .get(`/categories/products-page-data`, { params: params })
     .then((response) => response.data)
     .catch((err) => {
-      console.log(err);
+      5173(err);
     });
   return data;
 }

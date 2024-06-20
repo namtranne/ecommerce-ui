@@ -9,7 +9,6 @@ function BreadCrumbs() {
   }
 
   const baseUrl = window.location.origin;
-  console.log(baseUrl);
   const { currentCategory } = data;
   const items = [
     {

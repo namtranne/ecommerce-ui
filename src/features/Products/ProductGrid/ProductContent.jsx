@@ -15,7 +15,7 @@ function ProductContent({
 
   return (
     <motion.div
-      className="shadow-lg overflow-hidden h-[24rem] bg-black relative"
+      className="shadow-lg overflow-hidden bg-black relative"
       initial={{ opacity: 0.6 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -25,7 +25,7 @@ function ProductContent({
     >
       <img src={product.thumbnailUrl} alt="" className="w-full" />
       <motion.div
-        className="p-[25px] absolute rounded-b-sm bg-black h-44 -bottom-2 right-0 w-full"
+        className="p-[25px] rounded-b-sm bg-black h-44 -bottom-2 right-0 w-full"
         style={{
           transform: isHover ? "translateY(-30px)" : "translateY(0)",
           transition: "transform 0.3s",
@@ -39,7 +39,7 @@ function ProductContent({
             ? `${product.name.slice(0, 60)}...`
             : product.name}
         </p>
-        <div className="text-sm font-bold absolute top-28 text-[#3f60d7]">
+        <div className="text-sm font-bold text-[#3f60d7]">
           {product.originalPrice !== product.price && (
             <div className="text-[#C80036] flex items-center justify-between w-full">
               <div>{formatPrice(product.price)}</div>
@@ -73,13 +73,13 @@ function ProductContent({
         >
           <motion.button
             onClick={() => setReviewProduct(product)}
-            className="mr-4 text-[#3f60d7] font-extrabold"
+            className="mr-4 text-[#3f60d7] font-extrabold text-xs"
             whileHover={{ color: "#068FFF" }}
           >
             QUICKVIEW
           </motion.button>
           <motion.button
-            className="mr-4 text-[#3f60d7] font-extrabold"
+            className="mr-4 text-[#3f60d7] font-extrabold text-xs"
             whileHover={{ color: "#068FFF" }}
           >
             BUY PRODUCT
