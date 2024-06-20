@@ -16,10 +16,6 @@ function ProductReviewModal() {
 
   const y = useMotionValue(0);
   const controls = useDragControls();
-  console.log(reviewProduct);
-  useEffect(() => {
-    console.log("Rerender");
-  });
 
   const handleClose = async () => {
     animate(scope.current, {

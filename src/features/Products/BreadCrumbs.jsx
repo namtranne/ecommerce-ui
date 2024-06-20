@@ -8,18 +8,15 @@ function BreadCrumbs() {
     return <BreadCrumbWrapper />;
   }
 
+  const baseUrl = window.location.origin;
+  console.log(baseUrl);
   const { currentCategory } = data;
   const items = [
     {
       title: <BreadCrumbText text="Home" />,
     },
     {
-      title: (
-        <BreadCrumbText
-          text="Shop"
-          href={"http://localhost:5174/products/0/24/1"}
-        />
-      ),
+      title: <BreadCrumbText text="Shop" href={`${baseUrl}/products/0/24/1`} />,
     },
   ];
 
@@ -32,7 +29,7 @@ function BreadCrumbs() {
       title: (
         <BreadCrumbText
           text={category.name}
-          href={"http://localhost:5174/products/" + category.id + "/24/1"}
+          href={`${baseUrl}/products/` + category.id + "/24/1"}
         />
       ),
     });

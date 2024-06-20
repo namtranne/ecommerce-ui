@@ -12,6 +12,8 @@ export function CategoryFilter() {
       </div>
     );
   }
+
+  const baseUrl = window.location.origin;
   const { subCategories } = data;
   return (
     <div className="mb-4">
@@ -23,7 +25,7 @@ export function CategoryFilter() {
               heading={category.name}
               imgSrc={category.image}
               key={category.id}
-              href={"http://localhost:5174/products/" + category.id + "/24/1"}
+              href={`${baseUrl}/products/` + category.id + "/24/1"}
             ></CategoryCard>
           );
         })}
