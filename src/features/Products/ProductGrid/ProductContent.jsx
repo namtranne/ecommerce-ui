@@ -8,37 +8,24 @@ function ProductContent({
   isHover,
 }) {
   const { setReviewProduct } = useReviewProduct();
+
   function formatPrice(price) {
-    const priceString = price.toString();
-    const formattedPrice = priceString.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return formattedPrice + " VND";
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VND";
   }
+
   return (
     <motion.div
-      className="shadow-lg overflow-hidden h-[24rem] bg-black relative "
-      initial={{
-        opacity: 0.6,
-      }}
-      whileInView={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 0.5,
-      }}
-      whileHover={{
-        scale: 1.05,
-        transition: {
-          duration: 0.1,
-        },
-      }}
+      className="shadow-lg overflow-hidden h-[24rem] bg-black relative"
+      initial={{ opacity: 0.6 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="">
-        <img src={product.thumbnailUrl} alt="" className="w-full" />
-      </div>
+      <img src={product.thumbnailUrl} alt="" className="w-full" />
       <motion.div
-        className="p-[25px] absolute rounded-b-sm bg-black h-44 -bottom-2 right-0 w-full "
+        className="p-[25px] absolute rounded-b-sm bg-black h-44 -bottom-2 right-0 w-full"
         style={{
           transform: isHover ? "translateY(-30px)" : "translateY(0)",
           transition: "transform 0.3s",
@@ -54,12 +41,12 @@ function ProductContent({
         </p>
         <div className="text-sm font-bold absolute top-28 text-[#3f60d7]">
           {product.originalPrice !== product.price && (
-            <div
-              className="text-[#C80036] flex items-center"
-              style={{ textDecorationLine: "none", marginBottom: 0 }}
-            >
-              {formatPrice(product.price)}{" "}
-              <div className="inline text-xs text-white bg-[#C80036] p-1 ml-1">
+            <div className="text-[#C80036] flex items-center justify-between w-full">
+              <div>{formatPrice(product.price)}</div>
+              <div
+                className="inline text-white bg-[#C80036] p-1 ml-2"
+                style={{ fontSize: "0.6rem" }}
+              >
                 SALE {product.discountRate}%
               </div>
             </div>
@@ -80,12 +67,9 @@ function ProductContent({
             {formatPrice(product.originalPrice)}
           </p>
         </div>
-
         <div
           className="absolute top-36 text-[11px] font-bold mt-4"
-          style={{
-            opacity: isHover ? 1 : 0,
-          }}
+          style={{ opacity: isHover ? 1 : 0 }}
         >
           <motion.button
             onClick={() => setReviewProduct(product)}
@@ -93,7 +77,7 @@ function ProductContent({
             whileHover={{ color: "#068FFF" }}
           >
             QUICKVIEW
-          </motion.button>{" "}
+          </motion.button>
           <motion.button
             className="mr-4 text-[#3f60d7] font-extrabold"
             whileHover={{ color: "#068FFF" }}

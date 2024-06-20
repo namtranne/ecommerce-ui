@@ -77,7 +77,7 @@ const Wrapper = styled.section`
     width: 100%;
     display: block;
     /* width: 300px; */
-    height: 200px;
+    /* height: 200px; */
     object-fit: cover;
     border-radius: var(--radius);
     margin-bottom: 1rem;
