@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-const Error = () => {
+function Error() {
   return (
     <Wrapper className="page-100">
       <section>
@@ -13,7 +13,7 @@ const Error = () => {
       </section>
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.main`
   background: var(--clr-primary-10);

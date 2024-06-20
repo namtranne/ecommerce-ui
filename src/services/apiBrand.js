@@ -1,10 +1,8 @@
 import authAxios from "../utils/axios";
 
-export async function getProducts(limit, page, categoryId) {
+export async function getBrands() {
   const data = await authAxios
-    .get(`/products/category`, {
-      params: { limit: limit, page: page, categoryId: categoryId },
-    })
+    .get(`/brands`)
     .then((response) => response.data)
     .catch((err) => {
       console.log(err);

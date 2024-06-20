@@ -3,16 +3,16 @@ import { getProducts } from "../services/apiProduct";
 import { useQuery } from "@tanstack/react-query";
 
 export function useProducts() {
-  const { limit, page } = useParams();
+  const { limit, page, categoryId } = useParams();
   const {
     isLoading,
-    data: products,
+    data: data,
     error,
   } = useQuery({
     queryKey: ["products"],
-    queryFn: () => getProducts(limit, page),
+    queryFn: () => getProducts(limit, page, categoryId),
     retry: false,
     useErrorBoundary: true,
   });
-  return { isLoading, error, products };
+  return { isLoading, error, data };
 }

@@ -1,5 +1,5 @@
 function Footer() {
-  return <p>Nav bar</p>;
+  return <p>Footer</p>;
 }
 
 export default Footer;
