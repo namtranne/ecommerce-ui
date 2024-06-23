@@ -39,13 +39,16 @@ function ProductContent({
             ? `${product.name.slice(0, 60)}...`
             : product.name}
         </p>
-        <div className="text-sm font-bold text-[#3f60d7]">
+        <div
+          className="font-bold text-[#3f60d7]"
+          style={{ fontSize: "0.8rem", fontHeight: "1rem" }}
+        >
           {product.originalPrice !== product.price && (
-            <div className="text-[#C80036] flex items-center justify-between w-full">
+            <div className="text-[#C80036] flex items-center w-full">
               <div>{formatPrice(product.price)}</div>
               <div
                 className="inline text-white bg-[#C80036] p-1 ml-2"
-                style={{ fontSize: "0.6rem" }}
+                style={{ fontSize: "0.5rem" }}
               >
                 SALE {product.discountRate}%
               </div>
@@ -59,9 +62,7 @@ function ProductContent({
                   : "none",
             }}
             className={
-              product.originalPrice !== product.price
-                ? "text-xs text-gray-400"
-                : "text-base"
+              product.originalPrice !== product.price ? " text-gray-400" : ""
             }
           >
             {formatPrice(product.originalPrice)}
@@ -73,13 +74,13 @@ function ProductContent({
         >
           <motion.button
             onClick={() => setReviewProduct(product)}
-            className="mr-4 text-[#3f60d7] font-extrabold text-xs"
+            className="mr-4 text-[#3f60d7] font-extrabold"
             whileHover={{ color: "#068FFF" }}
           >
             QUICKVIEW
           </motion.button>
           <motion.button
-            className="mr-4 text-[#3f60d7] font-extrabold text-xs"
+            className="mr-4 text-[#3f60d7] font-extrabold"
             whileHover={{ color: "#068FFF" }}
           >
             BUY PRODUCT
