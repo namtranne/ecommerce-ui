@@ -13,18 +13,21 @@ function Footer() {
           ></path>
         </svg>
       </div>
-      <p>© 2024 Group 5. All rights reserved.</p>
+
       <div className="w-full flex justify-between">
-        <div className="flex w-1/6">
-          <div className="w-1/3">
-            <FontAwesomeIcon icon={faPhoneSquare} />
-            <FontAwesomeIcon icon={faEnvelope} />
+        <div>
+          <p>© 2024 Group 5. All rights reserved.</p>
+          <div className="flex w-1/3">
+            <div className="w-1/5">
+              <FontAwesomeIcon icon={faPhoneSquare} /><br/>
+              <FontAwesomeIcon icon={faEnvelope} />
+            </div>
+            <div className="w-1/2">Hotline Email</div>
+            <div className="w-1/12">
+              :<br />:
+            </div>
+            <div className="w-1/3">0123456789 group5@ecommerce.apcs.edu.vn</div>
           </div>
-          <div className="w-full">Hotline Email</div>
-          <div className="w-3/4">
-            :<br />:
-          </div>
-          <div className="w-1/3">0123456789 group5@ecommerce.apcs.edu.vn</div>
         </div>
         <div className="w-1/4">
           <text>Get the latest tech news</text>
