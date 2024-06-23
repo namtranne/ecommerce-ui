@@ -17,12 +17,16 @@ module.exports = {
         'titanium-100': '#bad9cd',
         'titanium-200': '#455f63',
       },
+      backgroundImage: {
+        'cherish-moment': "url('src/features/Home/Images/cherish-moment.jpg')",
+      }
     },
     backgroundSize: {
       '200%': '200%',
       '300%': '300%',
       '400%': '400%',
     },
+
   },
   plugins: [],
 };

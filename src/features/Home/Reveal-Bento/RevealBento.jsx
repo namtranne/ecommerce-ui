@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
 import { SiGithub, SiTiktok, SiTwitter, SiYoutube } from "react-icons/si";
+import { TbShoppingCartSearch } from "react-icons/tb";
+
 // Ref source: www.hover.dev/components/grids#reveal-bento
 
 export const RevealBento = () => {
@@ -120,7 +122,7 @@ const OffersBlock = () => (
       className="col-span-6 row-span-12 bg-red-500 md:col-span-6"
     >
       <a
-        href="http://localhost:5173/products/29016/24/1"
+        href="http://localhost:5173/products/1846/24/1" // PC & Laptops
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -128,12 +130,15 @@ const OffersBlock = () => (
           alt="Gaming Desktop"
           className="absolute -top-1/3"
         />
-        <div>
+        <div className="">
           <p className="text-xs mb-0">
             Level up your gaming experience
           </p>
+          <p className="text-xs mb-0">
+            Handle resource-intensive tasks
+          </p>
           <p className="mb-0 font-semibold">
-            BUILD YOUR OWN GEAR
+            DESKTOP-LAPTOPS-GEARS
           </p>
         </div>        
       </a>
@@ -144,20 +149,21 @@ const OffersBlock = () => (
         scale: 1.1,
       }}
       className="col-span-6 row-span-12
-        bg-gradient-to-t from-gray-700 to-white
+        bg-gradient-to-t from-green-700 to-green-200
+        z-50
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/1789/24/1"
-        className="flex flex-col justify-end items-center h-full text-3xl text-white"
+        href="http://localhost:5173/products/1815/24/1" // Accessories
+        className="flex flex-col justify-start items-center h-full text-3xl text-white"
       >
         <div>
-          <p className="text-gray-700 font-semibold">Premium Smartphones</p>
+          <p className="text-green-900 font-semibold">High-end Accessories</p>
         </div>  
         <img
-          src="src\features\Home\Images\iphones.png"
+          src="src\features\Home\Images\airpod.png"
           alt="Iphones"
-          className="backdrop-opacity-35"
+          className="absolute top-1/3 backdrop-opacity-35"
         />      
       </a>
     </RevealBentoBlock>
@@ -171,7 +177,7 @@ const OffersBlock = () => (
         md:col-span-6"
     >
       <a
-        href="http://localhost:5173/products/8095/24/1"
+        href="http://localhost:5173/products/1789/24/1" // Smartphones and tablets
         className="flex flex-row justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -181,10 +187,10 @@ const OffersBlock = () => (
         /> 
         <div>
           <p className="text-xs mb-0">
-            Laptops, Tablets, etc.
+            Smartphones, Tablets, etc.
           </p>
           <p className="mb-0 font-semibold">
-            MAKE YOUR BUSINESS PRODUCTIVE
+            THE WHOLE WORLD AT YOUR FINGERTIPS
           </p>
         </div>        
       </a>
@@ -195,20 +201,23 @@ const OffersBlock = () => (
         scale: 1.1,
       }}
       className="col-span-6 row-span-12
-        bg-gradient-to-t from-green-700 to-green-200
+        bg-gradient-to-t from-amber-600 to-amber-200
+        bg-contain
+        bg-center
+        hover:bg-cherish-moment
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/1811/24/1"
-        className="flex flex-col justify-end items-center h-full text-3xl text-white"
+        href="http://localhost:5173/products/1801/24/1"  // Cameras
+        className="flex flex-col justify-start items-top h-full text-3xl text-white"
       >
         <div>
-          <p className="text-green-900 font-semibold">Earbuds and Headphones</p>
+          <p className="text-amber-900 font-semibold text-left">Capture Your Cherished Moments</p>
         </div>  
         <img
-          src="src\features\Home\Images\airpod.png"
+          src="src\features\Home\Images\canon_cam.png"
           alt="Iphones"
-          className="backdrop-opacity-35"
+          className="absolute -bottom-1/3 backdrop-opacity-35 scale-75"
         />      
       </a>
     </RevealBentoBlock>
@@ -218,21 +227,17 @@ const OffersBlock = () => (
         scale: 1.1,
       }}
       className="col-span-6 row-span-12
-        bg-gradient-to-t from-amber-600 to-amber-200
+        bg-gray-200
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/1801/24/1"
-        className="flex flex-row justify-center items-top h-full text-3xl text-white"
+        href="http://localhost:5173/products/0/24/1"  // Full shop
+        className="flex flex-col justify-center items-center h-full text-3xl text-white"
       >
         <div>
-          <p className="text-amber-900 font-semibold text-left">Capture Your Cherished Moments</p>
-        </div>  
-        <img
-          src="src\features\Home\Images\canon_cam.png"
-          alt="Iphones"
-          className="absolute -bottom-5 -right-1/3 backdrop-opacity-35"
-        />      
+          <p className="text-gray-900 font-semibold text-left">View more</p>
+        </div>
+        <TbShoppingCartSearch className="text-6xl text-gray-900"></TbShoppingCartSearch>
       </a>
     </RevealBentoBlock>
   </>

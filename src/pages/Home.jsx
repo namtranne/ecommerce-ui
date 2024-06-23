@@ -1,8 +1,12 @@
 import RevealBento from "../features/Home/Reveal-Bento/RevealBento";
+import HomepageHero from "../features/Home/Hero/HomepageHero";
 
 function Home() {
   return (
-    <RevealBento></RevealBento>
+    <div>
+      <HomepageHero></HomepageHero>
+      <RevealBento></RevealBento>
+    </div>
   );
 }
 
