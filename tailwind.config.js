@@ -19,7 +19,16 @@ module.exports = {
       },
       backgroundImage: {
         'cherish-moment': "url('src/features/Home/Images/cherish-moment.jpg')",
-      }
+      },
+      keyframes: {
+        'infinite-scroll': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        'infinite-scroll': 'infinite-scroll 30s linear infinite',
+      },
     },
     backgroundSize: {
       '200%': '200%',

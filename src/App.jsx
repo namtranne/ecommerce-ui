@@ -1,5 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
@@ -43,9 +45,15 @@ function App() {
               </PrivateRoute>
             }
           /> */}
-          <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
+      </Router>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
       </Router>
     </QueryClientProvider>
   );
