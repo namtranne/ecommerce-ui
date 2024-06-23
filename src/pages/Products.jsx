@@ -11,7 +11,7 @@ function Products() {
   return (
     <ProductContext.Provider value={{ reviewProduct, setReviewProduct }}>
       <BreadCrumbs />
-      <div className="bg-[#F8F8F8] p-4 min-h-screen">
+      <div className="bg-gray-900 p-4 min-h-screen">
         <div className="flex flex-row px-32 py-8">
           <Filter />
           <ProductView />

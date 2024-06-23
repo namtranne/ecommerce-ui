@@ -92,6 +92,7 @@ const OffersBlock = () => (
         text-black 
         hover:text-white
         hover:bg-left
+        hover:z-20
         md:col-span-3"
     >
       <a
@@ -119,7 +120,7 @@ const OffersBlock = () => (
         rotate: "-2.5deg",
         scale: 1.1,
       }}
-      className="col-span-6 row-span-12 bg-red-500 md:col-span-6"
+      className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20"
     >
       <a
         href="http://localhost:5173/products/1846/24/1" // PC & Laptops
@@ -150,8 +151,9 @@ const OffersBlock = () => (
       }}
       className="col-span-6 row-span-12
         bg-gradient-to-t from-green-700 to-green-200
-        z-50
-        md:col-span-3"
+        z-10
+        md:col-span-3
+        hover:z-20"
     >
       <a
         href="http://localhost:5173/products/1815/24/1" // Accessories
@@ -174,6 +176,7 @@ const OffersBlock = () => (
       }}
       className="col-span-6 row-span-12 
         bg-gradient-to-t from-titanium-100 to-titanium-200
+        hover:z-20
         md:col-span-6"
     >
       <a
@@ -202,9 +205,10 @@ const OffersBlock = () => (
       }}
       className="col-span-6 row-span-12
         bg-gradient-to-t from-amber-600 to-amber-200
-        bg-contain
+        bg-cover
         bg-center
         hover:bg-cherish-moment
+        hover:z-20
         md:col-span-3"
     >
       <a
@@ -228,6 +232,7 @@ const OffersBlock = () => (
       }}
       className="col-span-6 row-span-12
         bg-gray-200
+        hover:z-20
         md:col-span-3"
     >
       <a
