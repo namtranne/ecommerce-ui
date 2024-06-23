@@ -39,7 +39,7 @@ function BreadCrumbs() {
     <BreadCrumbWrapper>
       <Breadcrumb
         className="text-white"
-        separator=<span className="text-white">{">"}</span>
+        separator={<span className="text-white">{">"}</span>}
         items={items}
       />
     </BreadCrumbWrapper>

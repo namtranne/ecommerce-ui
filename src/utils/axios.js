@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authAxios = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://spring-deploy-9mhk.onrender.com/api",
 });
 
 export default authAxios;
