@@ -120,7 +120,7 @@ const OffersBlock = () => (
       className="col-span-6 row-span-12 bg-red-500 md:col-span-6"
     >
       <a
-        href="#"
+        href="http://localhost:5173/products/29016/24/1"
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -148,7 +148,7 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="#"
+        href="http://localhost:5173/products/1789/24/1"
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <div>
@@ -171,7 +171,7 @@ const OffersBlock = () => (
         md:col-span-6"
     >
       <a
-        href="#"
+        href="http://localhost:5173/products/8095/24/1"
         className="flex flex-row justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -199,7 +199,7 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="#"
+        href="http://localhost:5173/products/1811/24/1"
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <div>
@@ -222,7 +222,7 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="#"
+        href="http://localhost:5173/products/1801/24/1"
         className="flex flex-row justify-center items-top h-full text-3xl text-white"
       >
         <div>
