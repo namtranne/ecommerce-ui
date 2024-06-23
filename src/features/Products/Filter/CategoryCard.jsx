@@ -49,7 +49,7 @@ function CategoryCard({ heading, imgSrc, href }) {
             staggerChildren: 0.075,
             delayChildren: 0.25,
           }}
-          className="relative z-10 block text-sm font-medium text-black transition-colors duration-500"
+          className="relative z-10 block text-sm font-medium text-white transition-colors duration-500"
         >
           <motion.span
             variants={{

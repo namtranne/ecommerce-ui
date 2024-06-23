@@ -70,14 +70,14 @@ function Sort({ isGridView, setListView, setGridView }) {
           <UnorderedListOutlined />
         </button>
       </div>
-      <p>{products.length} products found</p>
+      <p className="text-white">{products.length} products found</p>
       <hr />
       <Dropdown
         menu={{
           items,
         }}
       >
-        <a onClick={(e) => e.preventDefault()}>
+        <a onClick={(e) => e.preventDefault()} className="text-white">
           <Space>
             Sort By
             <DownOutlined />
@@ -132,10 +132,11 @@ const Wrapper = styled.section`
       svg {
         font-size: 1rem;
       }
+      color: var(--clr-white);
     }
     .active {
-      background: var(--clr-black);
-      color: var(--clr-white);
+      background: var(--clr-white);
+      color: var(--clr-black);
     }
   }
 

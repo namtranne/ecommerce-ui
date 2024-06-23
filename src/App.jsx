@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
+import AppLayout from "./ui/WebLayout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,32 +28,25 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Router>
-        <Navbar />
         <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="cart" element={<Cart />} />
-          <Route
-            path="/products/:categoryId/:limit/:page"
-            element={<Products />}
-          />
-          <Route path="products/:id" element={<SingleProduct />} />
-          {/* <Route
-            path="checkout"
-            element={
-              <PrivateRoute>
-                <Checkout />
-              </PrivateRoute>
-            }
-          /> */}
-        </Routes>
-        <Footer />
-      </Router>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<Error />} />
+          {/* Has header and footer routes */}
+          <Route element={<AppLayout hasHeaderAndFooter />}>
+            <Route path="/" exact element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="cart" element={<Cart />} />
+            <Route
+              path="/products/:categoryId/:limit/:page"
+              element={<Products />}
+            />
+            <Route path="products/:id" element={<SingleProduct />} />
+          </Route>
+
+          {/* does not have header and footer routes */}
+          <Route element={<AppLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<Error />} />
+          </Route>
         </Routes>
       </Router>
     </QueryClientProvider>

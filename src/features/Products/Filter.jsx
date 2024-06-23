@@ -3,7 +3,7 @@ import { CategoryFilter } from "./Filter/CategoryFilter";
 import PriceFilter from "./Filter/PriceFilter";
 function Filter() {
   return (
-    <div className="mr-12">
+    <div className="mr-12 text-white">
       <div className="mb-2">
         <input
           type="text"

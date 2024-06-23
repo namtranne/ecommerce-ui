@@ -9,7 +9,7 @@ import { TbShoppingCartSearch } from "react-icons/tb";
 
 export const RevealBento = () => {
   return (
-    <div className="min-h-screen bg-zinc-900 px-4 py-12 text-zinc-50">
+    <section className="bg-zinc-900 px-4 py-12 text-zinc-50 flex items-center">
       <motion.div
         initial="initial"
         animate="animate"
@@ -18,9 +18,9 @@ export const RevealBento = () => {
         }}
         className="mx-auto grid max-w-4xl grid-flow-dense grid-cols-12 gap-4"
       >
-        <OffersBlock/>
+        <OffersBlock />
       </motion.div>
-    </div>
+    </section>
   );
 };
 
@@ -83,7 +83,6 @@ const OffersBlock = () => (
         rotate: 2.5,
         scale: 1.1,
       }}
-
       className="col-span-6 row-span-12 
         bg-right
         bg-300%
@@ -95,24 +94,13 @@ const OffersBlock = () => (
         hover:z-20
         md:col-span-3"
     >
-      <a
-        href="#"
-        className="grid h-full place-content-center text-3xl"
-      >
-        <p className="flex flex-col">
-          <span className="font-extrabold text-5xl">
-            BEST
-          </span>
-          <p>
-          price offers.
-          </p>
-          <p>
-            Up to
-          </p>
-          <span className="font-extrabold text-5xl place-self-end">
-            30%
-          </span>
-        </p>
+      <a href="#" className="grid h-full place-content-center text-3xl">
+        <div className="flex flex-col">
+          <span className="font-extrabold text-5xl">BEST</span>
+          <p>price offers.</p>
+          <p>Up to</p>
+          <span className="font-extrabold text-5xl place-self-end">30%</span>
+        </div>
       </a>
     </RevealBentoBlock>
     <RevealBentoBlock
@@ -132,16 +120,10 @@ const OffersBlock = () => (
           className="absolute -top-1/3"
         />
         <div className="">
-          <p className="text-xs mb-0">
-            Level up your gaming experience
-          </p>
-          <p className="text-xs mb-0">
-            Handle resource-intensive tasks
-          </p>
-          <p className="mb-0 font-semibold">
-            DESKTOP-LAPTOPS-GEARS
-          </p>
-        </div>        
+          <p className="text-xs mb-0">Level up your gaming experience</p>
+          <p className="text-xs mb-0">Handle resource-intensive tasks</p>
+          <p className="mb-0 font-semibold">DESKTOP-LAPTOPS-GEARS</p>
+        </div>
       </a>
     </RevealBentoBlock>
     <RevealBentoBlock
@@ -161,12 +143,12 @@ const OffersBlock = () => (
       >
         <div>
           <p className="text-green-900 font-semibold">High-end Accessories</p>
-        </div>  
+        </div>
         <img
           src="src\features\Home\Images\airpod.png"
           alt="Iphones"
           className="absolute top-1/3 backdrop-opacity-35"
-        />      
+        />
       </a>
     </RevealBentoBlock>
     <RevealBentoBlock
@@ -187,15 +169,13 @@ const OffersBlock = () => (
           src="src\features\Home\Images\productive-items.png"
           alt="Iphones"
           className="backdrop-opacity-35"
-        /> 
+        />
         <div>
-          <p className="text-xs mb-0">
-            Smartphones, Tablets, etc.
-          </p>
+          <p className="text-xs mb-0">Smartphones, Tablets, etc.</p>
           <p className="mb-0 font-semibold">
             THE WHOLE WORLD AT YOUR FINGERTIPS
           </p>
-        </div>        
+        </div>
       </a>
     </RevealBentoBlock>
     <RevealBentoBlock
@@ -212,17 +192,19 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/1801/24/1"  // Cameras
+        href="http://localhost:5173/products/1801/24/1" // Cameras
         className="flex flex-col justify-start items-top h-full text-3xl text-white"
       >
         <div>
-          <p className="text-amber-900 font-semibold text-left">Capture Your Cherished Moments</p>
-        </div>  
+          <p className="text-amber-900 font-semibold text-left">
+            Capture Your Cherished Moments
+          </p>
+        </div>
         <img
           src="src\features\Home\Images\canon_cam.png"
           alt="Iphones"
           className="absolute -bottom-1/3 backdrop-opacity-35 scale-75"
-        />      
+        />
       </a>
     </RevealBentoBlock>
     <RevealBentoBlock
@@ -236,7 +218,7 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/0/24/1"  // Full shop
+        href="http://localhost:5173/products/0/24/1" // Full shop
         className="flex flex-col justify-center items-center h-full text-3xl text-white"
       >
         <div>
@@ -330,6 +312,6 @@ const SingleOfferBlock = () => {
       </a>
     </RevealBentoBlock>
   );
-}
+};
 
 export default RevealBento;

@@ -4,10 +4,15 @@ import Brands from "../features/Home/Brands/Brands";
 
 function Home() {
   return (
-    <div>
-      <HomepageHero></HomepageHero>
-      <RevealBento></RevealBento>
-      <Brands></Brands>
+    <div
+      style={{
+        scrollSnapType: "y mandatory",
+        scrollBehavior: "smooth",
+      }}
+    >
+      <HomepageHero />
+      <RevealBento />
+      <Brands />
     </div>
   );
 }
