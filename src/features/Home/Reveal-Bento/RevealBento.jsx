@@ -115,7 +115,7 @@ const OffersBlock = () => (
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <img
-          src="src\features\Home\Images\gaming_desktop.png"
+          src="public\Images\gaming_desktop.png"
           alt="Gaming Desktop"
           className="absolute -top-1/3"
         />
@@ -145,7 +145,7 @@ const OffersBlock = () => (
           <p className="text-green-900 font-semibold">High-end Accessories</p>
         </div>
         <img
-          src="src\features\Home\Images\airpod.png"
+          src="...rc\features\Home\Images\airpod.png"
           alt="Iphones"
           className="absolute top-1/3 backdrop-opacity-35"
         />
@@ -166,7 +166,7 @@ const OffersBlock = () => (
         className="flex flex-row justify-end items-center h-full text-3xl text-white"
       >
         <img
-          src="src\features\Home\Images\productive-items.png"
+          src="publicImages\productive-items.png"
           alt="Iphones"
           className="backdrop-opacity-35"
         />
@@ -201,7 +201,7 @@ const OffersBlock = () => (
           </p>
         </div>
         <img
-          src="src\features\Home\Images\canon_cam.png"
+          src="publicImages\canon_cam.png"
           alt="Iphones"
           className="absolute -bottom-1/3 backdrop-opacity-35 scale-75"
         />
