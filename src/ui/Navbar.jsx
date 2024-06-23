@@ -122,7 +122,7 @@ function Navbar() {
                 <div className="w-2/3">
                   <img
                     className="w-full h-full object-cover object-center rounded-r-md"
-                    src="public/images/shop-header.jpg"
+                    src="https://imgur.com/fBMFh5i.png"
                     alt="Shop Header"
                   />
                 </div>
