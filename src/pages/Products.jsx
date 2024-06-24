@@ -10,13 +10,15 @@ function Products() {
   const [reviewProduct, setReviewProduct] = useState(null);
   return (
     <ProductContext.Provider value={{ reviewProduct, setReviewProduct }}>
-      <BreadCrumbs />
-      <div className="bg-gray-900 p-4 min-h-screen">
-        <div className="flex flex-row px-32 py-8">
-          <Filter />
-          <ProductView />
+      <div className="mt-[70px]">
+        <BreadCrumbs />
+        <div className="bg-gray-900 p-4 min-h-screen">
+          <div className="flex flex-row px-32 py-8">
+            <Filter />
+            <ProductView />
+          </div>
+          <ProductReviewModal />
         </div>
-        <ProductReviewModal />
       </div>
     </ProductContext.Provider>
   );
