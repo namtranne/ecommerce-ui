@@ -2,7 +2,25 @@ import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { GrHpi } from "react-icons/gr";
-import { SiAsus, SiLenovo, SiApple, SiAcer, SiSamsung, SiNvidia, SiMsi } from "react-icons/si";
+import { SiAsus, 
+  SiApple, 
+  SiLenovo, 
+  SiAcer,
+  // Lacie,
+  SiSony,
+  SiRazer,
+  SiSamsung,
+  // Microlab,
+  SiPanasonic,
+  SiDell,
+  //Canon
+  SiSandisk,
+  SiLg,
+  SiLogitech,
+  SiSennheiser,
+
+  SiNvidia, 
+  SiMsi } from "react-icons/si";
 
 export const Brands = () => {
     return (
@@ -20,31 +38,41 @@ export const Brands = () => {
     );
 }
 
+
 const LogoScroller = () => {
-  
-    return (
-      <div className="w-full overflow-hidden relative">
-        <ul className="flex text-9xl items-center justify-center md:justify-start space-x-16 animate-infinite-scroll">
-            <li><GrHpi /></li>
-            <li><SiAsus /></li>
-            <li><SiLenovo /></li>
-            <li><SiApple /></li>
-            <li><SiAcer /></li>
-            <li><SiSamsung /></li>
-            <li><SiNvidia /></li>
-            <li><SiMsi /></li>
-            {/* Repeat icons to ensure smooth scrolling */}
-            <li><GrHpi /></li>
-            <li><SiAsus /></li>
-            <li><SiLenovo /></li>
-            <li><SiApple /></li>
-            <li><SiAcer /></li>
-            <li><SiSamsung /></li>
-            <li><SiNvidia /></li>
-            <li><SiMsi /></li>
-        </ul>
-      </div>
-    );
-  };
+  // Define the list of icons
+  const icons = [
+    <GrHpi key="GrHpi" />,
+    <SiAsus key="SiAsus" />,
+    <SiApple key="SiApple" />,
+    <SiLenovo key="SiLenovo" />,
+    <SiSony key="SiSony" />,
+    <SiRazer key="SiRazer" />,
+    <SiSamsung key="SiSamsung" />,
+    <SiAcer key="SiAcer" />,
+    <SiPanasonic key="SiPanasonic" />,
+    <SiDell key="SiDell" />,
+    <SiSandisk key="SiSandisk" />,
+    <SiLg key="SiLg" />,
+    <SiLogitech key="SiLogitech" />,
+    <SiSennheiser key="SiSennheiser" />,
+
+    <SiNvidia key="SiNvidia" />,
+    <SiMsi key="SiMsi" />,
+  ];
+
+  // Duplicate the icons array
+  const duplicatedIcons = [...icons, ...icons];
+
+  return (
+    <div className="w-full overflow-hidden relative">
+      <ul className="flex text-9xl items-center space-x-16 animate-infinite-scroll">
+        {duplicatedIcons.map((icon, index) => (
+          <li key={index}>{icon}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Brands;
