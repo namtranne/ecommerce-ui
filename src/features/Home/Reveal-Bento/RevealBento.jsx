@@ -120,7 +120,7 @@ const OffersBlock = () => (
         rotate: "-2.5deg",
         scale: 1.1,
       }}
-      className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20"
+      className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20 relative"
     >
       <a
         href="http://localhost:5173/products/1846/24/1" // PC & Laptops
@@ -129,7 +129,7 @@ const OffersBlock = () => (
         <img
           src="src\features\Home\Images\gaming_desktop.png"
           alt="Gaming Desktop"
-          className="absolute -top-1/3"
+          className="absolute -top-1/3 transform transition-transform"
         />
         <div className="">
           <p className="text-xs mb-0">
@@ -153,7 +153,8 @@ const OffersBlock = () => (
         bg-gradient-to-t from-green-700 to-green-200
         z-10
         md:col-span-3
-        hover:z-20"
+        hover:z-20
+        relative"
     >
       <a
         href="http://localhost:5173/products/1815/24/1" // Accessories
@@ -177,7 +178,8 @@ const OffersBlock = () => (
       className="col-span-6 row-span-12 
         bg-gradient-to-t from-titanium-100 to-titanium-200
         hover:z-20
-        md:col-span-6"
+        md:col-span-6
+        relative"
     >
       <a
         href="http://localhost:5173/products/1789/24/1" // Smartphones and tablets
@@ -205,11 +207,13 @@ const OffersBlock = () => (
       }}
       className="col-span-6 row-span-12
         bg-gradient-to-t from-amber-600 to-amber-200
-        bg-cover
+        bg-contain
         bg-center
         hover:bg-cherish-moment
         hover:z-20
-        md:col-span-3"
+        md:col-span-3
+        relative"
+        style={{ backgroundSize: 'contain', height: '100%', width: '100%' }}
     >
       <a
         href="http://localhost:5173/products/1801/24/1"  // Cameras
