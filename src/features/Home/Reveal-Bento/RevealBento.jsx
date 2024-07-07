@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
-import { SiGithub, SiTiktok, SiTwitter, SiYoutube } from "react-icons/si";
+import { SiTwitter } from "react-icons/si";
 import { TbShoppingCartSearch } from "react-icons/tb";
 
 // Ref source: www.hover.dev/components/grids#reveal-bento
@@ -53,28 +53,6 @@ const RevealBentoBlock = ({ className, ...rest }) => {
     />
   );
 };
-
-const HeaderBlock = () => (
-  <RevealBentoBlock className="col-span-12 row-span-2 md:col-span-6">
-    <img
-      src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=John"
-      alt="avatar"
-      className="mb-4 size-14 rounded-full"
-    />
-    <h1 className="mb-12 text-4xl font-medium leading-tight">
-      Hi, I'm Tom.{" "}
-      <span className="text-zinc-400">
-        I build cool websites like this one.
-      </span>
-    </h1>
-    <a
-      href="#"
-      className="flex items-center gap-1 text-red-300 hover:underline"
-    >
-      Contact me <FiArrowRight />
-    </a>
-  </RevealBentoBlock>
-);
 
 const OffersBlock = () => (
   <>
@@ -293,29 +271,6 @@ const EmailListBlock = () => (
     </form>
   </RevealBentoBlock>
 );
-
-const Logo = () => {
-  // Temp logo from https://logoipsum.com/
-  return (
-    <svg
-      width="40"
-      height="auto"
-      viewBox="0 0 50 39"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="mx-auto mb-12 fill-zinc-50"
-    >
-      <path
-        d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-        stopColor="#000000"
-      ></path>
-      <path
-        d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-        stopColor="#000000"
-      ></path>
-    </svg>
-  );
-};
 
 const SingleOfferBlock = () => {
   return (
