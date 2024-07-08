@@ -8,13 +8,19 @@ const ProductContext = createContext();
 
 function Products() {
   const [reviewProduct, setReviewProduct] = useState(null);
+  const [filter, setFilter] = useState("");
+
+  const updateFilter = (newFilter) => {
+    setFilter(newFilter);
+    console.log(newFilter)
+  }
   return (
     <ProductContext.Provider value={{ reviewProduct, setReviewProduct }}>
       <BreadCrumbs />
       <div className="bg-[#F8F8F8] p-4 min-h-screen">
         <div className="flex flex-row px-32 py-8">
-          <Filter />
-          <ProductView />
+          <Filter onFilterChange={updateFilter}/>
+          <ProductView filter={filter}/>
         </div>
         <ProductReviewModal />
       </div>
