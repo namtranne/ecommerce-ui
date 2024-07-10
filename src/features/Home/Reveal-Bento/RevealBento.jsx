@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { twMerge } from "tailwind-merge";
 import { FiArrowRight, FiMail, FiMapPin } from "react-icons/fi";
-import { SiGithub, SiTiktok, SiTwitter, SiYoutube } from "react-icons/si";
+import { SiTwitter } from "react-icons/si";
 import { TbShoppingCartSearch } from "react-icons/tb";
 
 // Ref source: www.hover.dev/components/grids#reveal-bento
@@ -54,28 +54,6 @@ const RevealBentoBlock = ({ className, ...rest }) => {
   );
 };
 
-const HeaderBlock = () => (
-  <RevealBentoBlock className="col-span-12 row-span-2 md:col-span-6">
-    <img
-      src="https://api.dicebear.com/8.x/lorelei-neutral/svg?seed=John"
-      alt="avatar"
-      className="mb-4 size-14 rounded-full"
-    />
-    <h1 className="mb-12 text-4xl font-medium leading-tight">
-      Hi, I'm Tom.{" "}
-      <span className="text-zinc-400">
-        I build cool websites like this one.
-      </span>
-    </h1>
-    <a
-      href="#"
-      className="flex items-center gap-1 text-red-300 hover:underline"
-    >
-      Contact me <FiArrowRight />
-    </a>
-  </RevealBentoBlock>
-);
-
 const OffersBlock = () => (
   <>
     <RevealBentoBlock
@@ -108,7 +86,7 @@ const OffersBlock = () => (
         rotate: "-2.5deg",
         scale: 1.1,
       }}
-      className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20"
+      className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20 relative"
     >
       <a
         href="http://localhost:5173/products/1846/24/1" // PC & Laptops
@@ -117,7 +95,7 @@ const OffersBlock = () => (
         <img
           src="https://imgur.com/E0nN2hX.png"
           alt="Gaming Desktop"
-          className="absolute -top-1/3"
+          className="absolute -top-1/3 transform transition-transform"
         />
         <div className="">
           <p className="text-xs mb-0">Level up your gaming experience</p>
@@ -135,7 +113,8 @@ const OffersBlock = () => (
         bg-gradient-to-t from-green-700 to-green-200
         z-10
         md:col-span-3
-        hover:z-20"
+        hover:z-20
+        relative"
     >
       <a
         href="http://localhost:5173/products/1815/24/1" // Accessories
@@ -159,7 +138,8 @@ const OffersBlock = () => (
       className="col-span-6 row-span-12 
         bg-gradient-to-t from-titanium-100 to-titanium-200
         hover:z-20
-        md:col-span-6"
+        md:col-span-6
+        relative"
     >
       <a
         href="http://localhost:5173/products/1789/24/1" // Smartphones and tablets
@@ -185,11 +165,13 @@ const OffersBlock = () => (
       }}
       className="col-span-6 row-span-12
         bg-gradient-to-t from-amber-600 to-amber-200
-        bg-cover
+        bg-contain
         bg-center
         hover:bg-cherish-moment
         hover:z-20
-        md:col-span-3"
+        md:col-span-3
+        relative"
+        style={{ backgroundSize: 'contain', height: '100%', width: '100%' }}
     >
       <a
         href="http://localhost:5173/products/1801/24/1" // Cameras
@@ -271,29 +253,6 @@ const EmailListBlock = () => (
     </form>
   </RevealBentoBlock>
 );
-
-const Logo = () => {
-  // Temp logo from https://logoipsum.com/
-  return (
-    <svg
-      width="40"
-      height="auto"
-      viewBox="0 0 50 39"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="mx-auto mb-12 fill-zinc-50"
-    >
-      <path
-        d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
-        stopColor="#000000"
-      ></path>
-      <path
-        d="M17.4224 27.102L11.4192 36H33.5008L49 13.0271H32.7024L23.2064 27.102H17.4224Z"
-        stopColor="#000000"
-      ></path>
-    </svg>
-  );
-};
 
 const SingleOfferBlock = () => {
   return (

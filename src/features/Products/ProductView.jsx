@@ -6,7 +6,7 @@ import ProductList from "./ProductList";
 import Sort from "./Sort";
 import NeubrutalismButton from "../../ui/NeubrutalismButton";
 
-function ProductView() {
+function ProductView({ filter }) {
   const { isLoading, data, error } = useProducts();
   const [isGridView, setIsGridView] = useState(true);
   if (isLoading) {
@@ -25,6 +25,20 @@ function ProductView() {
   };
 
   const { content: products } = data;
+
+  console.log(filter);
+  const filteredProducts = products.filter((product) => {
+    // Assuming product.brand is an object with a name property that is a string
+    const meetsBrandCriteria = filter.brand
+      ? product.brand.name.toLowerCase().includes(filter.brand.toLowerCase())
+      : true;
+    const meetsPriceCriteria = filter.price
+      ? product.price >= filter.price.min && product.price <= filter.price.max
+      : true;
+    return meetsBrandCriteria && meetsPriceCriteria;
+  });
+  console.log(filteredProducts);
+
   return (
     <div className="w-full">
       <Sort
@@ -33,9 +47,9 @@ function ProductView() {
         setListView={setListView}
       />
       {isGridView ? (
-        <ProductGrid products={products} />
+        <ProductGrid products={filteredProducts} />
       ) : (
-        <ProductList products={products} />
+        <ProductList products={filteredProducts} />
       )}
       <div className="flex w-full justify-center py-8">
         <NeubrutalismButton text="LOAD MORE..." />
