@@ -14,6 +14,7 @@ import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
 import AppLayout from "./ui/WebLayout";
 import CustomerSupport from "./pages/CustomerSupport";
+import LoginSignUp from "./pages/LoginSignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,8 +46,8 @@ function App() {
 
           {/* does not have header and footer routes */}
           <Route element={<AppLayout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LoginSignUp />} />
+            <Route path="/signup" element={<LoginSignUp />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

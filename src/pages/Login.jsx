@@ -6,9 +6,7 @@ import { LoginViaUsername } from "../features/Login/LoginViaUsername";
 import { LoginButton } from "../features/Login/LoginButton";
 import { useLogin } from "../hooks/useAuthentication";
 
-const LoginContext = createContext();
-
-function Login() {
+function Login({ onSignUpClick }) {
   const [userCredentials, setUserCredentials] = useState({
     username: "",
     password: "",
@@ -29,7 +27,7 @@ function Login() {
         }}
         className="mx-auto grid max-w-2xl grid-flow-dense grid-cols-12 gap-4"
       >
-        <LoginWelcomeText />
+        <LoginWelcomeText onSignUpClick={onSignUpClick}></LoginWelcomeText>;
         <LoginViaThirdParty />
         <LoginViaUsername
           userCredentials={userCredentials}
