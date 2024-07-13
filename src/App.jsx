@@ -10,11 +10,12 @@ import Error from "./pages/Error";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Footer from "./ui/Footer";
-import Navbar from "./ui/Navbar";
 import AppLayout from "./ui/WebLayout";
 import CustomerSupport from "./pages/CustomerSupport";
 import LoginSignUp from "./pages/LoginSignUp";
+import { useUserDetails } from "./hooks/useAuthentication";
+import UserContext from "./context/UserContext";
+import MyAccount from "./pages/MyAccount";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,8 +27,10 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const userDetails = useUserDetails();
+
   return (
-    <QueryClientProvider client={queryClient}>
+    <UserContext.Provider value={userDetails}>
       <ReactQueryDevtools initialIsOpen={false} />
       <Router>
         <Routes>
@@ -42,6 +45,7 @@ function App() {
             />
             <Route path="/customer-support" element={<CustomerSupport />} />
             <Route path="products/:id" element={<SingleProduct />} />
+            <Route path="my-account" element={<MyAccount />} />
           </Route>
 
           {/* does not have header and footer routes */}
@@ -52,7 +56,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </QueryClientProvider>
+    </UserContext.Provider>
   );
 }
 

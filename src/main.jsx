@@ -8,8 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-chat-elements/dist/main.css";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 1000,
+    },
+  },
+});
 root.render(
   <React.StrictMode>
     <ToastContainer
@@ -23,7 +32,9 @@ root.render(
       theme="dark"
     />
     <MantineProvider>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </MantineProvider>
   </React.StrictMode>
 );

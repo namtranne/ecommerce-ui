@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "../utils/axios";
+import UserContext from "../context/UserContext";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 function Navbar() {
-  const baseUrl = window.location.origin;
-  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+  const { username, firstName, lastName } = useContext(UserContext) || {};
+  const isUserLoggedIn = username != null && username != undefined;
+  const queryClient = useQueryClient();
+
+  const logOut = async () => {
+    localStorage.removeItem("token");
+    toast.success("Logout successfully!!!");
+    queryClient.invalidateQueries(["user"]);
+    navigate("/");
+  };
+
   const scrollToBottom = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
@@ -33,6 +45,11 @@ function Navbar() {
       }
       case "Support": {
         navigate("customer-support");
+        break;
+      }
+      case "Account": {
+        navigate("my-account");
+        break;
       }
     }
   };
@@ -149,7 +166,22 @@ function Navbar() {
           </button>
         </nav>
         <div className="flex-1 flex justify-end">
-          {!getToken() && (
+          {isUserLoggedIn ? (
+            <>
+              <button
+                onClick={() => navigateTo("Account")}
+                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+              >
+                {firstName + " " + lastName}
+              </button>
+              <button
+                onClick={() => logOut()}
+                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
             <>
               <button
                 onClick={() => navigateTo("Login")}

@@ -4,6 +4,10 @@ export const getToken = () => {
   return localStorage.getItem("token") ? localStorage.getItem("token") : "";
 };
 
+export const isLogin = () => {
+  return localStorage.getItem("token") ? true : false;
+};
+
 const authAxios = axios.create({
   baseURL: "http://localhost:8080/api",
 });

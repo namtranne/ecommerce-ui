@@ -1,24 +1,25 @@
-import React, { createContext, useState } from "react";
 import { motion } from "framer-motion";
-import LoginWelcomeText from "../features/Login/LoginWelcomeText";
+import { CiLogin } from "react-icons/ci";
 import { LoginViaThirdParty } from "../features/Login/LoginViaThirdParty";
-import { LoginViaUsername } from "../features/Login/LoginViaUsername";
 import { LoginButton } from "../features/Login/LoginButton";
+import LoginViaEmail from "../features/Login/LoginViaEmail";
+import LoginWelcomeText from "../features/Login/LoginWelcomeText";
 import { useLogin } from "../hooks/useAuthentication";
+import { useState } from "react";
 
 function Login({ onSignUpClick }) {
-  const [userCredentials, setUserCredentials] = useState({
+  const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
   const { login, isLoading } = useLogin();
 
   const handleLogin = () => {
-    login(userCredentials);
+    login(credentials);
   };
 
   return (
-    <section className="px-4 py-12 bg-gradient-to-r from-zinc-950 to-zinc-800 min-h-screen">
+    <section className="px-4 py-12 min-h-screen flex-wrap">
       <motion.div
         initial="initial"
         animate="animate"
@@ -27,13 +28,16 @@ function Login({ onSignUpClick }) {
         }}
         className="mx-auto grid max-w-2xl grid-flow-dense grid-cols-12 gap-4"
       >
-        <LoginWelcomeText onSignUpClick={onSignUpClick}></LoginWelcomeText>;
-        <LoginViaThirdParty />
-        <LoginViaUsername
-          userCredentials={userCredentials}
-          setUserCredentials={setUserCredentials}
-        />
-        <LoginButton handleLogin={handleLogin} isLoading={isLoading} />
+        <LoginWelcomeText onSignUpClick={onSignUpClick}></LoginWelcomeText>
+        <LoginViaThirdParty></LoginViaThirdParty>
+        <LoginViaEmail
+          credentials={credentials}
+          setCredentials={setCredentials}
+        ></LoginViaEmail>
+        <LoginButton
+          handleLogin={handleLogin}
+          isLoading={isLoading}
+        ></LoginButton>
       </motion.div>
     </section>
   );
