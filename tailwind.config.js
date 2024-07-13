@@ -19,6 +19,7 @@ module.exports = {
       },
       backgroundImage: {
         'cherish-moment': "url('src/features/Home/Images/cherish-moment.jpg')",
+        'explore-techverse': "url(src/features/SignUp/Images/signup_banner.png)",
       },
       keyframes: {
         'infinite-scroll': {

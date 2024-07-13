@@ -12,6 +12,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
+import LoginSignUp from "./pages/LoginSignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,8 +51,8 @@ function App() {
       </Router>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LoginSignUp />} />
+          <Route path="/signup" element={<LoginSignUp />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>

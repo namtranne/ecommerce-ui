@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { twMerge } from "tailwind-merge";
 import LoginOption from "../features/Login/LoginOption";
 import { SiGoogle, SiFacebook } from "react-icons/si";
+import { CiLogin } from "react-icons/ci";
 
-function Login() {
+function Login({onSignUpClick}) {
     return (
-        <section className="px-4 py-12 bg-gradient-to-r from-zinc-950 to-zinc-800 min-h-screen">
+        <section className="px-4 py-12 min-h-screen flex-wrap">
             <motion.div
                 initial="initial"
                 animate="animate"
@@ -15,7 +15,7 @@ function Login() {
                 }}
                 className="mx-auto grid max-w-2xl grid-flow-dense grid-cols-12 gap-4"
             >
-                <LoginWelcomeText></LoginWelcomeText>
+                <LoginWelcomeText onSignUpClick={onSignUpClick}></LoginWelcomeText>
                 <LoginViaThirdParty></LoginViaThirdParty>
                 <LoginViaEmail></LoginViaEmail>
                 <LoginButton></LoginButton>
@@ -24,12 +24,19 @@ function Login() {
     );
 }
 
-const LoginWelcomeText = () => {
+const LoginWelcomeText = ({onSignUpClick}) => {
     return (
         <div className="text-zinc-200 text-2xl col-span-full">
             <p className="text-xl">G5Tech</p>
             <p className="text-4xl">Log in to your account</p>
-            <p>Don't have an account? <a  className="text-blue-500 hover:underline" href="#">Create one.</a></p>
+            <p>Don't have an account? {" "}
+            <button
+                onClick={onSignUpClick}
+                className="text-blue-500 hover:underline"
+            >
+                Create one.
+            </button>
+            </p>
         </div>
     );
 }
@@ -112,8 +119,8 @@ const LoginViaEmail = () => {
             <div className="space-y-3">
                 <p className="text-2xl m-0">Password</p>
                 <input
-                    type="email"
-                    placeholder="Enter your email"
+                    type="password"
+                    placeholder="Enter your password"
                     className="w-full rounded border border-zinc-700 bg-zinc-800 px-3 py-1.5 transition-colors
                     hover:border-orange-400 hover:outline-0
                     focus:border-orange-300 focus:outline-0 focus:shadow-orange-400 focus:shadow"
@@ -130,10 +137,13 @@ const LoginButton = () => {
     return (
         <a className="col-span-full flex flex-col" href="#">
             <motion.button
-            
-            className="bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-lg transition duration-0.2 
-            hover:scale-105 hover:shadow-cyan-600 hover:shadow active:scale-95">
-            <p className="m-0 p-2 text-zinc-200 text-xl font-semibold">Log in </p>
+                className="bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-lg transition duration-0.2 
+                hover:scale-105 hover:shadow-cyan-600 hover:shadow active:scale-95
+                items-center justify-center
+                flex flex-row"
+            >
+                <p className="m-0 p-2 text-zinc-200 text-xl font-semibold">Log in </p> {" "} 
+                <CiLogin className="text-2xl text-zinc-200"></CiLogin>
             </motion.button>
         </a>
 
