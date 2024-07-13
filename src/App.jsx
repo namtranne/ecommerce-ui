@@ -13,6 +13,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Footer from "./ui/Footer";
 import Navbar from "./ui/Navbar";
 import AppLayout from "./ui/WebLayout";
+import CustomerSupport from "./pages/CustomerSupport";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,7 @@ function App() {
               path="/products/:categoryId/:limit/:page"
               element={<Products />}
             />
+            <Route path="/customer-support" element={<CustomerSupport />} />
             <Route path="products/:id" element={<SingleProduct />} />
           </Route>
 

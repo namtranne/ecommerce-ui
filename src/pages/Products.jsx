@@ -3,7 +3,6 @@ import Filter from "../features/Products/Filter";
 import ProductReviewModal from "../features/Products/ProductReviewModal";
 import BreadCrumbs from "../features/Products/BreadCrumbs";
 import ProductView from "../features/Products/ProductView";
-
 const ProductContext = createContext();
 
 function Products() {
@@ -12,16 +11,17 @@ function Products() {
 
   const updateFilter = (newFilter) => {
     setFilter(newFilter);
-    console.log(newFilter)
-  }
+    console.log(newFilter);
+  };
+
   return (
     <ProductContext.Provider value={{ reviewProduct, setReviewProduct }}>
       <div className="mt-[70px]">
         <BreadCrumbs />
         <div className="bg-gray-900 p-4 min-h-screen">
           <div className="flex flex-row px-32 py-8">
-          <Filter onFilterChange={updateFilter}/>
-          <ProductView filter={filter}/>
+            <Filter onFilterChange={updateFilter} />
+            <ProductView filter={filter} />
           </div>
           <ProductReviewModal />
         </div>

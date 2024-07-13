@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../utils/axios";
 
 function Navbar() {
   const baseUrl = window.location.origin;
@@ -28,6 +29,10 @@ function Navbar() {
       }
       case "Shop": {
         navigate("products/0/24/1");
+        break;
+      }
+      case "Support": {
+        navigate("customer-support");
       }
     }
   };
@@ -136,20 +141,30 @@ function Navbar() {
           >
             Contact
           </button>
+          <button
+            className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+            onClick={() => navigateTo("Support")}
+          >
+            Customer Support
+          </button>
         </nav>
         <div className="flex-1 flex justify-end">
-          <button
-            onClick={() => navigateTo("Login")}
-            className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => navigateTo("Register")}
-            className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
-          >
-            Register
-          </button>
+          {!getToken() && (
+            <>
+              <button
+                onClick={() => navigateTo("Login")}
+                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => navigateTo("Register")}
+                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+              >
+                Register
+              </button>
+            </>
+          )}
         </div>
       </header>
     </>

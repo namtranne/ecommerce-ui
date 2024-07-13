@@ -5,38 +5,30 @@ import { twMerge } from "tailwind-merge";
 export const LoginOption = ({ className, children, ...rest }) => {
   return (
     <motion.div
-      initial = "rest" 
-      whileHover= "hover"
-      animate = "anime"
-
+      initial="rest"
+      whileHover="hover"
+      animate="anime"
       variants={OptionMotion}
-
       transition={{
         type: "spring",
         mass: 3,
         stiffness: 400,
         damping: 50,
       }}
-
       whileTap={{
         scale: 0.975,
       }}
-      
       className={twMerge(
         "group overflow-hidden col-span-4 rounded-lg border border-zinc-700 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:text-zinc-900",
         className
       )}
-      
       {...rest}
-    > 
+    >
       <motion.span
         variants={OptionBGMotion}
         className="absolute inset-0 -z-10 bg-white"
       />
-      <div>
-        {children}
-      </div>
-      
+      <div>{children}</div>
     </motion.div>
   );
 };
@@ -56,8 +48,8 @@ const OptionMotion = {
     scale: 1,
     y: 0,
     opacity: 1,
-  }
-}
+  },
+};
 
 const OptionBGMotion = {
   rest: {
@@ -65,7 +57,7 @@ const OptionBGMotion = {
     transition: {
       duration: 0.2,
       ease: "linear",
-    }
+    },
   },
 
   hover: {
@@ -73,8 +65,8 @@ const OptionBGMotion = {
     transition: {
       duration: 0.2,
       ease: "linear",
-    }
-  }
-}
+    },
+  },
+};
 
-export default LoginOption
+export default LoginOption;
