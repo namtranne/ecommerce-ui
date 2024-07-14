@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.underline-effect {
+  position: relative;
+  cursor: pointer;
+}
+
+.underline-effect::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: black;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.underline-effect:hover::after {
+  width: 100%;
+  left: 0;
+}
