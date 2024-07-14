@@ -206,7 +206,7 @@ const SignUpSideBanner = () => {
         <div className="absolute inset-0 z-0 w-full h-full bg-explore-techverse bg-cover bg-center filter blur-lg scale-110 -rotate-1 rounded-lg"></div>
         {/* Image */}
         <div className="relative z-10 -rotate-1 border-4 rounded-lg">
-          <img src="src/features/SignUp/Images/signup_banner.png" />
+          <img src="https://i.postimg.cc/sDdV1r1f/signup-banner.png" />
         </div>
       </div>
     </div>
