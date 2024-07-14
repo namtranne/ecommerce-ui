@@ -6,8 +6,7 @@ import {
   SmileOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
-function Sort({ isGridView, setListView, setGridView }) {
-  const products = [1, 2, 3, 4];
+function Sort({ isGridView, setListView, setGridView, products }) {
   const items = [
     {
       key: "1",

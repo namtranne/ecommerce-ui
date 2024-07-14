@@ -38,7 +38,7 @@ function App() {
               path="/products/:categoryId/:limit/:page"
               element={<Products />}
             />
-            <Route path="products/:id" element={<SingleProduct />} />
+            <Route path="/products/product-info" element={<SingleProduct />} />
           </Route>
 
           {/* does not have header and footer routes */}

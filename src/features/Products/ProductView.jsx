@@ -31,6 +31,7 @@ function ProductView() {
         isGridView={isGridView}
         setGridView={setGridView}
         setListView={setListView}
+        products={products}
       />
       {isGridView ? (
         <ProductGrid products={products} />
