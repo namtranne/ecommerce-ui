@@ -23,7 +23,7 @@ function Sort({
         <span
           onClick={() => {
             updateFilter("sortBy", "price");
-            updateFilter("sortDir", "desc");
+            updateFilter("sortDir", "des");
           }}
           target="_blank"
           rel="noopener noreferrer"
@@ -55,7 +55,7 @@ function Sort({
         <span
           onClick={() => {
             updateFilter("sortBy", "discountRate");
-            updateFilter("sortDir", "desc");
+            updateFilter("sortDir", "des");
           }}
           target="_blank"
           rel="noopener noreferrer"
