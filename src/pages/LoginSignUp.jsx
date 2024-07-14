@@ -5,8 +5,9 @@ import { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-function LoginSignUp() {
-  const [showSignUp, setShowSignUp] = useState(false);
+function LoginSignUp({initSignUp}) {
+
+  const [showSignUp, setShowSignUp] = useState(initSignUp);
 
   const handleSignUpToggle = () => {
     setShowSignUp(!showSignUp);
@@ -19,7 +20,7 @@ function LoginSignUp() {
          bg-gradient-to-r from-zinc-950 to-zinc-800"
     >
       <motion.div
-        initial={{ x: 0 }}
+        initial={{ x: 0}}
         animate={{ translateX: showSignUp ? "-100%" : "0%" }}
         transition={{ type: "tween", duration: 0.5 }}
         className="flex w-[200%]"
