@@ -2,56 +2,68 @@ import { Dropdown, Space } from "antd";
 import styled from "styled-components";
 import {
   AppstoreOutlined,
+  CaretDownOutlined,
+  CaretUpOutlined,
   DownOutlined,
+  PercentageOutlined,
   SmileOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
-function Sort({ isGridView, setListView, setGridView }) {
-  const products = [1, 2, 3, 4];
+function Sort({
+  isGridView,
+  setListView,
+  setGridView,
+  totalElements,
+  updateFilter,
+}) {
   const items = [
     {
       key: "1",
       label: (
-        <a
+        <span
+          onClick={() => {
+            updateFilter("sortBy", "price");
+            updateFilter("sortDir", "desc");
+          }}
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.antgroup.com"
         >
-          1st menu item
-        </a>
+          High - Low Price
+        </span>
       ),
+      icon: <CaretDownOutlined />,
     },
     {
       key: "2",
       label: (
-        <a
+        <span
+          onClick={() => {
+            updateFilter("sortBy", "price");
+            updateFilter("sortDir", "asc");
+          }}
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.aliyun.com"
         >
-          2nd menu item (disabled)
-        </a>
+          Low - High Price
+        </span>
       ),
-      icon: <SmileOutlined />,
-      disabled: true,
+      icon: <CaretUpOutlined />,
     },
     {
       key: "3",
       label: (
-        <a
+        <span
+          onClick={() => {
+            updateFilter("sortBy", "discountRate");
+            updateFilter("sortDir", "desc");
+          }}
           target="_blank"
           rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
         >
-          3rd menu item (disabled)
-        </a>
+          Discount Rate
+        </span>
       ),
-      disabled: true,
-    },
-    {
-      key: "4",
-      danger: true,
-      label: "a danger item",
+      icon: <PercentageOutlined />,
     },
   ];
   return (
@@ -70,7 +82,7 @@ function Sort({ isGridView, setListView, setGridView }) {
           <UnorderedListOutlined />
         </button>
       </div>
-      <p className="text-white">{products.length} products found</p>
+      <p className="text-white">{totalElements} products found</p>
       <hr />
       <Dropdown
         menu={{

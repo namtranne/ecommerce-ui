@@ -16,7 +16,7 @@ function BreadCrumbs() {
       title: <BreadCrumbText text="Home" />,
     },
     {
-      title: <BreadCrumbText text="Shop" href={`${baseUrl}/products/0/24/1`} />,
+      title: <BreadCrumbText text="Shop" href={`${baseUrl}/products/0`} />,
     },
   ];
 
@@ -29,7 +29,7 @@ function BreadCrumbs() {
       title: (
         <BreadCrumbText
           text={category.name}
-          href={`${baseUrl}/products/` + category.id + "/24/1"}
+          href={`${baseUrl}/products/` + category.id}
         />
       ),
     });
@@ -52,10 +52,8 @@ function BreadCrumbs() {
 
 const BreadCrumbText = ({ text, href }) => {
   return (
-    <a href={href}>
-      <p className="text-black text-2xl font-thin">
-        <BubbleText text={text} />
-      </p>
+    <a href={href} className="text-black text-2xl font-thin">
+      <BubbleText text={text} />
     </a>
   );
 };

@@ -40,7 +40,7 @@ function Navbar() {
         break;
       }
       case "Shop": {
-        navigate("products/0/24/1");
+        navigate("products/0");
         break;
       }
       case "Support": {

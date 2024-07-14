@@ -26,7 +26,6 @@ export function useLogin() {
       toast.error("Login failed, please check your credentials and try again!");
     },
   });
-
   return { login, isLoading };
 }
 
@@ -34,7 +33,11 @@ export function useSignup() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { mutate: signUp, isLoading } = useMutation({
+  const {
+    data,
+    mutate: signUp,
+    isLoading,
+  } = useMutation({
     mutationFn: (credentials) => signUpApi(credentials),
     onSuccess: () => {
       queryClient.invalidateQueries(["user"]);
@@ -51,7 +54,6 @@ export function useSignup() {
       );
     },
   });
-
   return { signUp, isLoading };
 }
 
