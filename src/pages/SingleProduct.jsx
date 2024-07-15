@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   DownCircleOutlined,
   UpCircleOutlined,
   HeartOutlined,
-  HeartFilled,
 } from "@ant-design/icons";
-import { useSearchParams } from "react-router-dom";
+import { useProductInfo } from "../hooks/useProduct";
+import { Loader, LoadingOverlay } from "@mantine/core";
+import BarLoader from "../ui/BarLoader";
 
 function SingleProduct() {
-  const [searchParams] = useSearchParams();
-  const productId = searchParams.get("id");
-  const [product, setProduct] = useState(null);
+  // validateProductInfo();
+  const { data: product, isLoading, error } = useProductInfo();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState("");
   const [transformY, setTransformY] = useState(0);
@@ -45,19 +45,6 @@ function SingleProduct() {
     }
   };
 
-  useEffect(() => {
-    const url = `https://spring-deploy-9mhk.onrender.com/api/products/product-info?id=${productId}`;
-
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setProduct(data);
-        setSelectedImage(data?.images?.[0]?.url || "");
-        console.log(product.configurableOptions);
-      })
-      .catch((error) => console.error("Error fetching product:", error));
-  }, []);
-
   const renderConfigurableOptions = (optionCode, label) => (
     <div className="flex flex-row items-center mb-5">
       <p className="w-1/6 font-bold text-black text-xl mb-0">{label}</p>
@@ -78,8 +65,12 @@ function SingleProduct() {
     </div>
   );
 
-  if (!product) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <BarLoader />
+      </div>
+    );
   }
 
   return (
@@ -99,7 +90,7 @@ function SingleProduct() {
                   transform: `translateY(${transformY}px)`,
                 }}
               >
-                {product.images.map((image, index) => (
+                {product.images?.map((image, index) => (
                   <img
                     key={index}
                     src={image.url}
@@ -119,7 +110,7 @@ function SingleProduct() {
           </div>
 
           <img
-            src={selectedImage}
+            src={selectedImage || product.thumbnailUrl}
             alt="Product Thumbnail"
             className="mx-auto w-1/2 sticky top-0 rounded-md border-8 border-black hover:border-[#212f4d]"
           />
