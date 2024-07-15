@@ -18,8 +18,9 @@ module.exports = {
         "titanium-200": "#455f63",
       },
       backgroundImage: {
-        'cherish-moment': "url('src/features/Home/Images/cherish-moment.jpg')",
-        'explore-techverse': "url(src/features/SignUp/Images/signup_banner.png)",
+        "cherish-moment": "url('https://i.ibb.co/xqJpNV5/cherish-moment.jpg')",
+        "explore-techverse":
+          "url(https://i.postimg.cc/sDdV1r1f/signup-banner.png)",
       },
       keyframes: {
         "infinite-scroll": {
