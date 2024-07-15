@@ -47,8 +47,8 @@ function App() {
 
           {/* does not have header and footer routes */}
           <Route element={<AppLayout />}>
-            <Route path="/login" element={<LoginSignUp />} />
-            <Route path="/signup" element={<LoginSignUp />} />
+            <Route path="/login" element={<LoginSignUp initSignUp={false} />} />
+            <Route path="/signup" element={<LoginSignUp initSignUp={true} />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>
