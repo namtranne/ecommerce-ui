@@ -4,7 +4,7 @@ import { faPhoneSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 function Footer() {
   return (
     <footer className="relative text-white bg-[#111827] p-4">
-      <div className="absolute top-0 left-0 transform -translate-y-full">
+      {/* <div className="absolute top-0 left-0 transform -translate-y-full">
         <svg viewBox="0 0 1440 320" className="w-full">
           <path
             fill="#111827"
@@ -12,7 +12,7 @@ function Footer() {
             d="M0,310L48,304.7C96,299,192,289,288,294C384,299,480,321,576,320.7C672,321,768,299,864,288.7C960,278,1056,278,1152,288.7C1248,299,1344,321,1392,331.3L1440,342L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           ></path>
         </svg>
-      </div>
+      </div> */}
 
       <div className="w-full flex justify-between">
         <div>

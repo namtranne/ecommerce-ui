@@ -25,7 +25,6 @@ function SignUp({ onSignUpClick }) {
   return (
     <section className="px-4 py-12 w-full min-h-screen flex flex-row">
       <div className="w-1/2">
-        <ReturnToLogIn onSignUpClick={onSignUpClick}></ReturnToLogIn>
         <SignUpSideBanner></SignUpSideBanner>
       </div>
       <motion.div
@@ -36,7 +35,7 @@ function SignUp({ onSignUpClick }) {
         }}
         className="mx-auto grid max-w-2xl grid-flow-dense grid-cols-12 gap-4"
       >
-        <SignUpWelcomeText></SignUpWelcomeText>
+        <SignUpWelcomeText onSignUpClick={onSignUpClick}></SignUpWelcomeText>
         <SignUpInfoForm
           credentials={credentials}
           setCredentials={setCredentials}
@@ -49,10 +48,19 @@ function SignUp({ onSignUpClick }) {
   );
 }
 
-const SignUpWelcomeText = () => {
+const SignUpWelcomeText = ({onSignUpClick}) => {
   return (
-    <div className="col-span-full">
-      <p className="text-zinc-200 text-4xl">Join us</p>
+    <div className="col-span-full space-y-0 text-zinc-200">
+      <p className=" text-4xl">Join us</p>
+      <p className="">
+        Already had an account?{" "}
+        <button
+          onClick={onSignUpClick}
+          className="text-blue-500 hover:underline"
+        >
+          Go to login.
+        </button>
+      </p>
     </div>
   );
 };
@@ -206,17 +214,9 @@ const SignUpSideBanner = () => {
         <div className="absolute inset-0 z-0 w-full h-full bg-explore-techverse bg-cover bg-center filter blur-lg scale-110 -rotate-1 rounded-lg"></div>
         {/* Image */}
         <div className="relative z-10 -rotate-1 border-4 rounded-lg">
-          <img src="src/features/SignUp/Images/signup_banner.png" />
+          <img src="https://i.postimg.cc/sDdV1r1f/signup-banner.png" />
         </div>
       </div>
-    </div>
-  );
-};
-
-const ReturnToLogIn = ({ onSignUpClick }) => {
-  return (
-    <div onClick={onSignUpClick} className="text-zinc-200 text-4xl px-6">
-      <IoReturnUpBack className="hover:cursor-pointer transition duration-0.2 hover:scale-125 active:scale-95"></IoReturnUpBack>
     </div>
   );
 };

@@ -89,7 +89,7 @@ const OffersBlock = () => (
       className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20 relative"
     >
       <a
-        href="http://localhost:5173/products/1846/24/1" // PC & Laptops
+        href="http://localhost:5173/products/1846" // PC & Laptops
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -117,7 +117,7 @@ const OffersBlock = () => (
         relative"
     >
       <a
-        href="http://localhost:5173/products/1815/24/1" // Accessories
+        href="http://localhost:5173/products/1815" // Accessories
         className="flex flex-col justify-start items-center h-full text-3xl text-white"
       >
         <div>
@@ -142,7 +142,7 @@ const OffersBlock = () => (
         relative"
     >
       <a
-        href="http://localhost:5173/products/1789/24/1" // Smartphones and tablets
+        href="http://localhost:5173/products/1789" // Smartphones and tablets
         className="flex flex-row justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -171,10 +171,10 @@ const OffersBlock = () => (
         hover:z-20
         md:col-span-3
         relative"
-        style={{ backgroundSize: 'contain', height: '100%', width: '100%' }}
+      style={{ backgroundSize: "contain", height: "100%", width: "100%" }}
     >
       <a
-        href="http://localhost:5173/products/1801/24/1" // Cameras
+        href="http://localhost:5173/products/1801" // Cameras
         className="flex flex-col justify-start items-top h-full text-3xl text-white"
       >
         <div>
@@ -200,7 +200,7 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/0/24/1" // Full shop
+        href="http://localhost:5173/products/0" // Full shop
         className="flex flex-col justify-center items-center h-full text-3xl text-white"
       >
         <div>

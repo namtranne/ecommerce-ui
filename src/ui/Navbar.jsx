@@ -40,7 +40,7 @@ function Navbar() {
         break;
       }
       case "Shop": {
-        navigate("products/0/24/1");
+        navigate("products/0");
         break;
       }
       case "Support": {
@@ -56,12 +56,12 @@ function Navbar() {
   return (
     <>
       {/* Overlay */}
-      {showModal && (
+      {/* {showModal && (
         <div className="fixed inset-0 bg-black opacity-60 z-10"></div>
-      )}
+      )} */}
       <header
         className={`w-full flex justify-between items-center bg-[#212f4d] absolute top-0 z-40 ${
-          showModal ? "relative z-20" : ""
+          showModal ? " z-20" : ""
         }`}
       >
         <div className="flex-1"></div>

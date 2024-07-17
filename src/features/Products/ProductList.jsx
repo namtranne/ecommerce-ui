@@ -23,9 +23,9 @@ function ProductList({ products }) {
         } = product;
         return (
           <>
-            <article key={id}>
+            <article key={id} className="">
               <img src={thumbnailUrl} alt={name} />
-              <div>
+              <div className="text-white">
                 <h4>{name}</h4>
 
                 <div className="text-sm font-bold text-[#3f60d7]">

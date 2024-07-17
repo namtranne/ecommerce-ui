@@ -1,37 +1,16 @@
 import { BrandFilter } from "./Filter/BrandFilter";
 import { CategoryFilter } from "./Filter/CategoryFilter";
 import PriceFilter from "./Filter/PriceFilter";
-import { useState } from "react";
-function Filter({onFilterChange}) {
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState({ min: 0, max: 100000000 });
-
-  // Function to handle brand filter change
-  const handleBrandChange = (newBrand) => {
-    setBrand(newBrand);
-  };
-
-  // Function to handle price filter change
-  const handlePriceChange = (newPrice) => {
-    setPrice(newPrice);
-  };
-
-  // Function to apply filters
-  const applyFilters = () => {
-    console.log("Applying filters with:", { brand, price });
-    // Here you would typically make an API call or filter your data based on these values
-    onFilterChange({ brand, price });
-  };
+function Filter({ updateFilter, applyFilters, minPrice, maxPrice }) {
   return (
     <div className="mr-12 text-white">
       <div className="mb-2">
         <input
           type="text"
           name="text"
-          //   value={text}
           placeholder="Search"
-          //   onChange={updateFilters}
-          className="p-2 border-transparent tracking-[var(--spacing)] shadow-sm"
+          onChange={(e) => updateFilter("keyWord", e.target.value)}
+          className="p-2 border-transparent tracking-[var(--spacing)] shadow-sm text-black"
         />
       </div>
 
@@ -40,9 +19,13 @@ function Filter({onFilterChange}) {
         <CategoryFilter />
 
         {/* brand */}
-        <BrandFilter onChange={handleBrandChange}/>
+        <BrandFilter updateFilter={updateFilter} />
 
-        <PriceFilter onChange={handlePriceChange}/>
+        <PriceFilter
+          updateFilter={updateFilter}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+        />
 
         <button
           type="button"

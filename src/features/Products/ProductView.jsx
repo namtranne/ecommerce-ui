@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { useProducts } from "../../hooks/useProduct";
 import CartLoader from "../../ui/CartLoader";
 import ProductGrid from "./ProductGrid";
 import ProductList from "./ProductList";
 import Sort from "./Sort";
 import NeubrutalismButton from "../../ui/NeubrutalismButton";
 
-function ProductView({ filter }) {
-  const { isLoading, data, error } = useProducts();
+function ProductView({
+  isLoading,
+  data,
+  updateFilter,
+  first,
+  last,
+  empty,
+  totalElements,
+}) {
   const [isGridView, setIsGridView] = useState(true);
-  if (isLoading) {
+  if (isLoading && first) {
     return (
       <div className="flex justify-center items-center w-full h-96 ">
         <CartLoader />
@@ -24,36 +30,29 @@ function ProductView({ filter }) {
     setIsGridView(false);
   };
 
-  const { content: products } = data;
-
-  console.log(filter);
-  const filteredProducts = products.filter((product) => {
-    // Assuming product.brand is an object with a name property that is a string
-    const meetsBrandCriteria = filter.brand
-      ? product.brand.name.toLowerCase().includes(filter.brand.toLowerCase())
-      : true;
-    const meetsPriceCriteria = filter.price
-      ? product.price >= filter.price.min && product.price <= filter.price.max
-      : true;
-    return meetsBrandCriteria && meetsPriceCriteria;
-  });
-  console.log(filteredProducts);
-
   return (
     <div className="w-full">
       <Sort
         isGridView={isGridView}
         setGridView={setGridView}
         setListView={setListView}
+        totalElements={totalElements}
+        updateFilter={updateFilter}
       />
       {isGridView ? (
-        <ProductGrid products={filteredProducts} />
+        <ProductGrid products={data} />
       ) : (
-        <ProductList products={filteredProducts} />
+        <ProductList products={data} />
       )}
-      <div className="flex w-full justify-center py-8">
-        <NeubrutalismButton text="LOAD MORE..." />
-      </div>
+      {!last && (
+        <div className="flex w-full justify-center py-8">
+          <NeubrutalismButton
+            handleClick={() => updateFilter("page", 1)}
+            isLoading={isLoading}
+            text="LOAD MORE..."
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -3,11 +3,7 @@ import { useBrand } from "../../../hooks/useBrand";
 import { Select } from "antd";
 import BarLoader from "../../../ui/BarLoader";
 
-export function BrandFilter({ onChange }) {
-  const handleSelection = (selectedBrand) => {
-    onChange(selectedBrand); // Call the passed onChange function with the new brand
-  };
-
+export function BrandFilter({ updateFilter }) {
   const { isLoading, data, error } = useBrand();
   if (isLoading) {
     return (
@@ -28,7 +24,7 @@ export function BrandFilter({ onChange }) {
           value: brand.name,
           label: brand.name,
         }))}
-        onChange={handleSelection}
+        onChange={(selectBrand) => updateFilter("brand", selectBrand)}
       />
     </div>
   );

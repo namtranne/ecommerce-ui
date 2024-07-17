@@ -39,19 +39,16 @@ function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="cart" element={<Cart />} />
-            <Route
-              path="/products/:categoryId/:limit/:page"
-              element={<Products />}
-            />
+            <Route path="/products/:categoryId" element={<Products />} />
             <Route path="/customer-support" element={<CustomerSupport />} />
-            <Route path="products/:id" element={<SingleProduct />} />
             <Route path="my-account" element={<MyAccount />} />
+            <Route path="/products/product-info" element={<SingleProduct />} />
           </Route>
 
           {/* does not have header and footer routes */}
           <Route element={<AppLayout />}>
-            <Route path="/login" element={<LoginSignUp />} />
-            <Route path="/signup" element={<LoginSignUp />} />
+            <Route path="/login" element={<LoginSignUp initSignUp={false} />} />
+            <Route path="/signup" element={<LoginSignUp initSignUp={true} />} />
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

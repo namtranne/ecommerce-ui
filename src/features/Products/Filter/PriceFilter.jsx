@@ -1,29 +1,20 @@
 import { Slider } from "antd";
-import React, { useState } from "react";
+import React from "react";
 
-function PriceFilter({ onChange }) {
-  const handlePriceChange = (minValue, maxValue) => {
-    onChange({ min: minValue, max: maxValue }); // Call the passed onChange function with the new price range
-  };
-  const [price, setPrice] = useState({ min: 0, max: 100000000 });
-
+function PriceFilter({ updateFilter, minPrice, maxPrice }) {
+  console.log(minPrice, maxPrice);
   const handleChange = (value) => {
-    const newPrice = {
-      min: value[0],
-      max: value[1],
-    };
-    setPrice(newPrice);
-    handlePriceChange(newPrice.min, newPrice.max);
+    if (value[0] !== minPrice) {
+      updateFilter("minPrice", value[0]);
+    }
+    if (value[1] !== maxPrice) {
+      updateFilter("maxPrice", value[1]);
+    }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const newPrice = {
-      ...price,
-      [name]: Number(value), // Ensure value is treated as a number
-    };
-    setPrice(newPrice);
-    handlePriceChange(newPrice.min, newPrice.max);
+    updateFilter(name, value);
   };
 
   return (
@@ -37,22 +28,22 @@ function PriceFilter({ onChange }) {
         <div className="flex flex-col mx-2">
           <input
             type="number"
-            name="min"
-            value={price.min}
+            name="minPrice"
+            value={minPrice}
             onChange={handleInputChange}
-            className="input text-right"
+            className="input text-right text-black text-sm font-bold"
             min={0}
-            max={price.max}
+            max={maxPrice}
             style={{ width: "90px" }}
           />
           <input
             type="number"
             name="max"
-            value={price.max}
+            value={maxPrice}
             onChange={handleInputChange}
-            className="input text-right"
-            min={price.min}
-            max={100000000}
+            className="input text-right text-black text-sm font-bold"
+            min={minPrice}
+            max={999999999}
             style={{ width: "90px" }}
           />
         </div>
@@ -63,10 +54,10 @@ function PriceFilter({ onChange }) {
       </div>
       <Slider
         range
-        defaultValue={[price.min, price.max]}
+        value={[minPrice, maxPrice]}
         onChange={handleChange}
         min={0}
-        max={100000000}
+        max={999999999}
       />
     </div>
   );

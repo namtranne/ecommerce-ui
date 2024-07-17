@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useReviewProduct } from "../../../pages/Products";
+import { useNavigate } from "react-router-dom";
 
 function ProductContent({
   product,
@@ -7,21 +8,27 @@ function ProductContent({
   handleMouseLeave,
   isHover,
 }) {
+  const navigate = useNavigate();
   const { setReviewProduct } = useReviewProduct();
 
   function formatPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VND";
   }
 
+  const handleClick = () => {
+    navigate(`/products/product-info?id=${product.id}`); // Step 3: Adjust the path as needed
+  };
+
   return (
     <motion.div
-      className="shadow-lg overflow-hidden bg-black relative"
+      className="shadow-lg overflow-hidden bg-black relative hover:cursor-pointer"
       initial={{ opacity: 0.6 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
     >
       <img src={product.thumbnailUrl} alt="" className="w-full" />
       <motion.div

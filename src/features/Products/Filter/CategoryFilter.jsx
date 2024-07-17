@@ -25,7 +25,7 @@ export function CategoryFilter() {
               heading={category.name}
               imgSrc={category.image}
               key={category.id}
-              href={`${baseUrl}/products/` + category.id + "/24/1"}
+              href={`${baseUrl}/products/` + category.id}
             ></CategoryCard>
           );
         })}
