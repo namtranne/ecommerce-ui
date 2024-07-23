@@ -16,6 +16,7 @@ import LoginSignUp from "./pages/LoginSignUp";
 import { useUserDetails } from "./hooks/useAuthentication";
 import UserContext from "./context/UserContext";
 import MyAccount from "./pages/MyAccount";
+import { CartProvider } from "./context/CartContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,30 +31,41 @@ function App() {
   const userDetails = useUserDetails();
 
   return (
-    <UserContext.Provider value={userDetails}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Router>
-        <Routes>
-          {/* Has header and footer routes */}
-          <Route element={<AppLayout hasHeaderAndFooter />}>
-            <Route path="/" exact element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="/products/:categoryId" element={<Products />} />
-            <Route path="/customer-support" element={<CustomerSupport />} />
-            <Route path="my-account" element={<MyAccount />} />
-            <Route path="/products/product-info" element={<SingleProduct />} />
-          </Route>
+    <CartProvider>
+      <UserContext.Provider value={userDetails}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Router>
+          <Routes>
+            {/* Has header and footer routes */}
+            <Route element={<AppLayout hasHeaderAndFooter />}>
+              <Route path="/" exact element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="/products/:categoryId" element={<Products />} />
+              <Route path="/customer-support" element={<CustomerSupport />} />
+              <Route path="my-account" element={<MyAccount />} />
+              <Route
+                path="/products/product-info"
+                element={<SingleProduct />}
+              />
+            </Route>
 
-          {/* does not have header and footer routes */}
-          <Route element={<AppLayout />}>
-            <Route path="/login" element={<LoginSignUp initSignUp={false} />} />
-            <Route path="/signup" element={<LoginSignUp initSignUp={true} />} />
-            <Route path="*" element={<Error />} />
-          </Route>
-        </Routes>
-      </Router>
-    </UserContext.Provider>
+            {/* does not have header and footer routes */}
+            <Route element={<AppLayout />}>
+              <Route
+                path="/login"
+                element={<LoginSignUp initSignUp={false} />}
+              />
+              <Route
+                path="/signup"
+                element={<LoginSignUp initSignUp={true} />}
+              />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </Router>
+      </UserContext.Provider>
+    </CartProvider>
   );
 }
 

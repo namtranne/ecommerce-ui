@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useCartVisibility } from "../context/CartContext";
+import Cart from "../pages/Cart";
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
@@ -10,6 +12,8 @@ function Navbar() {
   const { username, firstName, lastName } = useContext(UserContext) || {};
   const isUserLoggedIn = username != null && username != undefined;
   const queryClient = useQueryClient();
+
+  const { toggleCartVisibility, isVisible } = useCartVisibility();
 
   const logOut = async () => {
     localStorage.removeItem("token");
@@ -168,6 +172,13 @@ function Navbar() {
         <div className="flex-1 flex justify-end">
           {isUserLoggedIn ? (
             <>
+              <button
+                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                onClick={toggleCartVisibility} // Toggle cart visibility
+              >
+                Cart
+              </button>
+              <Cart/>
               <button
                 onClick={() => navigateTo("Account")}
                 className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
