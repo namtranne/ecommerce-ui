@@ -3,7 +3,7 @@ import { faPhoneSquare, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 function Footer() {
   return (
-    <footer className="relative text-white bg-[#111827] p-4">
+    <footer className="w-screen bottom-0 text-white bg-[#111827] p-4">
       {/* <div className="absolute top-0 left-0 transform -translate-y-full">
         <svg viewBox="0 0 1440 320" className="w-full">
           <path

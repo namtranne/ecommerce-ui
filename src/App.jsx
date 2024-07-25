@@ -16,6 +16,7 @@ import LoginSignUp from "./pages/LoginSignUp";
 import { useUserDetails } from "./hooks/useAuthentication";
 import UserContext from "./context/UserContext";
 import MyAccount from "./pages/MyAccount";
+import Checkout from "./pages/Checkout";
 import { CartProvider } from "./context/CartContext";
 
 const queryClient = new QueryClient({
@@ -48,6 +49,7 @@ function App() {
                 path="/products/product-info"
                 element={<SingleProduct />}
               />
+              <Route path="checkout" element={<Checkout />} />
             </Route>
 
             {/* does not have header and footer routes */}

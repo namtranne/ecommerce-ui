@@ -64,7 +64,7 @@ function Navbar() {
         <div className="fixed inset-0 bg-black opacity-60 z-10"></div>
       )} */}
       <header
-        className={`w-full flex justify-between items-center bg-[#212f4d] absolute top-0 z-40 ${
+        className={`w-full flex justify-between items-center bg-[#212f4d] top-0 z-40 ${
           showModal ? " z-20" : ""
         }`}
       >

@@ -23,7 +23,7 @@ function CartView({ products }) {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-1/6 text-sm"
+                className="w-1/6 text-sm border border-solid border-black rounded-md shadow-md"
               />
               <div className="flex flex-col justify-center w-4/6">
                 <div className="text-lg font-bold">{product.name}</div>
