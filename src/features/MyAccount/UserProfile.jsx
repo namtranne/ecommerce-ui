@@ -1,39 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CiEdit } from "react-icons/ci";
 import { TbPencilCancel } from "react-icons/tb";
 import { MdDone } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
 
-export const UserProfile = ({firstName, lastName, email, phoneNumber, birthDay}) => {
+export const UserProfile = ({ userInfo }) => {
     return (
         <div className="w-full space-y-16">
             <UserProfileWelcome
-                firstName={firstName}
-                lastName={lastName}
+                firstName={userInfo.firstName}
+                lastName={userInfo.lastName}
             >
             </UserProfileWelcome>
             <UserProfileInfo
-                firstName={firstName}
-                lastName={lastName}
-                email={email}
-                phoneNumber={phoneNumber}
-                birthDay={birthDay}
+                userInfo={userInfo}
             >
             </UserProfileInfo>
         </div>
     );
 }
 
-const UserProfileInfo = ({firstName, lastName, email, phoneNumber, birthDay}) => {
+const UserProfileInfo = ({ userInfo }) => {
 
     const [isEditing, setIsEditing] = useState(false);
+    const [tempUserInfo, setTempUserInfo] = useState({ ...userInfo });
 
-    var tempFirstName = firstName;
-    var tempLastName = lastName;
-    var tempEmail = email;
-    var tempPhoneNumber = phoneNumber;
-    var tempBirthDay = birthDay;
+    useEffect(() => {
+        setTempUserInfo(userInfo);
+    }, [userInfo]);
 
     const handleEditClick = () => {
         setIsEditing(true);
@@ -41,17 +36,20 @@ const UserProfileInfo = ({firstName, lastName, email, phoneNumber, birthDay}) =>
 
     const handleSaveClick = () => {
         setIsEditing(false);
-        // Save functionality
+        // Save functionality, possibly send tempUserInfo to backend
     };
 
     const handleCancelClick = () => {
         setIsEditing(false);
-        // Cancel functionality
-        tempFirstName = firstName;
-        tempLastName = lastName;
-        tempEmail = email;
-        tempPhoneNumber = phoneNumber;
-        tempBirthDay = birthDay;
+        setTempUserInfo({ ...userInfo });
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setTempUserInfo(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
     return (
@@ -61,12 +59,10 @@ const UserProfileInfo = ({firstName, lastName, email, phoneNumber, birthDay}) =>
                 <div className=" space-y-3">
                     <p className="text-2xl m-0 text-zinc-800">First Name</p>
                     <input
-                        placeholder={tempFirstName}
+                        name="firstName"
+                        value={tempUserInfo.firstName}
                         disabled={!isEditing}
-                        // value={credentials.firstName}
-                        // onChange={(e) =>
-                        // setCredentials({ ...credentials, firstName: e.target.value })
-                        // }
+                        onChange={handleChange}
                         className="w-full rounded border bg-zinc-100 px-3 py-1.5 transition-colors
                                     hover:border-cyan-400 hover:outline-0
                                     focus:border-cyan-400 focus:outline-0 focus:shadow-cyan-400 focus:shadow"
@@ -75,12 +71,10 @@ const UserProfileInfo = ({firstName, lastName, email, phoneNumber, birthDay}) =>
                 <div className=" space-y-3">
                     <p className="text-2xl m-0 text-zinc-800">Last Name</p>
                     <input
-                        value={tempLastName}
+                        name="lastName"
+                        value={tempUserInfo.lastName}
                         disabled={!isEditing}
-                        // value={credentials.lastName}
-                        // onChange={(e) =>
-                        // setCredentials({ ...credentials, lastName: e.target.value })
-                        // }
+                        onChange={handleChange}
                         className="w-full rounded border bg-zinc-100 px-3 py-1.5 transition-colors
                                     hover:border-cyan-400 hover:outline-0
                                     focus:border-cyan-400 focus:outline-0 focus:shadow-cyan-400 focus:shadow"
@@ -93,71 +87,60 @@ const UserProfileInfo = ({firstName, lastName, email, phoneNumber, birthDay}) =>
                 <div className="space-y-3">
                     <p className="text-2xl m-0 text-zinc-800">Email</p>
                     <input
+                        name="email"
                         type="email"
-                        placeholder={tempEmail}
+                        value={tempUserInfo.email}
                         disabled={!isEditing}
-                        // value={credentials.email}
-                        // onChange={(e) =>
-                        //     setCredentials({ ...credentials, email: e.target.value })
-                        // }
+                        onChange={handleChange}
                         className="w-full rounded border bg-zinc-100 px-3 py-1.5 transition-colors
                                     hover:border-cyan-400 hover:outline-0
                                     focus:border-cyan-400 focus:outline-0 focus:shadow-cyan-400 focus:shadow"
                     />
-
                 </div>
 
                 {/* Phone number */}
                 <div className="space-y-3">
                     <p className="text-2xl m-0 text-zinc-800">Phone Number</p>
                     <input
+                        name="phoneNumber"
                         type="tel"
-                        placeholder={tempPhoneNumber}
+                        value={tempUserInfo.phoneNumber}
                         disabled={!isEditing}
-                        // value={credentials.phoneNumber}
-                        // onChange={(e) =>
-                        //     setCredentials({ ...credentials, phoneNumber: e.target.value })
-                        // }
+                        onChange={handleChange}
                         className="w-full rounded border bg-zinc-100 px-3 py-1.5 transition-colors
                                     hover:border-cyan-400 hover:outline-0
                                     focus:border-cyan-400 focus:outline-0 focus:shadow-cyan-400 focus:shadow"
                     />
                 </div>
-
-                
             </div>
 
             {/* date of birth */}
             <div className="w-1/2 pr-2 space-y-3">
-                    <p className="text-2xl m-0 text-zinc-800">Birthday</p>
-                    <input
-                        type="date"
-                        disabled={!isEditing}
-                        placeholder={tempBirthDay}
-                        // value={credentials.birthDay}
-                        // onChange={(e) =>
-                        //     setCredentials({ ...credentials, birthDay: e.target.value })
-                        // }
-                        className="w-full rounded border bg-zinc-100 px-3 py-1.5 transition-colors
-                                    hover:border-cyan-400 hover:outline-0
-                                    focus:border-cyan-400 focus:outline-0 focus:shadow-cyan-400 focus:shadow"
-                    />
+                <p className="text-2xl m-0 text-zinc-800">Birthday</p>
+                <input
+                    name="birthDay"
+                    type="date"
+                    value={tempUserInfo.birthDay}
+                    disabled={!isEditing}
+                    onChange={handleChange}
+                    className="w-full rounded border bg-zinc-100 px-3 py-1.5 transition-colors
+                                hover:border-cyan-400 hover:outline-0
+                                focus:border-cyan-400 focus:outline-0 focus:shadow-cyan-400 focus:shadow"
+                />
             </div>
 
             <div className="flex flex-row relative pt-12 space-x-2 justify-end">
-                {isEditing && (<ProfileButton buttonIcon={MdDone} buttonName="Save" onClick={handleSaveClick}></ProfileButton>)
-                }
+                {isEditing && (<ProfileButton buttonIcon={MdDone} buttonName="Save" onClick={handleSaveClick}></ProfileButton>)}
                 {isEditing ? 
                     (<ProfileButton buttonIcon={TbPencilCancel} buttonName="Cancel" onClick={handleCancelClick}></ProfileButton>) : 
                     (<ProfileButton buttonIcon={CiEdit} buttonName="Edit" onClick={handleEditClick}></ProfileButton>)
                 }
             </div>
-
         </div>
     );
 }
 
-const UserProfileWelcome = ({firstName, lastName, avatar}) => {
+const UserProfileWelcome = ({firstName, lastName}) => {
     return (
         <h1>
             Welcome, {lastName} {firstName}

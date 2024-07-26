@@ -32,6 +32,8 @@ export default function MyAccount() {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const userInfo = { firstName, lastName, email, phoneNumber, birthDay }
+
   return (
     <div className="flex w-full h-screen items-center py-32 px-12">
       <div className="w-1/3 h-fit flex justify-center">
@@ -41,11 +43,7 @@ export default function MyAccount() {
         {
           selectedIndex === 0 && 
           <UserProfile 
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            phoneNumber={phoneNumber}
-            birthDay={birthDay}
+            userInfo={userInfo}
           >
           </UserProfile>
         }

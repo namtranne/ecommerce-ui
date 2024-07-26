@@ -87,7 +87,7 @@ const AccountControlOption = ({ optionIcon: OptionIcon, optionName, onClick, isS
 
 const AccountStatusField = () => {
     return (
-        <motion.div className="flex flex-row p-4 border-2 border-zinc-900 rounded-3xl shadow-2xl items-center">
+        <motion.div className="flex flex-row p-4 border-2 border-zinc-900 rounded-3xl shadow-3xl items-center">
             <motion.div className="w-28 h-28">
                 <img src="https://i.postimg.cc/sDdV1r1f/signup-banner.png" className="rounded-full"></img>
             </motion.div>
