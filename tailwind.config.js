@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      height: {
+        "13": "3.25rem"
+      },
       transitionDuration: {
         2000: "2000ms",
         10000: "10000ms",
