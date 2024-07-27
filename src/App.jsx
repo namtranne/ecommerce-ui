@@ -22,6 +22,8 @@ import { useState } from "react";
 import { login, signUp } from "./services/apiAuthenticate";
 import { ConnectServerSocket } from "./hooks/useSocket";
 import { getUserDetails } from "./services/apiUser";
+import Checkout from "./pages/Checkout";
+import { CartProvider } from "./context/CartContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,20 +61,25 @@ function App() {
   };
 
   return (
-    <UserContext.Provider value={userDetails}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Router>
-        <Routes>
-          {/* Has header and footer routes */}
-          <Route element={<AppLayout hasHeaderAndFooter />}>
-            <Route path="/" exact element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="/products/:categoryId" element={<Products />} />
-            <Route path="/customer-support" element={<CustomerSupport />} />
-            <Route path="my-account" element={<MyAccount />} />
-            <Route path="/products/product-info" element={<SingleProduct />} />
-          </Route>
+    <CartProvider>
+      <UserContext.Provider value={userDetails}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Router>
+          <Routes>
+            {/* Has header and footer routes */}
+            <Route element={<AppLayout hasHeaderAndFooter />}>
+              <Route path="/" exact element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="/products/:categoryId" element={<Products />} />
+              <Route path="/customer-support" element={<CustomerSupport />} />
+              <Route path="my-account" element={<MyAccount />} />
+              <Route
+                path="/products/product-info"
+                element={<SingleProduct />}
+              />
+              <Route path="checkout" element={<Checkout />} />
+            </Route>
 
           {/* does not have header and footer routes */}
           <Route element={<AppLayout />}>
