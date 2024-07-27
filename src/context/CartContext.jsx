@@ -14,7 +14,9 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartVisibilityContext.Provider value={{ isVisible, toggleCartVisibility, hideCart }}>
+    <CartVisibilityContext.Provider
+      value={{ isVisible, toggleCartVisibility, hideCart }}
+    >
       {children}
     </CartVisibilityContext.Provider>
   );

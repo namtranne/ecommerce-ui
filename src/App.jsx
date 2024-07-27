@@ -18,12 +18,12 @@ import CustomerSupport from "./pages/CustomerSupport";
 import LoginSignUp from "./pages/LoginSignUp";
 import UserContext from "./context/UserContext";
 import MyAccount from "./pages/MyAccount";
+import Checkout from "./pages/Checkout";
+import { CartProvider } from "./context/CartContext";
 import { useState } from "react";
 import { login, signUp } from "./services/apiAuthenticate";
 import { ConnectServerSocket } from "./hooks/useSocket";
 import { getUserDetails } from "./services/apiUser";
-import Checkout from "./pages/Checkout";
-import { CartProvider } from "./context/CartContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -81,33 +81,34 @@ function App() {
               <Route path="checkout" element={<Checkout />} />
             </Route>
 
-          {/* does not have header and footer routes */}
-          <Route element={<AppLayout />}>
-            <Route
-              path="/login"
-              element={
-                <LoginSignUp
-                  initSignUp={false}
-                  loginUser={loginUser}
-                  signupUser={signupUser}
-                />
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <LoginSignUp
-                  initSignUp={true}
-                  loginUser={loginUser}
-                  signupUser={signupUser}
-                />
-              }
-            />
-            <Route path="*" element={<Error />} />
-          </Route>
-        </Routes>
-      </Router>
-    </UserContext.Provider>
+            {/* does not have header and footer routes */}
+            <Route element={<AppLayout />}>
+              <Route
+                path="/login"
+                element={
+                  <LoginSignUp
+                    initSignUp={false}
+                    loginUser={loginUser}
+                    signupUser={signupUser}
+                  />
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <LoginSignUp
+                    initSignUp={true}
+                    loginUser={loginUser}
+                    signupUser={signupUser}
+                  />
+                }
+              />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </Router>
+      </UserContext.Provider>
+    </CartProvider>
   );
 }
 

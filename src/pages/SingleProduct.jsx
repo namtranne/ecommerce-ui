@@ -46,6 +46,7 @@ function SingleProduct() {
       setAmount(amount - 1);
     }
   };
+  console.log(product);
 
   const renderConfigurableOptions = (optionCode, label) => (
     <div className="flex flex-row items-center mb-5">
@@ -204,7 +205,7 @@ function SingleProduct() {
           </div>
         </div>
       </div>
-      <h1 className="mt-10 mb-0 ml-5">You may also like</h1>
+      {/* <h1 className="mt-10 mb-0 ml-5">You may also like</h1> */}
     </div>
   );
 }
