@@ -240,3 +240,23 @@ p {
 .page {
   min-height: calc(100vh - (20vh + 10rem));
 }
+
+@font-face {
+  font-family: "Supreme-Regular";
+  src: url("./ui/assets/fonts/Supreme-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Supreme-Light";
+  src: url("./ui/assets/fonts/Supreme-Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Supreme-Bold";
+  src: url("./ui/assets/fonts/Supreme-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Supreme-ExtraBold";
+  src: url("./ui/assets/fonts/Supreme-ExtraBold.ttf") format("truetype");
+}

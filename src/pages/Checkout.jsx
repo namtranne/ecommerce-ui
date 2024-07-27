@@ -161,7 +161,7 @@ const Checkout = () => {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mt-8 space-y-4 w-[60vw]"
+        className="mt-8 space-y-4 w-[60vw] flex flex-col"
       >
         <div className="flex flex-row justify-between">
           <div className="w-[48%]">
@@ -314,7 +314,7 @@ const Checkout = () => {
         </div>
         <motion.button
           type="submit"
-          className="mt-4 w-full p-2 rounded-md shadow-md"
+          className="mt-4 w-1/3 p-2 rounded-md shadow-md mx-auto"
           whileHover={{
             backgroundColor: "#0b1215", // Tailwind's bg-blue-700 color
             color: "#ffffff", // Tailwind's text-white color
@@ -322,7 +322,7 @@ const Checkout = () => {
           }}
           style={{ backgroundColor: "#352f36", color: "#ffffff" }} // Tailwind's bg-blue-500 color
         >
-          Submit
+          Place order
         </motion.button>
       </motion.form>
     </div>
