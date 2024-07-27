@@ -3,6 +3,12 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        supreme_regular: ["Supreme-Regular"],
+        supreme_bold: ["Supreme-Bold"],
+        supreme_extrabold: ["Supreme-ExtraBold"],
+        supreme_light: ["Supreme-Light"],
+      },
       transitionDuration: {
         2000: "2000ms",
         10000: "10000ms",
