@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { CiEdit } from "react-icons/ci";
 import { TbPencilCancel } from "react-icons/tb";
 import { MdDone } from "react-icons/md";
-import { twMerge } from "tailwind-merge";
+import { ProfileButton } from "./ProfileButton";
+
 
 export const UserProfile = ({ userInfo }) => {
     return (
-        <div className="w-full space-y-16">
+        <div className="flex flex-col w-full space-y-16">
             <UserProfileWelcome
                 firstName={userInfo.firstName}
                 lastName={userInfo.lastName}
@@ -132,7 +132,8 @@ const UserProfileInfo = ({ userInfo }) => {
             <div className="flex flex-row relative pt-12 space-x-2 justify-end">
                 {isEditing && (<ProfileButton buttonIcon={MdDone} buttonName="Save" onClick={handleSaveClick}></ProfileButton>)}
                 {isEditing ? 
-                    (<ProfileButton buttonIcon={TbPencilCancel} buttonName="Cancel" onClick={handleCancelClick}></ProfileButton>) : 
+                    (<ProfileButton buttonIcon={TbPencilCancel} buttonName="Cancel" onClick={handleCancelClick}
+                    optionalClassName=" bg-zinc-50 text-zinc-800 border-2 border-zinc-800 hover:bg-zinc-50 hover:border-zinc-800"></ProfileButton>) : 
                     (<ProfileButton buttonIcon={CiEdit} buttonName="Edit" onClick={handleEditClick}></ProfileButton>)
                 }
             </div>
@@ -142,29 +143,8 @@ const UserProfileInfo = ({ userInfo }) => {
 
 const UserProfileWelcome = ({firstName, lastName}) => {
     return (
-        <h1>
+        <h1 className="self-start">
             Welcome, {lastName} {firstName}
         </h1>
-    );
-}
-
-const ProfileButton = ({buttonIcon: Icon, buttonName, onClick, optionalClassName}) => {
-    return (
-        <motion.div 
-        className={twMerge(
-            `flex min-w-32 p-2 space-x-2 rounded-xl items-center place-content-center
-             bg-zinc-800 text-zinc-200 text-xl transition duration-200 hover:cursor-pointer
-             hover:scale-105 active:scale-95 hover:bg-zinc-600`,
-            optionalClassName
-        )}
-        onClick={onClick}
-        >
-            <motion.div>
-                <Icon/>
-            </motion.div>
-            <motion.div>
-                {buttonName}
-            </motion.div>
-        </motion.div>
     );
 }

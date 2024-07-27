@@ -33,7 +33,7 @@ export const MyAccountControlPanel = ({selectedIndex, setSelectedIndex}) => {
         <motion.div className="relative w-fit rounded-3xl bg-zinc-800">
             <AccountStatusField className="left-0 top-0"></AccountStatusField>
             <motion.div
-                className="absolute left-0 top-[148px] h-13 w-1 bg-zinc-200 rounded"
+                className="absolute left-0 top-[148px] h-13 w-1 bg-zinc-50 rounded"
                 initial={{ y: 0 }}
                 animate={{ y: calculateIndicatorPosition(selectedIndex)}}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
