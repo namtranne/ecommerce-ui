@@ -9,7 +9,7 @@ export const isLogin = () => {
 };
 
 const authAxios = axios.create({
-  baseURL: "https://spring-deploy-9mhk.onrender.com/api",
+  baseURL: "http://localhost:8080/api",
 });
 
 authAxios.interceptors.request.use((config) => {

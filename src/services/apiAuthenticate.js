@@ -2,10 +2,17 @@ import authAxios from "../utils/axios";
 
 export const login = async ({ username, password }) => {
   try {
-    const response = await authAxios.post("/login", { username, password });
+    const response = await authAxios.post("/login", {
+      username,
+      password,
+    });
 
     // Assuming the response contains the JWT token in response.data.jwt or response.data.data.accessToken
-    const token = response.data.jwt || response.data.data.accessToken;
+    console.log(response);
+    const token =
+      response.data.token ||
+      response.data.jwt ||
+      response.data.data.accessToken;
     if (token) {
       localStorage.setItem("token", token);
     }
