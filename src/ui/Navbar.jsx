@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useCartVisibility } from "../context/CartContext";
+import Cart from "../pages/Cart";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
@@ -10,6 +13,8 @@ function Navbar() {
   const { username, firstName, lastName } = useContext(UserContext) || {};
   const isUserLoggedIn = username != null && username != undefined;
   const queryClient = useQueryClient();
+
+  const { toggleCartVisibility, isVisible } = useCartVisibility();
 
   const logOut = async () => {
     localStorage.removeItem("token");
@@ -60,7 +65,7 @@ function Navbar() {
         <div className="fixed inset-0 bg-black opacity-60 z-10"></div>
       )} */}
       <header
-        className={`w-full flex justify-between items-center bg-[#212f4d] absolute top-0 z-40 ${
+        className={`w-full flex justify-between items-center bg-[#212f4d] top-0 z-40 ${
           showModal ? " z-20" : ""
         }`}
       >
@@ -90,7 +95,7 @@ function Navbar() {
               onMouseEnter={() => setShowModal(true)}
               onMouseLeave={() => setShowModal(false)}
             >
-              <div className="flex">
+              <div className="flex ">
                 <div className="w-1/3 pr-15 m-20">
                   <p className="block w-full font-bold text-3xl pb-5">
                     Categories
@@ -168,6 +173,13 @@ function Navbar() {
         <div className="flex-1 flex justify-end">
           {isUserLoggedIn ? (
             <>
+              <button
+                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                onClick={toggleCartVisibility} // Toggle cart visibility
+              >
+                <ShoppingCartOutlined />
+              </button>
+              <Cart />
               <button
                 onClick={() => navigateTo("Account")}
                 className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}

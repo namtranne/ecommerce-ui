@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
   },
 });
 root.render(
-  <React.StrictMode>
+  <>
     <ToastContainer
       position="top-right"
       autoClose={5000}
@@ -36,7 +36,7 @@ root.render(
         <App />
       </QueryClientProvider>
     </MantineProvider>
-  </React.StrictMode>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

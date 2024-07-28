@@ -19,7 +19,7 @@ export const LoginOption = ({ className, children, ...rest }) => {
         scale: 0.975,
       }}
       className={twMerge(
-        "group overflow-hidden col-span-4 rounded-lg border border-zinc-700 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:text-zinc-900",
+        "group overflow-hidden relative col-span-4 rounded-lg border border-zinc-700 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:text-zinc-900",
         className
       )}
       {...rest}

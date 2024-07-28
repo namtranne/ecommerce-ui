@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { IoReturnUpBack } from "react-icons/io5";
-import { useSignup } from "../hooks/useAuthentication";
 import { Spin } from "antd";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-function SignUp({ onSignUpClick }) {
+function SignUp({ onSignUpClick, signUpUser }) {
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -15,11 +15,13 @@ function SignUp({ onSignUpClick }) {
     phoneNumber: "",
     birthDay: null,
   });
-  const { signUp, isLoading } = useSignup();
+  const navigate = useNavigate();
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     const signUpCredentials = { ...credentials, username: credentials.email };
-    signUp(signUpCredentials);
+    signUpUser(signUpCredentials);
+    toast.success("Sign up successfully");
+    navigate("/");
   };
 
   return (
@@ -40,15 +42,13 @@ function SignUp({ onSignUpClick }) {
           credentials={credentials}
           setCredentials={setCredentials}
         ></SignUpInfoForm>
-        <SignUpButton signUp={handleSignup} isLoading={isLoading}>
-          Sign Up
-        </SignUpButton>
+        <SignUpButton signUp={handleSignup}>Sign Up</SignUpButton>
       </motion.div>
     </section>
   );
 }
 
-const SignUpWelcomeText = ({onSignUpClick}) => {
+const SignUpWelcomeText = ({ onSignUpClick }) => {
   return (
     <div className="col-span-full space-y-0 text-zinc-200">
       <p className=" text-4xl">Join us</p>

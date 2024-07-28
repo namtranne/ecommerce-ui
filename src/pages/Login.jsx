@@ -1,21 +1,23 @@
 import { motion } from "framer-motion";
-import { CiLogin } from "react-icons/ci";
 import { LoginViaThirdParty } from "../features/Login/LoginViaThirdParty";
 import { LoginButton } from "../features/Login/LoginButton";
 import LoginViaEmail from "../features/Login/LoginViaEmail";
 import LoginWelcomeText from "../features/Login/LoginWelcomeText";
-import { useLogin } from "../hooks/useAuthentication";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-function Login({ onSignUpClick }) {
+function Login({ onSignUpClick, loginUser }) {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-  const { login, isLoading } = useLogin();
 
-  const handleLogin = () => {
-    login(credentials);
+  const handleLogin = async () => {
+    await loginUser(credentials);
+    toast.success("Login successfully");
+    navigate("/");
   };
 
   return (
@@ -34,10 +36,7 @@ function Login({ onSignUpClick }) {
           credentials={credentials}
           setCredentials={setCredentials}
         ></LoginViaEmail>
-        <LoginButton
-          handleLogin={handleLogin}
-          isLoading={isLoading}
-        ></LoginButton>
+        <LoginButton handleLogin={handleLogin}></LoginButton>
       </motion.div>
     </section>
   );

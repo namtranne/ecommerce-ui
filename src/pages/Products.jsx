@@ -26,7 +26,7 @@ function Products() {
     minPrice: 0,
     maxPrice: 999999999,
     sortBy: "price",
-    sortDir: "asc",
+    sortDir: "des",
   });
 
   const fetchProduct = async () => {
@@ -77,7 +77,7 @@ function Products() {
 
   return (
     <ProductContext.Provider value={{ reviewProduct, setReviewProduct }}>
-      <div className="mt-[70px]">
+      <div>
         <BreadCrumbs />
         <div className="bg-gray-900 p-4 min-h-screen">
           <div className="flex flex-row px-32 py-8">

@@ -1,59 +1,110 @@
 import "./App.css";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
 import About from "./pages/About";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Error from "./pages/Error";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import AppLayout from "./ui/WebLayout";
 import CustomerSupport from "./pages/CustomerSupport";
 import LoginSignUp from "./pages/LoginSignUp";
-import { useUserDetails } from "./hooks/useAuthentication";
 import UserContext from "./context/UserContext";
 import MyAccount from "./pages/MyAccount";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 5 * 1000,
-    },
-  },
-});
+import Checkout from "./pages/Checkout";
+import { CartProvider } from "./context/CartContext";
+import { useState } from "react";
+import { login, signUp } from "./services/apiAuthenticate";
+import { ConnectServerSocket } from "./hooks/useSocket";
+import { getUserDetails } from "./services/apiUser";
+import { useUserDetails } from "./hooks/useUser";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
+  const queryClient = useQueryClient();
   const userDetails = useUserDetails();
 
-  return (
-    <UserContext.Provider value={userDetails}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Router>
-        <Routes>
-          {/* Has header and footer routes */}
-          <Route element={<AppLayout hasHeaderAndFooter />}>
-            <Route path="/" exact element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="/products/:categoryId" element={<Products />} />
-            <Route path="/customer-support" element={<CustomerSupport />} />
-            <Route path="my-account" element={<MyAccount />} />
-            <Route path="/products/product-info" element={<SingleProduct />} />
-          </Route>
+  const handleRefetchUserDetails = () => {
+    queryClient.invalidateQueries("user");
+  };
 
-          {/* does not have header and footer routes */}
-          <Route element={<AppLayout />}>
-            <Route path="/login" element={<LoginSignUp initSignUp={false} />} />
-            <Route path="/signup" element={<LoginSignUp initSignUp={true} />} />
-            <Route path="*" element={<Error />} />
-          </Route>
-        </Routes>
-      </Router>
-    </UserContext.Provider>
+  const loginUser = async (credentials) => {
+    try {
+      await login(credentials);
+      const client = await ConnectServerSocket();
+      handleRefetchUserDetails();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const signupUser = async (credentials) => {
+    try {
+      await signUp(credentials);
+      const client = await ConnectServerSocket();
+      handleRefetchUserDetails();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <CartProvider>
+      <UserContext.Provider value={userDetails}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Router>
+          <Routes>
+            {/* Has header and footer routes */}
+            <Route element={<AppLayout hasHeaderAndFooter />}>
+              <Route path="/" exact element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="/products/:categoryId" element={<Products />} />
+              <Route path="/customer-support" element={<CustomerSupport />} />
+              <Route path="my-account" element={<MyAccount />} />
+              <Route
+                path="/products/product-info"
+                element={<SingleProduct />}
+              />
+              <Route path="checkout" element={<Checkout />} />
+            </Route>
+
+            {/* does not have header and footer routes */}
+            <Route element={<AppLayout />}>
+              <Route
+                path="/login"
+                element={
+                  <LoginSignUp
+                    initSignUp={false}
+                    loginUser={loginUser}
+                    signupUser={signupUser}
+                  />
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <LoginSignUp
+                    initSignUp={true}
+                    loginUser={loginUser}
+                    signupUser={signupUser}
+                  />
+                }
+              />
+              <Route path="/payment/success" element={<PaymentSuccess />} />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </Router>
+      </UserContext.Provider>
+    </CartProvider>
   );
 }
 

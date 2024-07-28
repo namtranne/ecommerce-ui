@@ -9,6 +9,7 @@ import {
   SmileOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
+import { useState } from "react";
 function Sort({
   isGridView,
   setListView,
@@ -16,6 +17,7 @@ function Sort({
   totalElements,
   updateFilter,
 }) {
+  const [sortBy, setSortBy] = useState("Sort By");
   const items = [
     {
       key: "1",
@@ -24,6 +26,7 @@ function Sort({
           onClick={() => {
             updateFilter("sortBy", "price");
             updateFilter("sortDir", "des");
+            setSortBy("High - Low Price");
           }}
           target="_blank"
           rel="noopener noreferrer"
@@ -40,6 +43,7 @@ function Sort({
           onClick={() => {
             updateFilter("sortBy", "price");
             updateFilter("sortDir", "asc");
+            setSortBy("Low - High Price");
           }}
           target="_blank"
           rel="noopener noreferrer"
@@ -56,6 +60,7 @@ function Sort({
           onClick={() => {
             updateFilter("sortBy", "discountRate");
             updateFilter("sortDir", "des");
+            setSortBy(" Discount Rate");
           }}
           target="_blank"
           rel="noopener noreferrer"
@@ -91,7 +96,7 @@ function Sort({
       >
         <a onClick={(e) => e.preventDefault()} className="text-white">
           <Space>
-            Sort By
+            {sortBy}
             <DownOutlined />
           </Space>
         </a>
