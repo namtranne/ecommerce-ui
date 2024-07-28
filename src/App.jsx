@@ -25,15 +25,6 @@ import { login, signUp } from "./services/apiAuthenticate";
 import { ConnectServerSocket } from "./hooks/useSocket";
 import { getUserDetails } from "./services/apiUser";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 5 * 1000,
-    },
-  },
-});
-
 function App() {
   const [userDetails, setUserDetails] = useState({});
 
