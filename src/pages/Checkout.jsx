@@ -227,6 +227,17 @@ const Checkout = () => {
           </div>
         </div>
         <CheckoutItem className="flex-grow" products={cartItems} />
+        <div className="text-xl font-bold flex justify-between">
+          <p>Total: </p>
+          <p>
+            {cartItems.reduce(
+              (acc, cur) => (acc += cur.product.price * cur.quantity),
+              0
+            )}{" "}
+            VND
+          </p>
+        </div>
+
         <motion.button
           // type="submit"
           className="mt-4 w-1/3 p-2 rounded-md shadow-md mx-auto"
