@@ -26,7 +26,7 @@ function Products() {
     minPrice: 0,
     maxPrice: 999999999,
     sortBy: "price",
-    sortDir: "asc",
+    sortDir: "des",
   });
 
   const fetchProduct = async () => {

@@ -10,10 +10,15 @@ import "./product.css";
 import PriceBox from "../features/SingleProduct/PriceBox";
 import { isLogin } from "../utils/axios";
 import { toast } from "react-toastify";
+import { useAddCartItem } from "../hooks/useUser";
+import RatingStars from "../features/SingleProduct/RatingStar";
+import ProductReview from "../features/SingleProduct/ProductReview";
 
 function SingleProduct() {
   // validateProductInfo();
   const { data: product, isLoading, error } = useProductInfo();
+  const { addCartItem, isLoading: isAddingCartItem } = useAddCartItem();
+
   const [selectedImage, setSelectedImage] = useState("");
   const [amount, setAmount] = useState(1);
   const [configurableProduct, setConfigurableProduct] = useState(null);
@@ -29,6 +34,18 @@ function SingleProduct() {
     if (isLogin() == false) {
       toast.error("Please login first");
       return;
+    } else if (amount == 0) {
+      return;
+    } else {
+      const cartItem = {
+        configurableProductId: configurableProduct.id,
+        productId: configurableProduct.productId,
+        quantity: amount,
+        option1: configurableProduct.option1,
+        option2: configurableProduct.option2,
+        image: configurableProduct.images[0]?.url,
+      };
+      addCartItem(cartItem);
     }
   };
 
@@ -108,6 +125,10 @@ function SingleProduct() {
 
           {/* product description */}
           <ProductDescription description={product.description} />
+
+          {/* <RatingStars ratingAverage={4} /> */}
+
+          <ProductReview productId={product.id} />
         </section>
       </main>
     </div>

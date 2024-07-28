@@ -5,7 +5,7 @@ import { useState } from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-function LoginSignUp({ initSignUp, loginUser, signUpUser }) {
+function LoginSignUp({ initSignUp, loginUser, signupUser }) {
   const [showSignUp, setShowSignUp] = useState(initSignUp);
 
   const handleSignUpToggle = () => {
@@ -28,7 +28,7 @@ function LoginSignUp({ initSignUp, loginUser, signUpUser }) {
           <Login onSignUpClick={handleSignUpToggle} loginUser={loginUser} />
         </div>
         <div className="w-full shrink-0">
-          <SignUp onSignUpClick={handleSignUpToggle} signUpUser={signUpUser} />
+          <SignUp onSignUpClick={handleSignUpToggle} signUpUser={signupUser} />
         </div>
       </motion.div>
     </div>

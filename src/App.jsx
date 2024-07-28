@@ -5,7 +5,7 @@ import Cart from "./pages/Cart";
 import Products from "./pages/Products";
 import SingleProduct from "./pages/SingleProduct";
 import Error from "./pages/Error";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   Route,
@@ -24,17 +24,22 @@ import { useState } from "react";
 import { login, signUp } from "./services/apiAuthenticate";
 import { ConnectServerSocket } from "./hooks/useSocket";
 import { getUserDetails } from "./services/apiUser";
+import { useUserDetails } from "./hooks/useUser";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 function App() {
-  const [userDetails, setUserDetails] = useState({});
+  const queryClient = useQueryClient();
+  const userDetails = useUserDetails();
+
+  const handleRefetchUserDetails = () => {
+    queryClient.invalidateQueries("user");
+  };
 
   const loginUser = async (credentials) => {
     try {
-      console.log(credentials);
       await login(credentials);
       const client = await ConnectServerSocket();
-      const userDetails = await getUserDetails();
-      setUserDetails(userDetails);
+      handleRefetchUserDetails();
     } catch (err) {
       console.log(err);
     }
@@ -44,8 +49,7 @@ function App() {
     try {
       await signUp(credentials);
       const client = await ConnectServerSocket();
-      const userDetails = await getUserDetails();
-      setUserDetails(userDetails);
+      handleRefetchUserDetails();
     } catch (err) {
       console.log(err);
     }
@@ -94,6 +98,7 @@ function App() {
                   />
                 }
               />
+              <Route path="/payment/success" element={<PaymentSuccess />} />
               <Route path="*" element={<Error />} />
             </Route>
           </Routes>

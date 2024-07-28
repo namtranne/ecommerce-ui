@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUp({ onSignUpClick, signUpUser }) {
   const [credentials, setCredentials] = useState({

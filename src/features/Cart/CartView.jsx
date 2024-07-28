@@ -17,35 +17,36 @@ function CartView({ products }) {
         {products.map((product, index) => (
           <li
             key={index}
-            className="bg-[#ededed] p-3 mb-5 rounded-lg hover:shadow-md transition-shadow duration-300"
+            className="bg-[black] p-3 mb-5 rounded-lg hover:shadow-md transition-shadow duration-300 text-white"
           >
             <div className="flex flex-row justify-between">
               <img
                 src={product.image}
-                alt={product.name}
+                // alt={product.name}
                 className="w-1/6 text-sm border border-solid border-black rounded-md shadow-md"
               />
               <div className="flex flex-col justify-center w-4/6">
-                <div className="text-lg font-bold">{product.name}</div>
+                <div className="text-lg font-bold mb-2">
+                  {product.product?.name}
+                </div>
+                <div className="text-base mb-2">
+                  {product.option1} {product.option2 && " | " + product.option2}
+                </div>
                 <div className="flex flex-row">
-                  <div className="flex flex-row items-center text-md font-semibold outline outline-2 outline-[#455f63] w-fit h-fit px-1 rounded-sm mr-auto">
-                    <button
-                      className="text-black"
-                      onClick={decreaseAmount}
-                    >
+                  <div className="bg-[var(--light-grayish-blue)] mr-4 p-2 rounded-md px-4">
+                    <button className="text-black" onClick={decreaseAmount}>
                       -
                     </button>
-                    <div className="border-l-2 border-[#455f63] mx-1 inline-block min-h-4" />
-                    <span className="text-black">{amount}</span>
-                    <div className="border-l-2 border-[#455f63] mx-1 inline-block min-h-4" />
-                    <button
-                      className="text-black"
-                      onClick={increaseAmount}
-                    >
+                    <div className="border-l-2  mx-1 inline-block min-h-4" />
+                    <span className="text-black">{product.quantity}</span>
+                    <div className="border-l-2  mx-1 inline-block min-h-4" />
+                    <button className="text-black" onClick={increaseAmount}>
                       +
                     </button>
                   </div>
-                  <div>${product.price*amount}</div>
+                  <div className="h-full flex items-center font-bold text-lg text-titanium-100">
+                    VND {product.product?.price * product.quantity}
+                  </div>
                 </div>
               </div>
             </div>
