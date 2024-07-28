@@ -1,7 +1,7 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import NeubrutalismButton from "../../ui/NeubrutalismButton";
 
-export default function PriceBox({ amount, setAmount }) {
+export default function PriceBox({ amount, setAmount, handleAddToCart }) {
   return (
     <div class="price-btnbox">
       <div class="price-btns">
@@ -29,7 +29,11 @@ export default function PriceBox({ amount, setAmount }) {
           <MinusOutlined />
         </button>
       </div>
-      <NeubrutalismButton className="text-white font-bold" text="Add to cart" />
+      <NeubrutalismButton
+        handleClick={handleAddToCart}
+        className="text-white font-bold"
+        text="Add to cart"
+      />
     </div>
   );
 }

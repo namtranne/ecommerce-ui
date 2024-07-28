@@ -1,36 +1,49 @@
+import { ProductImages } from "./../features/SingleProduct/ProductImages";
 import { ProductOptions } from "./../features/SingleProduct/ProductOptions";
 import { ProductDescription } from "./../features/SingleProduct/ProductDescription";
 import { ProductSpecifications } from "./../features/SingleProduct/ProductSpecifications";
 import { Warranties } from "./../features/SingleProduct/Warranties";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProductInfo } from "../hooks/useProduct";
 import BarLoader from "../ui/BarLoader";
-import { motion } from "framer-motion";
 import "./product.css";
-import { Descriptions } from "antd";
 import PriceBox from "../features/SingleProduct/PriceBox";
+import { isLogin } from "../utils/axios";
+import { toast } from "react-toastify";
 
 function SingleProduct() {
   // validateProductInfo();
   const { data: product, isLoading, error } = useProductInfo();
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState("");
-  const [transformY, setTransformY] = useState(0);
   const [amount, setAmount] = useState(1);
+  const [configurableProduct, setConfigurableProduct] = useState(null);
+  const [productImages, setProductImages] = useState([]);
 
-  const nextImages = () => {
-    if (currentIndex + imagesToShow < product.images.length) {
-      setCurrentIndex(currentIndex + imagesToShow);
-      setTransformY(transformY - 460); // Move up
+  const handleSetProductConfiguration = (product) => {
+    setConfigurableProduct(product);
+    setProductImages(product.images);
+    setSelectedImage(product.images[0]);
+  };
+
+  const handleAddToCart = () => {
+    if (isLogin() == false) {
+      toast.error("Please login first");
+      return;
     }
   };
 
-  const prevImages = () => {
-    if (currentIndex - imagesToShow >= 0) {
-      setCurrentIndex(currentIndex - imagesToShow);
-      setTransformY(transformY + 460); // Move down
+  useEffect(() => {
+    if (product) {
+      console.log(product);
+      setConfigurableProduct(
+        product.configurableProducts.length
+          ? product.configurableProducts[0]
+          : {}
+      );
+      setProductImages(product.images);
+      setSelectedImage(product.images[0]);
     }
-  };
+  }, [product]);
 
   if (isLoading) {
     return (
@@ -40,52 +53,16 @@ function SingleProduct() {
     );
   }
 
-  const [configurableProduct, setConfigurableProduct] = useState(
-    product.configurableProducts.length ? product.configurableProducts[0] : {}
-  );
-  const [productImages, setProductImages] = useState(product.images);
-  console.log(product);
+  // console.log(product);
 
   return (
     <div className="bg-white">
       <main className="px-12 py-8 max-w-[134rem] m-auto grid grid-cols-[0.8fr_1fr] gap-40">
-        <section class="img">
-          {/* <button class="hidden" className="left-[10%]">
-            <img
-              src="images/icon-next.svg"
-              alt="next symbol image"
-              class="img-main__btnlft-img img-main__btn-img"
-            />
-          </button> */}
-          <button class="img-main__btnrgt img-main__btn">
-            <img
-              src="images/icon-next.svg"
-              alt="next symbol image"
-              class="img-main__btnrgt-img img-main__btn-img"
-            />
-          </button>
-          {/* <div class="w-full flex justify-center"> */}
-          <img
-            src={productImages[0].url}
-            alt=""
-            className="max-w-full rounded-[5%] cursor-pointer mb-14"
-          />
-          {/* </div> */}
-
-          <div class="img-btns">
-            {productImages.map((image) => {
-              return (
-                <button class="img-btn" key={image.id}>
-                  <img
-                    src={image.url}
-                    alt="shoe product image"
-                    class="img-btn__img"
-                  />
-                </button>
-              );
-            })}
-          </div>
-        </section>
+        <ProductImages
+          selectedImage={selectedImage}
+          productImages={productImages}
+          setSelectedImage={setSelectedImage}
+        />
 
         <section class="price w-full overflow-hidden">
           <h2 class="price-sub__heading text-[#212f4d]">
@@ -111,11 +88,15 @@ function SingleProduct() {
 
           <ProductOptions
             configurableProducts={product.configurableProducts}
-            // productConfiguration={productConfiguration}
-            // setProductConfiguration={handleSetProductConfiguration}
+            configurableProduct={configurableProduct}
+            setProductConfiguration={handleSetProductConfiguration}
           />
 
-          <PriceBox amount={amount} setAmount={setAmount} />
+          <PriceBox
+            amount={amount}
+            setAmount={setAmount}
+            handleAddToCart={handleAddToCart}
+          />
 
           {product.warranties.length > 0 && (
             <Warranties warranties={product.warranties} />
