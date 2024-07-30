@@ -1,10 +1,24 @@
 import { Button, Input } from "@mantine/core";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useAddProductReview, useProductReview } from "../../hooks/useProduct";
 
 function ProductReview({ productId }) {
-  const [reviews, setReviews] = useState([]);
+  const { data: reviews, isLoading } = useProductReview();
+  const { addProductReview, isLoading: isAddingProduct } =
+    useAddProductReview();
   const [review, setReview] = useState("");
+  const handleAddReview = () => {
+    if (review == "") return;
+    const data = { content: review, productId: productId };
+    setReview("");
+    addProductReview(data);
+  };
+
+  if (isLoading) {
+    return <div>Loading review...</div>;
+  }
+
   return (
     <div>
       <p className="text-xl font-bold">Reviews</p>
@@ -17,21 +31,18 @@ function ProductReview({ productId }) {
           onChange={(e) => setReview(e.target.value)}
         />
         <Button
-          onClick={() => {
-            if (review == "") return;
-            setReview("");
-            setReviews([...reviews, review]);
-            toast.success("Reviewed sent successfully!!");
-          }}
+          onClick={handleAddReview}
           bg={"black"}
+          disabled={isAddingProduct}
         >
-          Send
+          {isAddingProduct ? "Adding review..." : "Send"}
         </Button>
       </div>
       {reviews.map((r) => {
         return (
-          <div className="w-80 p-4 border-[1px] border-black rounded-lg mt-4">
-            <span className="font-bold">Tran Hai Nam:</span> <span>{r}</span>
+          <div className="w-80 p-4 border-[1px] border-black rounded-lg mt-4 w-full">
+            <span className="font-bold">{r.reviewerName}</span>{" "}
+            <span>{r.content}</span>
           </div>
         );
       })}
