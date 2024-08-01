@@ -5,6 +5,7 @@ import { useCartVisibility } from "../context/CartContext";
 import CartView from "../features/Cart/CartView";
 import { useCart } from "../hooks/useUser";
 import BarLoader from "../ui/BarLoader";
+import { formatPrice } from "../utils/product";
 
 function Cart() {
   const { hideCart, isVisible } = useCartVisibility();
@@ -94,11 +95,12 @@ function Cart() {
                   <div className="w-full flex flex-row justify-between mb-2">
                     <span className="flex-grow">Total:</span>
                     <span className="ml-2 font-bold">
-                      VND{" "}
-                      {cartItems.reduce(
-                        (acc, curr) =>
-                          acc + curr.product?.price * curr.quantity,
-                        0
+                      {formatPrice(
+                        cartItems.reduce(
+                          (acc, curr) =>
+                            acc + curr.product?.price * curr.quantity,
+                          0
+                        )
                       )}
                     </span>
                   </div>

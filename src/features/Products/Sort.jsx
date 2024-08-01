@@ -87,14 +87,14 @@ function Sort({
           <UnorderedListOutlined />
         </button>
       </div>
-      <p className="text-white">{totalElements} products found</p>
+      <p>{totalElements} products found</p>
       <hr />
       <Dropdown
         menu={{
           items,
         }}
       >
-        <a onClick={(e) => e.preventDefault()} className="text-white">
+        <a onClick={(e) => e.preventDefault()}>
           <Space>
             {sortBy}
             <DownOutlined />

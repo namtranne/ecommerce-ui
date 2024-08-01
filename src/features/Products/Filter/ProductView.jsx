@@ -26,7 +26,7 @@ function ProductView() {
 
   const products = data;
   return (
-    <div className="w-full">
+    <div className="w-full text-[#393E46]">
       <Sort
         isGridView={isGridView}
         setGridView={setGridView}

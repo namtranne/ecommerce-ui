@@ -11,6 +11,7 @@ import { EditAddressForm } from "../features/MyAccount/UserAddress";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { ProfileButton } from "../features/MyAccount/ProfileButton";
 import authAxios from "../utils/axios";
+import { formatPrice } from "../utils/product";
 
 const paymentMethods = [
   {
@@ -230,11 +231,12 @@ const Checkout = () => {
         <div className="text-xl font-bold flex justify-between">
           <p>Total: </p>
           <p>
-            {cartItems.reduce(
-              (acc, cur) => (acc += cur.product.price * cur.quantity),
-              0
-            )}{" "}
-            VND
+            {formatPrice(
+              cartItems.reduce(
+                (acc, cur) => (acc += cur.product.price * cur.quantity),
+                0
+              )
+            )}
           </p>
         </div>
 

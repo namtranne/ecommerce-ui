@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatPrice } from "../../utils/product";
 
 export default function CheckoutItem({ products }) {
   return (
@@ -27,7 +28,7 @@ export default function CheckoutItem({ products }) {
                 </div>
               </div>
               <div className="flex font-bold text-lg text-titanium-100 items-center">
-                VND {product.product?.price * product.quantity} x{" "}
+                {formatPrice(product.product?.price * product.quantity)} x{" "}
                 {product.quantity}
               </div>
             </div>

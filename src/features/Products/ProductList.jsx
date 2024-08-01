@@ -1,14 +1,8 @@
 import styled from "styled-components";
 import NeubrutalismButton from "../../ui/NeubrutalismButton";
 import { Divider } from "antd";
-
+import { formatPrice } from "../../utils/product";
 function ProductList({ products }) {
-  function formatPrice(price) {
-    const priceString = price.toString();
-    const formattedPrice = priceString.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    return formattedPrice + " VND";
-  }
-
   return (
     <Wrapper>
       {products.map((product) => {
@@ -25,7 +19,7 @@ function ProductList({ products }) {
           <>
             <article key={id} className="">
               <img src={thumbnailUrl} alt={name} />
-              <div className="text-white">
+              <div className="text-black">
                 <h4>{name}</h4>
 
                 <div className="text-sm font-bold text-[#3f60d7]">
@@ -35,7 +29,7 @@ function ProductList({ products }) {
                       style={{ textDecorationLine: "none", marginBottom: 0 }}
                     >
                       {formatPrice(price)}{" "}
-                      <div className="inline text-xs text-white bg-[#C80036] p-1 ml-1">
+                      <div className="inline text-xs text-black bg-[#C80036] p-1 ml-1">
                         SALE {discountRate}%
                       </div>
                     </div>

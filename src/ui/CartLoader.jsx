@@ -52,7 +52,7 @@ function CartLoader() {
           </g>
         </g>
       </svg>
-      <div className="preloader__text">
+      <div className="preloader__text text-white text-2xl">
         <p className="preloader__msg">Bringing you the goods…</p>
         <p className="preloader__msg preloader__msg--last">
           This is taking long. Something’s wrong.

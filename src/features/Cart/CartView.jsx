@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatPrice } from "../../utils/product";
 
 function CartView({ products }) {
   const [amount, setAmount] = useState(1);
@@ -45,7 +46,7 @@ function CartView({ products }) {
                     </button>
                   </div>
                   <div className="h-full flex items-center font-bold text-lg text-titanium-100">
-                    VND {product.product?.price * product.quantity}
+                    {formatPrice(product.product?.price * product.quantity)}
                   </div>
                 </div>
               </div>

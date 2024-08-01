@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { useAddCartItem } from "../hooks/useUser";
 import RatingStars from "../features/SingleProduct/RatingStar";
 import ProductReview from "../features/SingleProduct/ProductReview";
+import { formatPrice } from "../utils/product";
 
 function SingleProduct() {
   // validateProductInfo();
@@ -39,12 +40,15 @@ function SingleProduct() {
     } else {
       const cartItem = {
         configurableProductId: configurableProduct.id,
-        productId: configurableProduct.productId,
+        productId: product.id,
         quantity: amount,
         option1: configurableProduct.option1,
         option2: configurableProduct.option2,
-        image: configurableProduct.images[0]?.url,
+        image: configurableProduct.images
+          ? configurableProduct.images[0]?.url
+          : product.images[0].url,
       };
+      console.log(cartItem);
       addCartItem(cartItem);
     }
   };
@@ -88,7 +92,9 @@ function SingleProduct() {
           <h1 className="text-[3rem] font-bold">{product.name}</h1>
           <div class="price-box">
             <div class="price-box__main">
-              <span class="price-box__main-new">{product.price} VND</span>
+              <span class="price-box__main-new">
+                {formatPrice(product.price)}
+              </span>
               {product.discountRate ? (
                 <>
                   <span class="price-box__main-discount">

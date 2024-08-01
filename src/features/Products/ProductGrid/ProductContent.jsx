@@ -21,18 +21,22 @@ function ProductContent({
 
   return (
     <motion.div
-      className="shadow-lg overflow-hidden bg-black relative hover:cursor-pointer"
+      className="shadow-lg overflow-hidden bg-[white] relative hover:cursor-pointer"
       initial={{ opacity: 0.6 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
     >
-      <img src={product.thumbnailUrl} alt="" className="w-full" />
+      <img
+        src={product.thumbnailUrl}
+        alt=""
+        className="w-full"
+        onClick={handleClick}
+      />
       <motion.div
-        className="p-[25px] rounded-b-sm bg-black h-44 -bottom-2 right-0 w-full"
+        className="p-[25px] rounded-b-sm bg-[#393E46] h-44 -bottom-2 right-0 w-full"
         style={{
           transform: isHover ? "translateY(-30px)" : "translateY(0)",
           transition: "transform 0.3s",
@@ -89,6 +93,7 @@ function ProductContent({
           <motion.button
             className="mr-4 text-[#3f60d7] font-extrabold"
             whileHover={{ color: "#068FFF" }}
+            onClick={handleClick}
           >
             BUY PRODUCT
           </motion.button>

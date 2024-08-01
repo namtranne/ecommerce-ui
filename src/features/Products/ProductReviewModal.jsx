@@ -8,9 +8,11 @@ import {
 import { useEffect } from "react";
 import { useReviewProduct } from "../../pages/Products";
 import NeubrutalismButton from "../../ui/NeubrutalismButton";
+import { useNavigate } from "react-router-dom";
 
 function ProductReviewModal() {
   const { reviewProduct, setReviewProduct } = useReviewProduct();
+  const navigate = useNavigate();
   const [scope, animate] = useAnimate();
   const [drawerRef, { height }] = useMeasure();
 
@@ -69,16 +71,16 @@ function ProductReviewModal() {
               bottom: 0.5,
             }}
           >
-            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center bg-[#F5F5F5] p-4">
+            <div className="absolute left-0 right-0 top-0 z-10 flex justify-center bg-[white] p-4">
               <button
                 onPointerDown={(e) => {
                   controls.start(e);
                 }}
-                className="h-2 w-14 cursor-grab touch-none rounded-full bg-[#91C8E4] active:cursor-grabbing"
+                className="h-2 w-14 cursor-grab touch-none rounded-full bg-[black] active:cursor-grabbing"
               ></button>
             </div>
             <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
-              <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">
+              <div className="mx-auto max-w-2xl space-y-4 text-black">
                 <h2 className="text-4xl font-bold text-black">
                   {reviewProduct.name}
                 </h2>
@@ -87,7 +89,12 @@ function ProductReviewModal() {
                     __html: reviewProduct.description,
                   }}
                 />
-                <div className="flex items-center justify-center">
+                <div
+                  className="flex items-center justify-center"
+                  onClick={() =>
+                    navigate(`/products/product-info?id=${reviewProduct.id}`)
+                  }
+                >
                   <NeubrutalismButton text="BUY ME" />
                 </div>
               </div>

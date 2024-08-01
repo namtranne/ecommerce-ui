@@ -40,10 +40,8 @@ function BreadCrumbs() {
   return (
     <BreadCrumbWrapper>
       <Breadcrumb
-        className="text-white"
-        separator={
-          <span className="text-2xl font-thin text-indigo-300">{"/"}</span>
-        }
+        className="text-black"
+        separator={<span className="text-2xl font-thin text-black">{"/"}</span>}
         items={items}
       />
     </BreadCrumbWrapper>
@@ -60,7 +58,7 @@ const BreadCrumbText = ({ text, href }) => {
 
 const BreadCrumbWrapper = ({ children }) => {
   return (
-    <div className="flex flex-col justify-center text-black w-full p-2 px-4 bg-zinc-900">
+    <div className="flex flex-col justify-center text-black w-full p-2 px-4 bg-[#F7F7F7]">
       {children}
     </div>
   );
@@ -68,7 +66,7 @@ const BreadCrumbWrapper = ({ children }) => {
 
 const BubbleText = ({ text }) => {
   return (
-    <h2 className="text-center text-2xl font-thin text-indigo-300">
+    <h2 className="text-center text-2xl font-thin text-black">
       {text.split("").map((child, idx) => (
         <span className={styles.hoverText} key={idx}>
           {child}
