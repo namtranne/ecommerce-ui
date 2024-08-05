@@ -47,5 +47,8 @@ module.exports = {
       "400%": "400%",
     },
   },
+  variants: {
+    fill: ['hover', 'focus'],
+  },
   plugins: [],
 };
