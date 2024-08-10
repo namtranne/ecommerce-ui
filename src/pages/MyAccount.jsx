@@ -7,6 +7,8 @@ import { MyAccountControlPanel } from "../features/MyAccount/MyAccount-Control-P
 import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
 import { isLogin } from "../utils/axios";
+import { UserProfileWelcome } from "../features/MyAccount/UserProfile";
+import { UserAddressHeader } from "../features/MyAccount/UserAddress";
 
 export default function MyAccount() {
   const {
@@ -36,18 +38,26 @@ export default function MyAccount() {
   const userInfo = { firstName, lastName, email, phoneNumber, birthDay };
 
   return (
-    <div className="flex w-full h-screen items-center py-32 px-12">
-      <div className="w-1/3 h-fit flex justify-center">
-        <MyAccountControlPanel
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-        ></MyAccountControlPanel>
+    <div className="flex flex-col w-full h-screen py-32 px-12">
+      <div className="relative" style={{marginLeft: '33.33%'}}>
+        {selectedIndex === 0 && <UserProfileWelcome firstName={firstName} lastName={lastName} />}
+        {selectedIndex === 1 && <UserAddressHeader/>}
       </div>
-      <div className="w-2/3 flex flex-row justify-center self-start">
-        {selectedIndex === 0 && <UserProfile userInfo={userInfo}></UserProfile>}
-
-        {selectedIndex === 1 && <UserAddress></UserAddress>}
+  
+      <div className="flex w-full h-screen items-start pb-32 px-12 pt-12">
+        <div className="w-1/3 h-fit flex justify-center">
+          <MyAccountControlPanel
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+          />
+        </div>
+        <div className="w-2/3 flex flex-row justify-center">
+          {selectedIndex === 0 && <UserProfile userInfo={userInfo} />}
+  
+          {selectedIndex === 1 && <UserAddress />}
+        </div>
       </div>
     </div>
   );
+   
 }
