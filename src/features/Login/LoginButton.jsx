@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 export const LoginButton = ({ handleLogin, isLoading }) => {
   return (
-    <a className="col-span-full flex flex-col" href="#">
+    <a className="col-span-full flex flex-col h-12" href="#">
       <motion.button
         onClick={() => handleLogin()}
-        className="bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-lg transition duration-0.2 
+        className="bg-gradient-to-r h-full from-cyan-400 to-cyan-600 rounded-lg transition duration-0.2 
             hover:scale-105 hover:shadow-cyan-600 hover:shadow active:scale-95"
       >
         {isLoading ? (

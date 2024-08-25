@@ -14,13 +14,18 @@ function Login({ onSignUpClick, loginUser }) {
     password: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleLogin = async () => {
     try {
+      setIsLoading(true);
       await loginUser(credentials);
+      setIsLoading(false);
       toast.success("Login successfully");
       navigate("/");
     }
     catch(err) {
+      setIsLoading(false);
       console.log(err);
       toast.error("Can not loggin, please try again!");
     }
@@ -43,7 +48,7 @@ function Login({ onSignUpClick, loginUser }) {
           credentials={credentials}
           setCredentials={setCredentials}
         ></LoginViaEmail>
-        <LoginButton handleLogin={handleLogin}></LoginButton>
+        <LoginButton handleLogin={handleLogin} isLoading={isLoading}></LoginButton>
       </motion.div>
     </section>
   );
