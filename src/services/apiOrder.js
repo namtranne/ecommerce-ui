@@ -7,7 +7,7 @@ export async function getUserOrders() {
     const res = await authAxios.get("/auth/order/user");
     console.log(res);
     if (res.status == 200) {
-      return res.data;
+      return res.data.orders;
     } else {
       toast.error("Fail to get user addresses");
     }
