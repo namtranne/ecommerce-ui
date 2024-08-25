@@ -171,3 +171,147 @@ const AddressBlock = ({
     </div>
   );
 };
+
+export const EditAddressForm = ({ address, onClose, onSubmit }) => {
+  const [formData, setFormData] = useState({ ...address });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = () => {
+    onSubmit(formData);
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-zinc-800 bg-opacity-50 z-10">
+      <div className="bg-white p-8 rounded-xl shadow-md w-1/2">
+        <h2 className="text-2xl mb-4">
+          {address.receiver ? "Edit Address" : "Add Address"}
+        </h2>
+        <form className="space-y-4">
+          <input
+            type="number"
+            name="id"
+            value={formData.id}
+            onChange={handleChange}
+            className="mt-1 p-2 hidden w-full border rounded-md"
+          />
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Title
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md "
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Receiver
+            </label>
+            <input
+              type="text"
+              name="receiverName"
+              value={formData.receiverName || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Tel
+            </label>
+            <input
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Address line 1
+            </label>
+            <input
+              type="text"
+              name="addressLine1"
+              value={formData.addressLine1 || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Address line 2
+            </label>
+            <input
+              type="text"
+              name="addressLine2"
+              value={formData.addressLine2 || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              City
+            </label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Country
+            </label>
+            <input
+              type="text"
+              name="country"
+              value={formData.country || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              Postal Code
+            </label>
+            <input
+              type="number"
+              name="postalCode"
+              value={formData.postalCode || ""}
+              onChange={handleChange}
+              className="mt-1 p-2 block w-full border rounded-md"
+            />
+          </div>
+          <div className="flex justify-end space-x-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 bg-zinc-500 text-white rounded-md"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
