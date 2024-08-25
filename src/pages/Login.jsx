@@ -15,9 +15,16 @@ function Login({ onSignUpClick, loginUser }) {
   });
 
   const handleLogin = async () => {
-    await loginUser(credentials);
-    toast.success("Login successfully");
-    navigate("/");
+    try {
+      await loginUser(credentials);
+      toast.success("Login successfully");
+      navigate("/");
+    }
+    catch(err) {
+      console.log(err);
+      toast.error("Can not loggin, please try again!");
+    }
+    
   };
 
   return (
