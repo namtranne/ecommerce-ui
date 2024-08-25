@@ -23,7 +23,7 @@ import { SiAsus,
 
 export const Brands = () => {
   return (
-    <div className="bg-zinc-900 px-4 py-36 text-zinc-50">
+    <div className="bg-g5-black px-4 py-20 text-zinc-50">
       <motion.div
         initial="initial"
         animate="animate"
