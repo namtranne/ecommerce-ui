@@ -14,9 +14,21 @@ function Login({ onSignUpClick, loginUser }) {
     password: "",
   });
 
+  const [fieldEmptyErr, setFieldEmptyErr] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = async () => {
+    if (credentials.username.length === 0) {
+      toast.error("Email cannot be empty! Please enter a valid email.");
+      return;
+    }
+
+    if (credentials.password.length === 0) {
+      toast.error("Password cannot be empty! Please enter your password.");
+      return;
+    }
+
     try {
       setIsLoading(true);
       await loginUser(credentials);
