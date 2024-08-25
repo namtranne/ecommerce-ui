@@ -7,6 +7,7 @@ import { MyAccountControlPanel } from "../features/MyAccount/MyAccount-Control-P
 import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
 import { isLogin } from "../utils/axios";
+import { UserOrder } from "../features/MyAccount/UserOrder";
 
 export default function MyAccount() {
   const {
@@ -47,6 +48,7 @@ export default function MyAccount() {
         {selectedIndex === 0 && <UserProfile userInfo={userInfo}></UserProfile>}
 
         {selectedIndex === 1 && <UserAddress></UserAddress>}
+        {selectedIndex === 2 && <UserOrder />}
       </div>
     </div>
   );

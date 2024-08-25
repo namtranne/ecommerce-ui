@@ -1,11 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { BankFilled } from "@ant-design/icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import { faPaypal } from "@fortawesome/free-brands-svg-icons";
-import { ReactSVG } from "react-svg"; // Import ReactSVG from react-svg
 import { useAddUserAddress, useCart, useUserAddresses } from "../hooks/useUser";
-import CartView from "../features/Cart/CartView";
 import CheckoutItem from "../features/Checkout/CheckoutItem";
 import { EditAddressForm } from "../features/MyAccount/UserAddress";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
