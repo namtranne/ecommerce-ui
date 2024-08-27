@@ -40,7 +40,7 @@ function Products() {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [filter.sortBy, filter.sortDir]);
 
   const updateFilter = async (attribute, value) => {
     if (attribute == "page") {
@@ -51,6 +51,7 @@ function Products() {
       setData(newData);
       setIsLoading(false);
     } else {
+      console.log(filter);
       setFilter((prev) => {
         const newFilter = { ...prev };
         newFilter[attribute] = value;

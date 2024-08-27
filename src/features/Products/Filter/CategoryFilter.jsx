@@ -2,13 +2,15 @@ import React from "react";
 import { useCategoriesProductsPage } from "../../../hooks/useCategory";
 import BarLoader from "../../../ui/BarLoader";
 import CategoryCard from "./CategoryCard";
+import { Skeleton } from "antd";
 export function CategoryFilter() {
   const { isLoading, data, error } = useCategoriesProductsPage();
+
   if (isLoading) {
     return (
       <div className="mb-4">
         <p className="mb-1 text-xl font-bold">Category</p>
-        <BarLoader />
+        <Skeleton active />
       </div>
     );
   }

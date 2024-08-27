@@ -7,38 +7,30 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { ProfileButton } from "../features/MyAccount/ProfileButton";
 import authAxios from "../utils/axios";
 import { formatPrice } from "../utils/product";
+import { toast } from "react-toastify";
+import cities from "../data/cities.json";
+import districts from "../data/districts.json";
 
 const paymentMethods = [
   {
-    name: "VNPay",
+    name: "VN_PAY",
     icon: <img src="https://www.svgrepo.com/show/520025/v-vnpay.svg" />,
   },
   {
-    name: "Pay when receive",
+    name: "CASH",
     icon: <img src="https://www.svgrepo.com/show/453826/receive-package.svg" />,
   },
 ];
 
 const Checkout = () => {
   const { isLoading, data: addresses } = useUserAddresses();
-  const { data: cartItems } = useCart();
+  const { data: cartItems, isLoading: isLoadingCartItems } = useCart();
   const [paymentDropdownFocus, setPaymentDropdownFocus] = useState(false);
   const [addressesDropdownFocus, setAddressesDropdownFocus] = useState(false);
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const { addUserAddress } = useAddUserAddress();
-  const [newAddress, setNewAddress] = useState({
-    id: "",
-    title: "",
-    addressLine1: "",
-    addressLine2: "",
-    country: "",
-    city: "",
-    postalCode: "",
-    landmark: "",
-    phoneNumber: "",
-    receiverName: "",
-  });
+  const [newAddress, setNewAddress] = useState({});
   const [isAddingAddress, setIsAddingAddress] = useState(false);
 
   const togglePaymentDropdownFocus = () => {
@@ -60,11 +52,15 @@ const Checkout = () => {
   };
 
   const convertAddress = (address) => {
-    return `
-      ${address.addressLine1}, ${address.addressLine2}, ${address.city}, ${address.country}\n
+    const province = cities.find(
+      (city) => city.value === address.province
+    ).label;
+    const dist = districts.find(
+      (district) => district.value === address.district
+    ).label;
+    return `${address.addressLine1}, ${address.addressLine2}, ${dist}, ${province}, Vietnam\n
       Phone number: ${address.phoneNumber}\n
-      Receiver's name: ${address.receiverName}
-    `;
+      Receiver's name: ${address.receiverName}`;
   };
 
   const onCloseAddressForm = () => {
@@ -82,9 +78,29 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    const response = await authAxios.get("/payment/create_payment");
-    window.location.href = response.data.url;
+    console.log(123);
+    if (!address) {
+      toast.error("Please select an address!");
+    }
+    if (!paymentMethod) {
+      toast.error("Please select a payment method!");
+    }
+    try {
+      const data = {
+        paymentMethod: paymentMethod.name,
+        address: convertAddress(address),
+      };
+      const response = await authAxios.post("/payment/create_payment", data);
+      window.location.href = response.data.url;
+    } catch (err) {
+      console.log(err);
+      toast.error("There was an error creating the order");
+    }
   };
+
+  if (isLoading || isLoadingCartItems) {
+    return <>Loading...</>;
+  }
 
   return (
     <div className="p-10">

@@ -2,7 +2,7 @@ import { Badge, Col } from "antd";
 import ProductContent from "./ProductContent";
 import { useState } from "react";
 
-function ProductCard({ product }) {
+function ProductCard({ product, isLoading }) {
   const [isHover, setIsHover] = useState(false);
   const handleMouseLeave = () => {
     setIsHover(false);
@@ -11,8 +11,15 @@ function ProductCard({ product }) {
     setIsHover(true);
   };
   return (
-    <Col className="gutter-row" sm={24} md={12} lg={6} key={product.id}>
+    <Col
+      className="gutter-row"
+      sm={24}
+      md={12}
+      lg={6}
+      key={product ? product.id : Math.floor(Math.random() * 100)}
+    >
       <ProductContent
+        isLoading={isLoading}
         product={product}
         handleMouseLeave={handleMouseLeave}
         handleMouseEnter={handleMouseEnter}

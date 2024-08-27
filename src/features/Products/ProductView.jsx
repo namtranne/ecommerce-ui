@@ -15,20 +15,45 @@ function ProductView({
   totalElements,
 }) {
   const [isGridView, setIsGridView] = useState(true);
-  if (isLoading && first) {
-    return (
-      <div className="flex justify-center items-center w-full h-96 ">
-        <CartLoader />
-      </div>
-    );
-  }
   const setGridView = () => {
     setIsGridView(true);
   };
-
   const setListView = () => {
     setIsGridView(false);
   };
+  if (isLoading && first) {
+    return (
+      <div className="w-full">
+        <Sort
+          isGridView={isGridView}
+          setGridView={setGridView}
+          setListView={setListView}
+          totalElements={0}
+          updateFilter={updateFilter}
+        />
+        {isGridView ? (
+          <ProductGrid
+            isLoading={isLoading}
+            products={new Array(24).fill(null)}
+          />
+        ) : (
+          <ProductList
+            isLoading={isLoading}
+            products={new Array(24).fill(null)}
+          />
+        )}
+        {!last && (
+          <div className="flex w-full justify-center py-8">
+            <NeubrutalismButton
+              handleClick={() => updateFilter("page", 1)}
+              isLoading={isLoading}
+              text="LOAD MORE..."
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">

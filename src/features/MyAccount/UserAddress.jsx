@@ -7,7 +7,9 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useAddUserAddress, useUserAddresses } from "../../hooks/useUser";
 import BarLoader from "../../ui/BarLoader";
-
+import cities from "../../data/cities.json";
+import districts from "../../data/districts.json";
+import { Select } from "antd";
 export const UserAddress = () => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(null);
@@ -25,11 +27,12 @@ export const UserAddress = () => {
       title: "",
       addressLine1: "",
       addressLine2: "",
-      country: "",
-      city: "",
+      country: "Vietnam",
       postalCode: "",
       landmark: "",
       phoneNumber: "",
+      province: "",
+      district: "",
       receiverName: "",
     });
     setEditIndex(null);
@@ -142,7 +145,7 @@ const AddressBlock = ({
   handleEditClick,
 }) => {
   return (
-    <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch">
+    <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch text-xl">
       <div className="flex flex-col w-full">
         <div className="text-black font-bold text-lg">{address.title}</div>
         <div className="flex flex-row space-x-4">
@@ -153,7 +156,15 @@ const AddressBlock = ({
         <div className="text-zinc-600">
           {address.addressLine1 + " " + address.addressLine2}
         </div>
-        <div className="text-zinc-600">{address.city}</div>
+        <div className="text-zinc-600">
+          {
+            districts.find((district) => district.value == address.district)
+              .label
+          }
+        </div>
+        <div className="text-zinc-600">
+          {cities.find((city) => city.value == address.province).label}
+        </div>
         <div className="text-zinc-600">{address.country}</div>
         <div className="text-zinc-600">Postal: {address.postalCode}</div>
       </div>
@@ -270,14 +281,37 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
           </div>
           <div>
             <label className="block text-sm font-medium text-zinc-700">
-              City
+              Province
             </label>
-            <input
+            <Select
+              onChange={(value) => {
+                setFormData({
+                  ...formData,
+                  province: value,
+                  district: "",
+                });
+              }}
+              value={formData.province}
               type="text"
-              name="city"
-              value={formData.city || ""}
-              onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              options={cities}
+              className="mt-1 block w-full"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              District
+            </label>
+            <Select
+              type="text"
+              disabled={!formData.province}
+              value={formData.district}
+              onChange={(value) => {
+                setFormData({ ...formData, district: value });
+              }}
+              options={districts.filter(
+                (district) => district.parent_value == formData.province
+              )}
+              className="mt-1 block w-full"
             />
           </div>
           <div>
@@ -287,8 +321,8 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
             <input
               type="text"
               name="country"
-              value={formData.country || ""}
-              onChange={handleChange}
+              value="Vietnam"
+              disabled
               className="mt-1 p-2 block w-full border rounded-md"
             />
           </div>
