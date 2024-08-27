@@ -13,10 +13,10 @@ export function ProductSpecifications({ specifications }) {
   };
 
   return (
-    <div>
+    <div className="gap-[2rem] flex flex-col">
       {specifications.map((specification, i) => {
         return (
-          <div className="mb-4">
+          <div>
             <Descriptions
               column={1}
               title=<button

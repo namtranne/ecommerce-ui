@@ -40,7 +40,7 @@ function ProductReview({ productId }) {
       </div>
       {reviews.map((r) => {
         return (
-          <div className="w-80 p-4 border-[1px] border-black rounded-lg mt-4 w-full">
+          <div className="p-4 border-[1px] border-black rounded-lg mt-4 w-full">
             <span className="font-bold">{r.reviewerName}</span>{" "}
             <span>{r.content}</span>
           </div>

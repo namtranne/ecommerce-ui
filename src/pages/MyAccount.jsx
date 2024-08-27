@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { MyAccountControlPanel } from "../features/MyAccount/MyAccount-Control-Panel";
 import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
+import { UserWishlist } from "../features/MyAccount/UserWishlist";
 import { isLogin } from "../utils/axios";
 import { UserProfileWelcome } from "../features/MyAccount/UserProfile";
 import { UserAddressHeader } from "../features/MyAccount/UserAddress";
@@ -58,6 +59,7 @@ export default function MyAccount() {
         {selectedIndex === 0 && <UserProfile userInfo={userInfo} />}
         {selectedIndex === 1 && <UserAddress />}
         {selectedIndex === 2 && <UserOrder />}
+        {selectedIndex === 3 && <UserWishlist />}
       </div>
     </div>
   );
