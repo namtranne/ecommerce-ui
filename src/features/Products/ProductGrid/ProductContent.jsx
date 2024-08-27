@@ -74,8 +74,9 @@ function ProductContent({
         className="w-full"
         onClick={handleClick}
       />
+      <div className="w-full h-44 bg-[#393E46]"></div>
       <motion.div
-        className="p-[25px] rounded-b-sm bg-[#393E46] h-44 -bottom-2 right-0 w-full"
+        className="p-[25px] absolute rounded-b-sm bg-[#393E46] h-44 -bottom-2 right-0 w-full"
         style={{
           transform: isHover ? "translateY(-30px)" : "translateY(0)",
           transition: "transform 0.3s",

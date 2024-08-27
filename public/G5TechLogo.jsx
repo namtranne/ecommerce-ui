@@ -17,10 +17,10 @@ export const Logo = () => {
       className="hover:fill-[#f7f7f7] w-20 h-20 hover:cursor-pointer"
       onClick={() => navigateTo("Home")}
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      width="500"
+      width="80"
       zoomAndPan="magnify"
       viewBox="0 0 375 374.999991"
-      height="500"
+      height="80"
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
     >

@@ -39,19 +39,16 @@ function App() {
     try {
       await login(credentials);
     } catch (err) {
-      console.log(err);
-      return;
+      throw err;
     }
     try {
       const client = await ConnectServerSocket();
-    }
-    catch(err) {
+    } catch (err) {
       toast.error("Cannot connect to chat server");
     }
     try {
       handleRefetchUserDetails();
-    }
-    catch(err) {
+    } catch (err) {
       toast.error("Cannot get your information");
     }
   };
@@ -62,7 +59,7 @@ function App() {
       const client = await ConnectServerSocket();
       handleRefetchUserDetails();
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   };
 

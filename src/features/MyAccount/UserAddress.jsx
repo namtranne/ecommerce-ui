@@ -9,7 +9,7 @@ import { useAddUserAddress, useUserAddresses } from "../../hooks/useUser";
 import BarLoader from "../../ui/BarLoader";
 import cities from "../../data/cities.json";
 import districts from "../../data/districts.json";
-import { Select } from "antd";
+import { Select, Skeleton } from "antd";
 export const UserAddress = () => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(null);
@@ -47,6 +47,12 @@ export const UserAddress = () => {
 
   return (
     <div className="flex flex-col place-content-start w-full h-full">
+      <ProfileButton
+        buttonIcon={MdOutlineAddLocationAlt}
+        buttonName="Add Address"
+        onClick={handleAddClick}
+        optionalClassName="mt-12 mb-4 mr-24 self-center"
+      />
       <UserAddressesList
         handleEditClick={handleEditClick}
         currentAddress={currentAddress}
@@ -55,12 +61,6 @@ export const UserAddress = () => {
         setEditIndex={setEditIndex}
         showEditForm={showEditForm}
         handleCloseForm={handleCloseForm}
-      />
-      <ProfileButton
-        buttonIcon={MdOutlineAddLocationAlt}
-        buttonName="Add Address"
-        onClick={handleAddClick}
-        optionalClassName="mt-12 mb-4 mr-24 self-center"
       />
     </div>
   );
@@ -83,7 +83,11 @@ const UserAddressesList = ({
   showEditForm,
   handleCloseForm,
 }) => {
-  const { isLoading: isLoadingAddresses, data: addresses, setData: setAddresses } = useUserAddresses();
+  const {
+    isLoading: isLoadingAddresses,
+    data: addresses,
+    setData: setAddresses,
+  } = useUserAddresses();
   const { isLoading, addUserAddress } = useAddUserAddress();
 
   const handleRemoveClick = (index) => {
@@ -104,10 +108,26 @@ const UserAddressesList = ({
 
   if (isLoadingAddresses) {
     return (
-      <div className="w-full flex flex-col items-center justify-center">
-        <p>Loading your addresses...</p>
-        <BarLoader />
-      </div>
+      <motion.div className="flex w-full pr-20 max-h-[500px] overflow-y-auto">
+        <motion.ul className="w-full space-y-4">
+          <React.Fragment>
+            <AddressBlock
+              isLoading
+              // address={address}
+              // index={index}
+              handleRemoveClick={handleRemoveClick}
+              handleEditClick={handleEditClick}
+            />
+          </React.Fragment>
+        </motion.ul>
+        {showEditForm && (
+          <EditAddressForm
+            address={currentAddress}
+            onClose={handleCloseForm}
+            onSubmit={handleFormSubmit}
+          />
+        )}
+      </motion.div>
     );
   }
 
@@ -137,11 +157,34 @@ const UserAddressesList = ({
 };
 
 const AddressBlock = ({
+  isLoading,
   address,
   index,
   handleRemoveClick,
   handleEditClick,
 }) => {
+  if (isLoading) {
+    return (
+      <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch text-xl">
+        <div className="flex flex-col w-full p-4">
+          <Skeleton />
+        </div>
+        <div className="self-end space-y-4 w-fit min-w-fit">
+          <ProfileButton
+            buttonIcon={MdOutlineEditLocationAlt}
+            buttonName="Edit"
+            // onClick={() => handleEditClick(address, index)}
+          />
+          <ProfileButton
+            buttonIcon={MdDelete}
+            buttonName="Remove"
+            // onClick={() => handleRemoveClick(index)}
+            optionalClassName="hover:bg-rose-500"
+          />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch text-xl">
       <div className="flex flex-col w-full">
@@ -348,4 +391,4 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
       </div>
     </div>
   );
-}
+};
