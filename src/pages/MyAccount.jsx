@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { MyAccountControlPanel } from "../features/MyAccount/MyAccount-Control-Panel";
 import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
+import { UserWishlist } from "../features/MyAccount/UserWishlist";
 import { isLogin } from "../utils/axios";
 import { UserProfileWelcome } from "../features/MyAccount/UserProfile";
 import { UserAddressHeader } from "../features/MyAccount/UserAddress";

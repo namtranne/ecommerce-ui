@@ -6,11 +6,11 @@ module.exports = {
       fontFamily: {
         supreme_regular: ["Supreme-Regular"],
         supreme_bold: ["Supreme-Bold"],
-        supreme_extrabold: ["Supreme-ExtraBold"],
+        supreme_extrabold: ["Supreme-Extrabold"],
         supreme_light: ["Supreme-Light"],
       },
       height: {
-        "13": "3.25rem"
+        13: "3.25rem",
       },
       transitionDuration: {
         2000: "2000ms",
@@ -50,7 +50,7 @@ module.exports = {
     },
   },
   variants: {
-    fill: ['hover', 'focus'],
+    fill: ["hover", "focus"],
   },
   plugins: [],
 };
