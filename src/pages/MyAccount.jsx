@@ -8,6 +8,8 @@ import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
 import { isLogin } from "../utils/axios";
 import { UserOrder } from "../features/MyAccount/UserOrder";
+import { motion, useTransform, useScroll } from "framer-motion";
+
 
 export default function MyAccount() {
   const {
@@ -26,6 +28,7 @@ export default function MyAccount() {
     phoneNumber,
     username,
   } = useContext(UserContext) || {};
+  
   const navigate = useNavigate();
   if (!isLogin) {
     toast.error("You haven't logged in!!!");
@@ -33,21 +36,25 @@ export default function MyAccount() {
   }
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 100]);
 
   const userInfo = { firstName, lastName, email, phoneNumber, birthDay };
 
   return (
-    <div className="flex w-full h-screen items-center py-32 px-12">
-      <div className="w-1/3 h-fit flex justify-center">
+    <div className="flex w-full min-h-screen items-start py-32 px-12 bg-[#EEEEEE]">
+      <motion.div
+        className="w-1/3 h-fit flex justify-center sticky top-32"
+        style={{ y }}
+      >
         <MyAccountControlPanel
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
-        ></MyAccountControlPanel>
-      </div>
+        />
+      </motion.div>
       <div className="w-2/3 flex flex-row justify-center self-start">
-        {selectedIndex === 0 && <UserProfile userInfo={userInfo}></UserProfile>}
-
-        {selectedIndex === 1 && <UserAddress></UserAddress>}
+        {selectedIndex === 0 && <UserProfile userInfo={userInfo} />}
+        {selectedIndex === 1 && <UserAddress />}
         {selectedIndex === 2 && <UserOrder />}
       </div>
     </div>

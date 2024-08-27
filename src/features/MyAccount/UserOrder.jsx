@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
 import { useUserOrders } from "../../hooks/useOrder";
+import BarLoader from "../../ui/BarLoader";
+import { Fragment } from "react";
+import { OrderProgressBar} from "../MyAccount/OrderProgressBar";
+
 export function UserOrder() {
   return (
-    <div>
+    <div className="flex flex-col place-content-start w-full h-full">
+      <UserOrderWelcome></UserOrderWelcome>
       <UserOrderList />
     </div>
   );
@@ -10,79 +15,80 @@ export function UserOrder() {
 
 const UserOrderList = ({}) => {
   const { data: orders, isLoading } = useUserOrders();
-  // if (isLoadingAddresses) {
-  //   return (
-  //     <div className="w-full flex flex-col items-center justify-center">
-  //       <p>Loading your orders...</p>
-  //       <BarLoader />
-  //     </div>
-  //   );
-  // }
-  // console.log(addresses);
+  if (isLoading) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center">
+        <p>Loading your orders...</p>
+        <BarLoader />
+      </div>
+    );
+  }
+  console.log("Orders");
+  console.log(orders);
 
   return (
-    <motion.div className="flex w-full pr-20 max-h-[500px] overflow-y-auto">
+    <motion.div className="flex w-full pr-20 overflow-y-auto">
       <motion.ul className="w-full space-y-4">
-        {/* {addresses.map((address, index) => (
-          <React.Fragment key={index}>
-            <AddressBlock
-              address={address}
-              index={index}
-              tempDefaultAddress={ tempDefaultAddress}
-              handleSetDefaultClick={handleSetDefaultClick}
-              handleEditClick={handleEditClick}
-            />
-          </React.Fragment>
-        ))} */}
+        {orders.map((order) => (
+          <Fragment key={order.id}>
+            <OrderBlock order={order}
+            >
+
+            </OrderBlock>
+          </Fragment>
+        ))}
       </motion.ul>
     </motion.div>
   );
 };
 
-const AddressBlock = ({
-  address,
-  index,
-  tempDefaultAddress,
-  handleSetDefaultClick,
-  handleEditClick,
-}) => {
+const OrderBlock = ({order}) => {
+  const {orderItems, orderStatus, paymentMethod, total} = order;
   return (
-    <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch">
-      <div className="flex flex-col w-full">
-        <div className="text-black font-bold text-lg">{address.title}</div>
-        <div className="flex flex-row space-x-4">
-          <div className="text-zinc-800">{address.receiverName}</div>
-          <div className="w-[1px] bg-zinc-600"></div>
-          <div className="text-zinc-600">{address.phoneNumber}</div>
-        </div>
-        <div className="text-zinc-600">
-          {address.addressLine1 + " " + address.addressLine2}
-        </div>
-        <div className="text-zinc-600">{address.city}</div>
-        <div className="text-zinc-600">{address.country}</div>
-        <div className="text-zinc-600">Postal: {address.postalCode}</div>
-      </div>
-      <div className="self-end space-y-4 w-fit min-w-fit">
-        <ProfileButton
-          buttonIcon={MdOutlineEditLocationAlt}
-          buttonName="Edit"
-          onClick={() => handleEditClick(address, index)}
-        />
-        {index === tempDefaultAddress ? (
-          <ProfileButton
-            buttonIcon={TbHomeEdit}
-            buttonName="Default"
-            optionalClassName="bg-zinc-50 text-rose-500 border-2 border-rose-500 hover:cursor-default hover:scale-100 hover:bg-zinc-50 active:scale-100"
-            disabled={true}
+    <div className="flex flex-col w-full border rounded-3xl p-4 shadow-md items-stretch bg-zinc-50">
+      {orderItems.map((orderItem) => (
+        <Fragment key={orderItem.id}>
+          <ItemBlock
+            orderItem = {orderItem}
           />
-        ) : (
-          <ProfileButton
-            buttonIcon={TbHomeEdit}
-            buttonName="Set Default"
-            onClick={() => handleSetDefaultClick(index)}
-          />
-        )}
+        </Fragment>
+      ))}
+      <div className="bg-zinc-400 h-[1px] w0-full mt-8"></div>
+      <div className="flex flex-col place-self-center pt-8">
+        <div className="flex flex-col">
+            <OrderProgressBar currentStatus={orderStatus}/>
+        </div>
+
+        <div className="flex flex-row text-2xl mt-10">
+            <p className="text-g5-black pr-4"> Total: </p>
+            <p className="text-rose-500 text-bold"> {total} VND </p>
+        </div>
       </div>
     </div>
+  )
+}
+
+const ItemBlock = ({
+  orderItem
+}) => {
+  return (
+    <div className="flex flex-row w-full border rounded-3xl p-4 my-2 items-stretch space-x-8">
+      <img src={orderItem.image} className="w-24 h-24"></img>
+      <div className="flex flex-col w-full">
+        <p className="text-xl font-md">{orderItem.productName}</p>
+        {orderItem.option1 != null ? ( <p className="">{orderItem.option1}</p> ) : <></>}
+        {orderItem.option1 != null ? ( <p className="">{orderItem.option2}</p> ) : <></>}
+        <p className="">Quantity: {orderItem.quantity}</p>
+        <p className="">Price: {orderItem.price}</p>
+      </div>
+    </div>
+  );
+};
+
+const UserOrderWelcome = () => {
+  return (
+    <h1 className="self-start">
+      My Orders
+    </h1>
   );
 };
