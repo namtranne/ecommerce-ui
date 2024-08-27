@@ -11,6 +11,7 @@ import { UserProfileWelcome } from "../features/MyAccount/UserProfile";
 import { UserAddressHeader } from "../features/MyAccount/UserAddress";
 import { UserOrder } from "../features/MyAccount/UserOrder";
 import { motion, useTransform, useScroll } from "framer-motion";
+import { UserWishlist } from "../features/MyAccount/UserWishlist";
 
 
 export default function MyAccount() {
@@ -58,6 +59,7 @@ export default function MyAccount() {
         {selectedIndex === 0 && <UserProfile userInfo={userInfo} />}
         {selectedIndex === 1 && <UserAddress />}
         {selectedIndex === 2 && <UserOrder />}
+        {selectedIndex === 3 && <UserWishlist />}
       </div>
     </div>
   );

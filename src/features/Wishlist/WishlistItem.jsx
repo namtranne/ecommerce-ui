@@ -19,18 +19,18 @@ export default function WishlistItem({ products }) {
     <div>
       <ul>
         {productList.map((product, index) => (
-          <div className="flex">
+          <div className="flex h-fit mb-5">
             <li
               key={index}
               onClick={() => handleItemClick(product.id)}
-              className="flex flex-1 bg-[#393e46] h-[10vh] p-3 mb-5 rounded-l-lg hover:shadow-lg transition-all duration-300 text-white items-center justify-center hover:cursor-pointer hover:bg-[#5e636b]"
+              className="flex flex-1 bg-[#393e46] p-3 rounded-l-lg hover:shadow-lg transition-all duration-300 text-white items-center justify-center hover:cursor-pointer hover:bg-[#5e636b]"
             >
               <div className="flex flex-row w-11/12 justify-between">
                 <div className="flex">
                   <img
                     src={product.thumbnailUrl}
                     // alt={product.name}
-                    className="w-[40px] h-[40px] text-sm border border-solid border-black rounded-md shadow-md mr-2"
+                    className="w-[100px] text-sm border border-solid border-black rounded-md shadow-md mr-2"
                   />
                   <div className="flex justify-center items-center">
                     <div className="text-lg font-bold mr-2">{product.name}</div>
@@ -43,7 +43,7 @@ export default function WishlistItem({ products }) {
             </li>
             <div
               onClick={() => handleDeleteItem(product)}
-              className="w-1/12 bg-red-700 h-[10vh] rounded-r-lg text-center items-center flex justify-center transition-all duration-300 hover:cursor-pointer hover:bg-red-800"
+              className="w-1/12 bg-red-700 rounded-r-lg text-center items-center flex justify-center transition-all duration-300 hover:cursor-pointer hover:bg-red-800"
             >
               <span className="text-white font-semibold">Remove from wishlist</span>
             </div>
