@@ -18,13 +18,13 @@ function CartView({ products }) {
         {products.map((product, index) => (
           <li
             key={index}
-            className="bg-[black] p-3 mb-5 rounded-lg hover:shadow-md transition-shadow duration-300 text-white"
+            className="bg-[#393e46] p-3 mb-5 rounded-lg hover:shadow-md transition-shadow duration-300 text-white"
           >
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between items-center">
               <img
                 src={product.image}
                 // alt={product.name}
-                className="w-1/6 text-sm border border-solid border-black rounded-md shadow-md"
+                className="w-1/6 h-fit text-sm border border-solid border-black rounded-md shadow-md"
               />
               <div className="flex flex-col justify-center w-4/6">
                 <div className="text-lg font-bold mb-2">

@@ -73,7 +73,7 @@ function Cart() {
           />
           <motion.div
             ref={cartRef}
-            className="fixed right-0 top-0 p-5 w-1/3 h-screen bg-white shadow-xl z-50 overflow-auto flex flex-col"
+            className="fixed right-0 top-0 p-5 w-1/3 h-screen bg-[#eeeeee] shadow-xl z-50 overflow-auto flex flex-col"
             initial="hidden"
             animate="visible"
             exit="exit"

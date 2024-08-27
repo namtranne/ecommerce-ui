@@ -74,13 +74,25 @@ function ProductContent({
         className="w-full"
         onClick={handleClick}
       />
-      <div className="bg-[#393E46]">
-        <motion.div
-          className="p-[25px] bg-[#393E46] w-full"
-          style={{
-            transform: isHover ? "translateY(-30px) scale(1.05)" : "translateY(0) scale(1)",
-            transition: "transform 0.3s, scale 0.3s",
-          }}
+      <div className="w-full h-44 bg-[#393E46]"></div>
+      <motion.div
+        className="p-[25px] absolute rounded-b-sm bg-[#393E46] h-44 -bottom-2 right-0 w-full"
+        style={{
+          transform: isHover ? "translateY(-30px)" : "translateY(0)",
+          transition: "transform 0.3s",
+        }}
+      >
+        <p className="font-semibold mb-2 text-xs text-[#FFF5E1]">
+          {product.brand.name}
+        </p>
+        <p className="text-xs font-bold text-white">
+          {product.name.length > 60
+            ? `${product.name.slice(0, 60)}...`
+            : product.name}
+        </p>
+        <div
+          className="font-bold text-[#3f60d7]"
+          style={{ fontSize: "0.8rem", fontHeight: "1rem" }}
         >
           <p className="font-semibold mb-2 text-xs text-[#FFF5E1]">
             {product.brand.name}

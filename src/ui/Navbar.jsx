@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useCartVisibility } from "../context/CartContext";
 import Cart from "../pages/Cart";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Logo } from "../../public/G5TechLogo.jsx"; // Import SVG as React component
+import { Logo } from "../../public/G5TechLogo";
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
@@ -51,6 +51,62 @@ function Navbar() {
       }
       case "Account": {
         navigate("my-account");
+        break;
+      }
+      case "SmartPhone": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "1789";
+        } else {
+          navigate("products/1789");
+        }
+        break;
+      }
+      case "Laptop": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "8095";
+        } else {
+          navigate("products/8095");
+        }
+        break;
+      }
+      case "Tablet": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "1794";
+        } else {
+          navigate("products/1794");
+        }
+        break;
+      }
+      case "Desktop": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "5172";
+        } else {
+          navigate("products/5172");
+        }
+        break;
+      }
+      case "Accessories": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "1815";
+        } else {
+          navigate("products/1815");
+        }
+        break;
+      }
+      case "Keyboard": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "5267";
+        } else {
+          navigate("products/5267");
+        }
+        break;
+      }
+      case "Mouse": {
+        if (window.location.href.includes("products")) {
+          window.location.href = "3428";
+        } else {
+          navigate("products/3428");
+        }
         break;
       }
     }

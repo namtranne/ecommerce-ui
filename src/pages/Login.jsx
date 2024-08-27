@@ -16,7 +16,7 @@ function Login({ onSignUpClick, loginUser }) {
 
   const [fieldEmptyErr, setFieldEmptyErr] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     if (credentials.username.length === 0) {
@@ -35,13 +35,13 @@ function Login({ onSignUpClick, loginUser }) {
       setIsLoading(false);
       toast.success("Login successfully");
       navigate("/");
-    }
-    catch(err) {
+    } catch (err) {
       setIsLoading(false);
       console.log(err);
-      toast.error("Can not loggin, please try again!");
+      toast.error(
+        "Can not loggin, please check your credentials and try again!"
+      );
     }
-    
   };
 
   return (
@@ -60,7 +60,10 @@ function Login({ onSignUpClick, loginUser }) {
           credentials={credentials}
           setCredentials={setCredentials}
         ></LoginViaEmail>
-        <LoginButton handleLogin={handleLogin} isLoading={isLoading}></LoginButton>
+        <LoginButton
+          handleLogin={handleLogin}
+          isLoading={isLoading}
+        ></LoginButton>
       </motion.div>
     </section>
   );
