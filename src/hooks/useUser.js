@@ -6,6 +6,8 @@ import {
   updateUserDetails,
 } from "../services/apiUser";
 import { addCartItemApi, getCartItemsApi } from "../services/apiCart";
+import { addWishListItemApi, getWishlistItemsApi, deleteWishlistItemApi } from "../services/apiWishlist";
+
 
 export function useUserDetails() {
   const { isLoading, data, error } = useQuery({
@@ -67,10 +69,55 @@ export function useAddCartItem() {
   return { addCartItem, isLoading };
 }
 
+
+
 export function useCart() {
   const { isLoading, data, error } = useQuery({
     queryKey: ["cart"],
     queryFn: getCartItemsApi,
+  });
+  if (error) {
+    console.log("error", error);
+  }
+  //   console.log(response);
+  return { isLoading, data };
+}
+
+
+export function useAddWishlistItem() {
+  const queryClient = useQueryClient();
+
+  const { mutate: addWishlistItem, isLoading } = useMutation(
+    addWishListItemApi,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["wishlist"]);
+      },
+    }
+  );
+
+  return { addWishlistItem, isLoading };
+}
+
+export function useDeleteWishlistItem() {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteWishlistItem, isLoading } = useMutation(
+    deleteWishlistItemApi,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["wishlist"]);
+      },
+    }
+  );
+
+  return { deleteWishlistItem, isLoading };
+}
+
+export function useWishlist() {
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["wishlist"],
+    queryFn: getWishlistItemsApi,
   });
   if (error) {
     console.log("error", error);

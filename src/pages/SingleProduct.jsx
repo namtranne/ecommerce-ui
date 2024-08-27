@@ -14,11 +14,14 @@ import { useAddCartItem } from "../hooks/useUser";
 import RatingStars from "../features/SingleProduct/RatingStar";
 import ProductReview from "../features/SingleProduct/ProductReview";
 import { formatPrice } from "../utils/product";
+import { useAddWishlistItem } from "../hooks/useUser";
 
 function SingleProduct() {
   // validateProductInfo();
   const { data: product, isLoading, error } = useProductInfo();
   const { addCartItem, isLoading: isAddingCartItem } = useAddCartItem();
+  const { addWishlistItem, isLoading: isAddingWishlistItem } =
+    useAddWishlistItem();
 
   const [selectedImage, setSelectedImage] = useState("");
   const [amount, setAmount] = useState(1);
@@ -50,6 +53,18 @@ function SingleProduct() {
       };
       console.log(cartItem);
       addCartItem(cartItem);
+    }
+  };
+
+  const handleAddToWishlist = () => {
+    if (isLogin() == false) {
+      toast.error("Please login first");
+      return;
+    } else {
+      const item = {
+        productId: product.id,
+      };
+      addWishlistItem(item);
     }
   };
 
@@ -119,6 +134,7 @@ function SingleProduct() {
             amount={amount}
             setAmount={setAmount}
             handleAddToCart={handleAddToCart}
+            handleAddToWishlist={handleAddToWishlist}
           />
 
           {product.warranties.length > 0 && (
