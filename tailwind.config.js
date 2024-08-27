@@ -23,8 +23,10 @@ module.exports = {
         30: "30%",
       },
       colors: {
-        "titanium-100": "#bad9cd",
-        "titanium-200": "#455f63",
+        "g5-white": "#f7f7f7",
+        "g5-grey": "#eeeeee",
+        "g5-black": "#393e46",
+        "g5-cream": "#929aab",
       },
       backgroundImage: {
         "cherish-moment": "url('https://i.ibb.co/xqJpNV5/cherish-moment.jpg')",

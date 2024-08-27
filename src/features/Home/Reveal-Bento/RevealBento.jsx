@@ -9,7 +9,7 @@ import { TbShoppingCartSearch } from "react-icons/tb";
 
 export const RevealBento = () => {
   return (
-    <section className="bg-zinc-900 px-4 py-12 text-zinc-50 flex items-center">
+    <section className="bg-g5-black px-4 py-12 text-zinc-50 flex items-center">
       <motion.div
         initial="initial"
         animate="animate"

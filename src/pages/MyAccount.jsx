@@ -7,6 +7,8 @@ import { MyAccountControlPanel } from "../features/MyAccount/MyAccount-Control-P
 import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
 import { isLogin } from "../utils/axios";
+import { UserProfileWelcome } from "../features/MyAccount/UserProfile";
+import { UserAddressHeader } from "../features/MyAccount/UserAddress";
 import { UserOrder } from "../features/MyAccount/UserOrder";
 import { motion, useTransform, useScroll } from "framer-motion";
 
@@ -59,4 +61,5 @@ export default function MyAccount() {
       </div>
     </div>
   );
+   
 }

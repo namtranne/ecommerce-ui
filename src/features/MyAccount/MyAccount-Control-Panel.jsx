@@ -30,7 +30,7 @@ export const MyAccountControlPanel = ({ selectedIndex, setSelectedIndex }) => {
   };
 
   return (
-    <motion.div className="relative w-fit rounded-3xl bg-zinc-800">
+    <motion.div className="relative w-96 rounded-3xl bg-zinc-800">
       <AccountStatusField className="left-0 top-0"></AccountStatusField>
       <motion.div
         className="absolute left-0 top-[148px] h-13 w-1 bg-zinc-50 rounded"

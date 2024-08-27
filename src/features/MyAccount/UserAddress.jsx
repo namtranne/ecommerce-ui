@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ProfileButton } from "./ProfileButton";
 import { MdOutlineEditLocationAlt } from "react-icons/md";
 import { TbHomeEdit } from "react-icons/tb";
-import { MdOutlineAddLocationAlt } from "react-icons/md";
+import { MdOutlineAddLocationAlt, MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useAddUserAddress, useUserAddresses } from "../../hooks/useUser";
 import BarLoader from "../../ui/BarLoader";
@@ -47,13 +47,6 @@ export const UserAddress = () => {
 
   return (
     <div className="flex flex-col place-content-start w-full h-full">
-      <UserAddressHeader />
-      <ProfileButton
-        buttonIcon={MdOutlineAddLocationAlt}
-        buttonName="Add Address"
-        onClick={handleAddClick}
-        optionalClassName="mt-12 mb-4 mr-24 self-end"
-      />
       <UserAddressesList
         handleEditClick={handleEditClick}
         currentAddress={currentAddress}
@@ -63,14 +56,20 @@ export const UserAddress = () => {
         showEditForm={showEditForm}
         handleCloseForm={handleCloseForm}
       />
+      <ProfileButton
+        buttonIcon={MdOutlineAddLocationAlt}
+        buttonName="Add Address"
+        onClick={handleAddClick}
+        optionalClassName="mt-12 mb-4 mr-24 self-center"
+      />
     </div>
   );
 };
 
-const UserAddressHeader = () => {
+export const UserAddressHeader = () => {
   return (
-    <div className="flex flex-row self-start w-full">
-      <h1 className="self-start">Your Addresses</h1>
+    <div className="">
+      <h1 className="">Your Addresses</h1>
     </div>
   );
 };
@@ -84,12 +83,13 @@ const UserAddressesList = ({
   showEditForm,
   handleCloseForm,
 }) => {
-  const { isLoading: isLoadingAddresses, data: addresses } = useUserAddresses();
-  const [tempDefaultAddress, setTempDefaultAddress] = useState(null);
+  const { isLoading: isLoadingAddresses, data: addresses, setData: setAddresses } = useUserAddresses();
   const { isLoading, addUserAddress } = useAddUserAddress();
 
-  const handleSetDefaultClick = (index) => {
-    setTempDefaultAddress(index);
+  const handleRemoveClick = (index) => {
+    const updatedAddresses = addresses.filter((_, i) => i !== index);
+    setAddresses(updatedAddresses);
+    toast.success("Address removed successfully!");
   };
 
   const handleFormSubmit = (updatedAddress) => {
@@ -101,6 +101,7 @@ const UserAddressesList = ({
     // toast.success("Address added successfully!");
     handleCloseForm();
   };
+
   if (isLoadingAddresses) {
     return (
       <div className="w-full flex flex-col items-center justify-center">
@@ -109,7 +110,6 @@ const UserAddressesList = ({
       </div>
     );
   }
-  console.log(addresses);
 
   return (
     <motion.div className="flex w-full pr-20 max-h-[500px] overflow-y-auto">
@@ -119,8 +119,7 @@ const UserAddressesList = ({
             <AddressBlock
               address={address}
               index={index}
-              tempDefaultAddress={tempDefaultAddress}
-              handleSetDefaultClick={handleSetDefaultClick}
+              handleRemoveClick={handleRemoveClick}
               handleEditClick={handleEditClick}
             />
           </React.Fragment>
@@ -140,8 +139,7 @@ const UserAddressesList = ({
 const AddressBlock = ({
   address,
   index,
-  tempDefaultAddress,
-  handleSetDefaultClick,
+  handleRemoveClick,
   handleEditClick,
 }) => {
   return (
@@ -174,20 +172,12 @@ const AddressBlock = ({
           buttonName="Edit"
           onClick={() => handleEditClick(address, index)}
         />
-        {index === tempDefaultAddress ? (
-          <ProfileButton
-            buttonIcon={TbHomeEdit}
-            buttonName="Default"
-            optionalClassName="bg-zinc-50 text-rose-500 border-2 border-rose-500 hover:cursor-default hover:scale-100 hover:bg-zinc-50 active:scale-100"
-            disabled={true}
-          />
-        ) : (
-          <ProfileButton
-            buttonIcon={TbHomeEdit}
-            buttonName="Set Default"
-            onClick={() => handleSetDefaultClick(index)}
-          />
-        )}
+        <ProfileButton
+          buttonIcon={MdDelete}
+          buttonName="Remove"
+          onClick={() => handleRemoveClick(index)}
+          optionalClassName="hover:bg-rose-500"
+        />
       </div>
     </div>
   );
@@ -206,7 +196,7 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-zinc-800 bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-zinc-800 bg-opacity-50 z-10">
       <div className="bg-white p-8 rounded-xl shadow-md w-1/2">
         <h2 className="text-2xl mb-4">
           {address.receiver ? "Edit Address" : "Add Address"}
@@ -358,4 +348,4 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
       </div>
     </div>
   );
-};
+}
