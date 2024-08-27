@@ -11,18 +11,6 @@ export default function PriceBox({
     <div class="price-btnbox">
       <div class="price-btns">
         <button
-          class="price-btn__add price-btn"
-          onClick={() =>
-            setAmount((prev) => {
-              console.log(prev);
-              return prev + 1;
-            })
-          }
-        >
-          <PlusOutlined />
-        </button>
-        <span class="price-btn__txt">{amount}</span>
-        <button
           class="price-btn__remove price-btn"
           onClick={() =>
             setAmount((prev) => {
@@ -33,18 +21,25 @@ export default function PriceBox({
         >
           <MinusOutlined />
         </button>
+        <span class="price-btn__txt">{amount}</span>
+        <button
+          class="price-btn__add price-btn"
+          onClick={() =>
+            setAmount((prev) => {
+              console.log(prev);
+              return prev + 1;
+            })
+          }
+        >
+          <PlusOutlined />
+        </button>
       </div>
       <NeubrutalismButton
         handleClick={handleAddToCart}
         className="text-white font-bold"
         text="Add to cart"
       />
-      <NeubrutalismButton
-        handleClick={handleAddToWishlist}
-        className="text-white font-bold"
-        text="Add to wishlist"
-        background="red"
-      />
+      <NeubrutalismButton className="text-white font-bold" text="Add to wishlist" background="red" />
     </div>
   );
 }

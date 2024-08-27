@@ -33,10 +33,6 @@ function Navbar() {
 
   const navigateTo = (dest) => {
     switch (dest) {
-      case "Home": {
-        navigate("/");
-        break;
-      }
       case "Login": {
         navigate("Login");
         break;
@@ -122,7 +118,7 @@ function Navbar() {
         <div className="fixed inset-0 bg-black opacity-60 z-10"></div>
       )} */}
       <header
-        className={`w-full flex justify-between items-center bg-[#393E46] top-0 z-40 ${
+        className={`w-full h-[10vh] flex justify-center items-center bg-[#393E46] top-0 z-40 font-supreme_extrabold ${
           showModal ? " z-20" : ""
         }`}
       >
@@ -255,40 +251,59 @@ function Navbar() {
             <>
               <button
                 className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
-                onClick={toggleCartVisibility} // Toggle cart visibility
+                onClick={scrollToBottom}
               >
-                <ShoppingCartOutlined />
-              </button>
-              <Cart />
-              <button
-                onClick={() => navigateTo("Account")}
-                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
-              >
-                {firstName + " " + lastName}
+                Contact
               </button>
               <button
-                onClick={() => logOut()}
                 className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                onClick={() => navigateTo("Support")}
               >
-                Sign out
+                Customer Support
               </button>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={() => navigateTo("Login")}
-                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
-              >
-                Login
-              </button>
-              <button
-                onClick={() => navigateTo("Register")}
-                className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
-              >
-                Register
-              </button>
-            </>
-          )}
+            </nav>
+          </div>
+
+          <div className="flex">
+            {isUserLoggedIn ? (
+              <>
+                <button
+                  className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                  onClick={toggleCartVisibility} // Toggle cart visibility
+                >
+                  <ShoppingCartOutlined />
+                </button>
+                <Cart />
+                <button
+                  onClick={() => navigateTo("Account")}
+                  className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                >
+                  {firstName + " " + lastName}
+                </button>
+                <button
+                  onClick={() => logOut()}
+                  className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigateTo("Login")}
+                  className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => navigateTo("Register")}
+                  className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
+                >
+                  Register
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </header>
     </>

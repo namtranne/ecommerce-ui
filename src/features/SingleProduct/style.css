@@ -1,0 +1,13 @@
+.transition-bg {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.warranties-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.warranties-content.show {
+  max-height: 500px; /* Adjust this to a value that comfortably fits the content */
+}

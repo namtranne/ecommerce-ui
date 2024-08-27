@@ -152,7 +152,7 @@ const UserProfileInfo = ({ userInfo }) => {
 export const UserProfileWelcome = ({ firstName, lastName }) => {
   return (
     <h1 className="">
-      Welcome, {lastName} {firstName}
+      Welcome, {firstName} {lastName}
     </h1>
   );
 };

@@ -469,13 +469,13 @@ Product section stylling
 }
 
 .price-box__main-new {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
 }
 
 .price-box__main-discount {
   border: none;
-  padding: 0.5rem 1.25rem;
+  padding: 0.1rem 0.7rem;
   background-color: var(--pale-orange);
   border-radius: 0.5rem;
   font-size: 1.7rem;
@@ -492,7 +492,7 @@ Product section stylling
 .price-box__old::after {
   content: "";
   height: 1px;
-  width: 9%;
+  width: 100%;
   background-color: var(--grayish-blue);
   position: absolute;
   left: 0;
