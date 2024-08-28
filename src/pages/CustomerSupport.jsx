@@ -8,7 +8,7 @@ import ChatBox from "../features/CustomerSupport/ChatBox";
 export const tabs = [
   {
     icon: <QuestionCircleFilled color="red" />,
-    label: "FQA",
+    label: "FAQ",
     content: <FAQ></FAQ>,
   },
   { icon: <MessageFilled />, label: "Live Chat Support", content: <ChatBox /> },
