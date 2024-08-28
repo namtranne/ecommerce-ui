@@ -26,14 +26,21 @@ export default function MyAccount() {
     navigate("/login");
   }
 
-  // Retrieve the selectedIndex from localStorage or default to 0
-  const initialSelectedIndex = parseInt(localStorage.getItem("selectedIndex")) || 0;
+  // Retrieve the selectedIndex
+  const query = new URLSearchParams(location.search);
+
+  const initialSelectedIndex = parseInt(parseInt(query.get("selectedIndex")) || localStorage.getItem("selectedIndex")) || 0;
+
   const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
 
   // Update localStorage whenever selectedIndex changes
   useEffect(() => {
     localStorage.setItem("selectedIndex", selectedIndex);
-  }, [selectedIndex]);
+
+    const params = new URLSearchParams(location.search);
+    params.set("selectedIndex", selectedIndex);
+    navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+  }, [selectedIndex, navigate, location.pathname, location.search]);
 
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 100]);
