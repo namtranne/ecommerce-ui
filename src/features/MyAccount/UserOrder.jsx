@@ -56,13 +56,20 @@ const OrderBlock = ({order}) => {
       <div className="bg-zinc-400 h-[1px] w0-full mt-8"></div>
       <div className="flex flex-col place-self-center pt-8">
         <div className="flex flex-col">
-            <OrderProgressBar currentStatus={orderStatus}/>
+            <OrderProgressBar currentStatus={orderStatus} paymentMethod={paymentMethod}/>
         </div>
 
-        <div className="flex flex-row text-2xl mt-10">
-            <p className="text-g5-black pr-4"> Total: </p>
-            <p className="text-rose-500 text-bold"> {total} VND </p>
+        <div className="flex flex-col w-full space-y-0 mt-16">
+          <div className="flex flex-row text-2xl">
+              <p className="text-g5-black pr-4"> Payment Method: </p>
+              <p className="text-cyan-800 text-bold"> {paymentMethod} </p>
+          </div>
+          <div className="flex flex-row text-2xl">
+              <p className="text-g5-black pr-4"> Total: </p>
+              <p className="text-rose-800 text-bold"> {total} VND </p>
+          </div>
         </div>
+
       </div>
     </div>
   )
