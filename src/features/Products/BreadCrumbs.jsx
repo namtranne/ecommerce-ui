@@ -1,4 +1,4 @@
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Skeleton } from "antd";
 import { useCategoriesProductsPage } from "../../hooks/useCategory";
 import styles from "./css/bubble.module.css";
 
@@ -13,7 +13,7 @@ function BreadCrumbs() {
   const { currentCategory } = data;
   const items = [
     {
-      title: <BreadCrumbText text="Home" />,
+      title: <BreadCrumbText text="Home" href={`${baseUrl}`} />,
     },
     {
       title: <BreadCrumbText text="Shop" href={`${baseUrl}/products/0`} />,
@@ -36,6 +36,9 @@ function BreadCrumbs() {
   };
 
   addCategories(currentCategory);
+  if (isLoading) {
+    return <Skeleton />;
+  }
 
   return (
     <BreadCrumbWrapper>

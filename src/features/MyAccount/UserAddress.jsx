@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ProfileButton } from "./ProfileButton";
 import { MdOutlineEditLocationAlt } from "react-icons/md";
 import { TbHomeEdit } from "react-icons/tb";
-import { MdOutlineAddLocationAlt } from "react-icons/md";
+import { MdOutlineAddLocationAlt, MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 import { useAddUserAddress, useUserAddresses } from "../../hooks/useUser";
 import BarLoader from "../../ui/BarLoader";
-
+import cities from "../../data/cities.json";
+import districts from "../../data/districts.json";
+import { Select, Skeleton } from "antd";
 export const UserAddress = () => {
   const [showEditForm, setShowEditForm] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(null);
@@ -25,11 +27,12 @@ export const UserAddress = () => {
       title: "",
       addressLine1: "",
       addressLine2: "",
-      country: "",
-      city: "",
+      country: "Vietnam",
       postalCode: "",
       landmark: "",
       phoneNumber: "",
+      province: "",
+      district: "",
       receiverName: "",
     });
     setEditIndex(null);
@@ -44,12 +47,11 @@ export const UserAddress = () => {
 
   return (
     <div className="flex flex-col place-content-start w-full h-full">
-      <UserAddressHeader />
       <ProfileButton
         buttonIcon={MdOutlineAddLocationAlt}
         buttonName="Add Address"
         onClick={handleAddClick}
-        optionalClassName="mt-12 mb-4 mr-24 self-end"
+        optionalClassName="mt-12 mb-4 mr-24 self-center"
       />
       <UserAddressesList
         handleEditClick={handleEditClick}
@@ -64,10 +66,10 @@ export const UserAddress = () => {
   );
 };
 
-const UserAddressHeader = () => {
+export const UserAddressHeader = () => {
   return (
-    <div className="flex flex-row self-start w-full">
-      <h1 className="self-start">Your Addresses</h1>
+    <div className="">
+      <h1 className="">Your Addresses</h1>
     </div>
   );
 };
@@ -81,12 +83,17 @@ const UserAddressesList = ({
   showEditForm,
   handleCloseForm,
 }) => {
-  const { isLoading: isLoadingAddresses, data: addresses } = useUserAddresses();
-  const [tempDefaultAddress, setTempDefaultAddress] = useState(null);
+  const {
+    isLoading: isLoadingAddresses,
+    data: addresses,
+    setData: setAddresses,
+  } = useUserAddresses();
   const { isLoading, addUserAddress } = useAddUserAddress();
 
-  const handleSetDefaultClick = (index) => {
-    setTempDefaultAddress(index);
+  const handleRemoveClick = (index) => {
+    const updatedAddresses = addresses.filter((_, i) => i !== index);
+    setAddresses(updatedAddresses);
+    toast.success("Address removed successfully!");
   };
 
   const handleFormSubmit = (updatedAddress) => {
@@ -98,15 +105,31 @@ const UserAddressesList = ({
     // toast.success("Address added successfully!");
     handleCloseForm();
   };
+
   if (isLoadingAddresses) {
     return (
-      <div className="w-full flex flex-col items-center justify-center">
-        <p>Loading your addresses...</p>
-        <BarLoader />
-      </div>
+      <motion.div className="flex w-full pr-20 max-h-[500px] overflow-y-auto">
+        <motion.ul className="w-full space-y-4">
+          <React.Fragment>
+            <AddressBlock
+              isLoading
+              // address={address}
+              // index={index}
+              handleRemoveClick={handleRemoveClick}
+              handleEditClick={handleEditClick}
+            />
+          </React.Fragment>
+        </motion.ul>
+        {showEditForm && (
+          <EditAddressForm
+            address={currentAddress}
+            onClose={handleCloseForm}
+            onSubmit={handleFormSubmit}
+          />
+        )}
+      </motion.div>
     );
   }
-  console.log(addresses);
 
   return (
     <motion.div className="flex w-full pr-20 max-h-[500px] overflow-y-auto">
@@ -116,8 +139,7 @@ const UserAddressesList = ({
             <AddressBlock
               address={address}
               index={index}
-              tempDefaultAddress={tempDefaultAddress}
-              handleSetDefaultClick={handleSetDefaultClick}
+              handleRemoveClick={handleRemoveClick}
               handleEditClick={handleEditClick}
             />
           </React.Fragment>
@@ -135,14 +157,36 @@ const UserAddressesList = ({
 };
 
 const AddressBlock = ({
+  isLoading,
   address,
   index,
-  tempDefaultAddress,
-  handleSetDefaultClick,
+  handleRemoveClick,
   handleEditClick,
 }) => {
+  if (isLoading) {
+    return (
+      <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch text-xl">
+        <div className="flex flex-col w-full p-4">
+          <Skeleton />
+        </div>
+        <div className="self-end space-y-4 w-fit min-w-fit">
+          <ProfileButton
+            buttonIcon={MdOutlineEditLocationAlt}
+            buttonName="Edit"
+            // onClick={() => handleEditClick(address, index)}
+          />
+          <ProfileButton
+            buttonIcon={MdDelete}
+            buttonName="Remove"
+            // onClick={() => handleRemoveClick(index)}
+            optionalClassName="hover:bg-rose-500"
+          />
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch">
+    <div className="flex flex-row w-full border rounded-3xl p-4 shadow-md items-stretch text-xl">
       <div className="flex flex-col w-full">
         <div className="text-black font-bold text-lg">{address.title}</div>
         <div className="flex flex-row space-x-4">
@@ -153,7 +197,15 @@ const AddressBlock = ({
         <div className="text-zinc-600">
           {address.addressLine1 + " " + address.addressLine2}
         </div>
-        <div className="text-zinc-600">{address.city}</div>
+        <div className="text-zinc-600">
+          {
+            districts.find((district) => district.value == address.district)
+              .label
+          }
+        </div>
+        <div className="text-zinc-600">
+          {cities.find((city) => city.value == address.province).label}
+        </div>
         <div className="text-zinc-600">{address.country}</div>
         <div className="text-zinc-600">Postal: {address.postalCode}</div>
       </div>
@@ -163,20 +215,12 @@ const AddressBlock = ({
           buttonName="Edit"
           onClick={() => handleEditClick(address, index)}
         />
-        {index === tempDefaultAddress ? (
-          <ProfileButton
-            buttonIcon={TbHomeEdit}
-            buttonName="Default"
-            optionalClassName="bg-zinc-50 text-rose-500 border-2 border-rose-500 hover:cursor-default hover:scale-100 hover:bg-zinc-50 active:scale-100"
-            disabled={true}
-          />
-        ) : (
-          <ProfileButton
-            buttonIcon={TbHomeEdit}
-            buttonName="Set Default"
-            onClick={() => handleSetDefaultClick(index)}
-          />
-        )}
+        <ProfileButton
+          buttonIcon={MdDelete}
+          buttonName="Remove"
+          onClick={() => handleRemoveClick(index)}
+          optionalClassName="hover:bg-rose-500"
+        />
       </div>
     </div>
   );
@@ -195,32 +239,13 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-zinc-800 bg-opacity-50">
-      <div className="bg-white p-8 rounded-xl shadow-md w-1/2">
+    <div className="fixed inset-0 flex items-center justify-center bg-zinc-800 bg-opacity-50 z-10">
+      <div className="bg-white p-8 rounded-xl shadow-md w-2/3 h-2/3 overflow-hidden">
         <h2 className="text-2xl mb-4">
           {address.receiver ? "Edit Address" : "Add Address"}
         </h2>
-        <form className="space-y-4">
-          <input
-            type="number"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            className="mt-1 p-2 hidden w-full border rounded-md"
-          />
-          <div>
-            <label className="block text-sm font-medium text-zinc-700">
-              Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title || ""}
-              onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md "
-            />
-          </div>
-          <div>
+        <form className="grid grid-cols-2 space-y-4">
+          <div className="self-end">
             <label className="block text-sm font-medium text-zinc-700">
               Receiver
             </label>
@@ -229,7 +254,7 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
               name="receiverName"
               value={formData.receiverName || ""}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              className="mt-1 p-2 block w-11/12 border rounded-md"
             />
           </div>
           <div>
@@ -241,7 +266,7 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
               name="phoneNumber"
               value={formData.phoneNumber || ""}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              className="mt-1 p-2 block w-11/12 border rounded-md"
             />
           </div>
           <div>
@@ -253,7 +278,7 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
               name="addressLine1"
               value={formData.addressLine1 || ""}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              className="mt-1 p-2 block w-11/12 border rounded-md"
             />
           </div>
           <div>
@@ -265,19 +290,42 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
               name="addressLine2"
               value={formData.addressLine2 || ""}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              className="mt-1 p-2 block w-11/12 border rounded-md"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-zinc-700">
-              City
+              Province
             </label>
-            <input
+            <Select
+              onChange={(value) => {
+                setFormData({
+                  ...formData,
+                  province: value,
+                  district: "",
+                });
+              }}
+              value={formData.province}
               type="text"
-              name="city"
-              value={formData.city || ""}
-              onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              options={cities}
+              className="mt-1 block w-11/12"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-zinc-700">
+              District
+            </label>
+            <Select
+              type="text"
+              disabled={!formData.province}
+              value={formData.district}
+              onChange={(value) => {
+                setFormData({ ...formData, district: value });
+              }}
+              options={districts.filter(
+                (district) => district.parent_value == formData.province
+              )}
+              className="mt-1 block w-11/12"
             />
           </div>
           <div>
@@ -287,9 +335,9 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
             <input
               type="text"
               name="country"
-              value={formData.country || ""}
-              onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              value="Vietnam"
+              disabled
+              className="mt-1 p-2 block w-11/12 border rounded-md"
             />
           </div>
           <div>
@@ -301,21 +349,23 @@ export const EditAddressForm = ({ address, onClose, onSubmit }) => {
               name="postalCode"
               value={formData.postalCode || ""}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full border rounded-md"
+              className="mt-1 p-2 block w-11/12 border rounded-md"
             />
           </div>
-          <div className="flex justify-end space-x-4">
+          <div className="flex justify-center">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-zinc-500 text-white rounded-md"
+              className="px-4 py-2 bg-zinc-500 text-white rounded-md w-5/12"
             >
               Cancel
             </button>
+          </div>
+          <div className="flex justify-center">
             <button
               type="button"
               onClick={handleSubmit}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md w-5/12"
             >
               Save
             </button>

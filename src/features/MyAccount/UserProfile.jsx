@@ -8,7 +8,6 @@ import { useUpdateUser } from "../../hooks/useUser";
 export const UserProfile = ({ userInfo }) => {
   return (
     <div className="flex flex-col w-full space-y-16">
-      <UserProfileWelcome firstName={userInfo.firstName} lastName={userInfo.lastName}></UserProfileWelcome>
       <UserProfileInfo userInfo={userInfo}></UserProfileInfo>
     </div>
   );
@@ -150,10 +149,10 @@ const UserProfileInfo = ({ userInfo }) => {
   );
 };
 
-const UserProfileWelcome = ({ firstName, lastName }) => {
+export const UserProfileWelcome = ({ firstName, lastName }) => {
   return (
-    <h1 className="self-start">
-      Welcome, {lastName} {firstName}
+    <h1 className="">
+      Welcome, {firstName} {lastName}
     </h1>
   );
 };

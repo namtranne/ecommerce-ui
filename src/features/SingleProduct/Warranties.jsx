@@ -7,13 +7,15 @@ export function Warranties({ warranties }) {
     <div>
       <Descriptions
         column={1}
-        title=<button
-          className="text-xl font-bold flex mb-0 p-0 items-center"
-          onClick={() => setIsShownWarranties((prev) => !prev)}
-        >
-          Warranty information{" "}
-          {isShownWarranties ? <CaretDownFilled /> : <CaretUpFilled />}
-        </button>
+        title={
+          <button
+            className="text-xl font-bold flex mb-0 p-0 items-center"
+            onClick={() => setIsShownWarranties((prev) => !prev)}
+          >
+            Warranty information{" "}
+            {isShownWarranties ? <CaretDownFilled /> : <CaretUpFilled />}
+          </button>
+        }
         layout="horizontal"
         bordered
         items={

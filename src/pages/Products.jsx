@@ -39,8 +39,9 @@ function Products() {
   };
 
   useEffect(() => {
+    setData({ ...data, first: true });
     fetchProduct();
-  }, []);
+  }, [filter.sortBy, filter.sortDir]);
 
   const updateFilter = async (attribute, value) => {
     if (attribute == "page") {
@@ -54,6 +55,14 @@ function Products() {
       setFilter((prev) => {
         const newFilter = { ...prev };
         newFilter[attribute] = value;
+        if (newFilter.minPrice - 0 > newFilter.maxPrice - 0) {
+          console.log(newFilter.minPrice, newFilter.maxPrice);
+          if (attribute === "minPrice") {
+            newFilter.minPrice = newFilter.maxPrice;
+          } else {
+            newFilter.maxPrice = newFilter.minPrice;
+          }
+        }
         return newFilter;
       });
     }

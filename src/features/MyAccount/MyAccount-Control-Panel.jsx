@@ -7,6 +7,7 @@ import { BsBag, BsBagHeart } from "react-icons/bs";
 import { TbClockSearch } from "react-icons/tb";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { CiLogout } from "react-icons/ci";
+import { useUserDetails } from "../../hooks/useUser";
 
 const options = [
   { icon: LuUser2, name: "User Profile" },
@@ -30,7 +31,7 @@ export const MyAccountControlPanel = ({ selectedIndex, setSelectedIndex }) => {
   };
 
   return (
-    <motion.div className="relative w-fit rounded-3xl bg-zinc-800">
+    <motion.div className="relative w-96 rounded-3xl bg-zinc-800">
       <AccountStatusField className="left-0 top-0"></AccountStatusField>
       <motion.div
         className="absolute left-0 top-[148px] h-13 w-1 bg-zinc-50 rounded"
@@ -91,16 +92,17 @@ const AccountControlOption = ({
 };
 
 const AccountStatusField = () => {
+  const userDetails = useUserDetails() || {};
   return (
     <motion.div className="flex flex-row p-4 border-2 border-zinc-900 rounded-3xl shadow-3xl items-center">
       <motion.div className="w-28 h-28">
         <img
           src="https://i.postimg.cc/sDdV1r1f/signup-banner.png"
           className="rounded-full"
-        ></img>
+        />
       </motion.div>
       <motion.div className="text-3xl text-zinc-200 pl-10">
-        User Name
+        {userDetails.firstName} {userDetails.lastName}
       </motion.div>
     </motion.div>
   );

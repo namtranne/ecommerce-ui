@@ -14,10 +14,34 @@ function Login({ onSignUpClick, loginUser }) {
     password: "",
   });
 
+  const [fieldEmptyErr, setFieldEmptyErr] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = async () => {
-    await loginUser(credentials);
-    toast.success("Login successfully");
-    navigate("/");
+    if (credentials.username.length === 0) {
+      toast.error("Email cannot be empty! Please enter a valid email.");
+      return;
+    }
+
+    if (credentials.password.length === 0) {
+      toast.error("Password cannot be empty! Please enter your password.");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      await loginUser(credentials);
+      setIsLoading(false);
+      toast.success("Login successfully");
+      navigate("/");
+    } catch (err) {
+      setIsLoading(false);
+      console.log(err);
+      toast.error(
+        "Can not loggin, please check your credentials and try again!"
+      );
+    }
   };
 
   return (
@@ -36,7 +60,10 @@ function Login({ onSignUpClick, loginUser }) {
           credentials={credentials}
           setCredentials={setCredentials}
         ></LoginViaEmail>
-        <LoginButton handleLogin={handleLogin}></LoginButton>
+        <LoginButton
+          handleLogin={handleLogin}
+          isLoading={isLoading}
+        ></LoginButton>
       </motion.div>
     </section>
   );

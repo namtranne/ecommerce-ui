@@ -1,6 +1,6 @@
 import React from "react";
 import { useBrand } from "../../../hooks/useBrand";
-import { Select } from "antd";
+import { Select, Skeleton } from "antd";
 import BarLoader from "../../../ui/BarLoader";
 
 export function BrandFilter({ updateFilter }) {
@@ -9,7 +9,7 @@ export function BrandFilter({ updateFilter }) {
     return (
       <div className="mb-4">
         <p className="mb-1 text-xl font-bold">Brand</p>
-        <BarLoader />
+        <Skeleton.Input active />
       </div>
     );
   }

@@ -6,9 +6,6 @@ export const login = async ({ username, password }) => {
       username,
       password,
     });
-
-    // Assuming the response contains the JWT token in response.data.jwt or response.data.data.accessToken
-    console.log(response);
     const token =
       response.data.token ||
       response.data.jwt ||

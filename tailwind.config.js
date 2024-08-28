@@ -6,11 +6,11 @@ module.exports = {
       fontFamily: {
         supreme_regular: ["Supreme-Regular"],
         supreme_bold: ["Supreme-Bold"],
-        supreme_extrabold: ["Supreme-ExtraBold"],
+        supreme_extrabold: ["Supreme-Extrabold"],
         supreme_light: ["Supreme-Light"],
       },
       height: {
-        "13": "3.25rem"
+        13: "3.25rem",
       },
       transitionDuration: {
         2000: "2000ms",
@@ -23,8 +23,10 @@ module.exports = {
         30: "30%",
       },
       colors: {
-        "titanium-100": "#bad9cd",
-        "titanium-200": "#455f63",
+        "g5-white": "#f7f7f7",
+        "g5-grey": "#eeeeee",
+        "g5-black": "#393e46",
+        "g5-cream": "#929aab",
       },
       backgroundImage: {
         "cherish-moment": "url('https://i.ibb.co/xqJpNV5/cherish-moment.jpg')",
@@ -46,6 +48,9 @@ module.exports = {
       "300%": "300%",
       "400%": "400%",
     },
+  },
+  variants: {
+    fill: ["hover", "focus"],
   },
   plugins: [],
 };
