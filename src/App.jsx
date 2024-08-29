@@ -25,7 +25,7 @@ import CustomerSupport from "./pages/CustomerSupport";
 import LoginSignUp from "./pages/LoginSignUp";
 import MyAccount from "./pages/MyAccount";
 import Checkout from "./pages/Checkout";
-import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentSuccess, { OrderSuccess } from "./pages/PaymentSuccess";
 import Error from "./pages/Error";
 
 function App() {
@@ -142,6 +142,7 @@ function App() {
                   path="/payment/success/:payment"
                   element={<PaymentSuccess />}
                 />
+                <Route path="/order/success" element={<OrderSuccess />} />
                 <Route path="*" element={<Error />} />
               </Route>
             </Routes>
