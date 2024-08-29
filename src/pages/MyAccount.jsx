@@ -1,44 +1,47 @@
-import React, { useState } from "react";
-import { useContext } from "react";
-import UserContext from "../context/UserContext";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion, useTransform, useScroll } from "framer-motion";
+import UserContext from "../context/UserContext";
 import { MyAccountControlPanel } from "../features/MyAccount/MyAccount-Control-Panel";
 import { UserProfile } from "../features/MyAccount/UserProfile";
 import { UserAddress } from "../features/MyAccount/UserAddress";
 import { UserWishlist } from "../features/MyAccount/UserWishlist";
 import { isLogin } from "../utils/axios";
-import { UserProfileWelcome } from "../features/MyAccount/UserProfile";
-import { UserAddressHeader } from "../features/MyAccount/UserAddress";
 import { UserOrder } from "../features/MyAccount/UserOrder";
-import { motion, useTransform, useScroll } from "framer-motion";
-
 
 export default function MyAccount() {
   const {
-    accountNonExpired,
-    accountNonLocked,
-    authorities,
-    avatar,
-    birthDay,
-    credentialsNonExpired,
-    email,
-    enabled,
     firstName,
-    id,
     lastName,
-    password,
+    email,
     phoneNumber,
-    username,
+    birthDay,
   } = useContext(UserContext) || {};
-  
+
   const navigate = useNavigate();
+  
   if (!isLogin) {
     toast.error("You haven't logged in!!!");
     navigate("/login");
   }
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  // Retrieve the selectedIndex
+  const query = new URLSearchParams(location.search);
+
+  const initialSelectedIndex = parseInt(parseInt(query.get("selectedIndex")) || localStorage.getItem("selectedIndex")) || 0;
+
+  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
+
+  // Update localStorage whenever selectedIndex changes
+  useEffect(() => {
+    localStorage.setItem("selectedIndex", selectedIndex);
+
+    const params = new URLSearchParams(location.search);
+    params.set("selectedIndex", selectedIndex);
+    navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+  }, [selectedIndex, navigate, location.pathname, location.search]);
+
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 100]);
 
@@ -63,5 +66,4 @@ export default function MyAccount() {
       </div>
     </div>
   );
-   
 }
