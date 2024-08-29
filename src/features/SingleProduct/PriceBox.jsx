@@ -43,7 +43,7 @@ export default function PriceBox({
         className="text-white font-bold"
         text="Add to wishlist"
         background="red"
-        onClick={handleAddToWishlist}
+        handleClick={handleAddToWishlist}
       />
     </div>
   );
