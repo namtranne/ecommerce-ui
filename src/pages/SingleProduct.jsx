@@ -15,6 +15,7 @@ import RatingStars from "../features/SingleProduct/RatingStar";
 import ProductReview from "../features/SingleProduct/ProductReview";
 import { formatPrice } from "../utils/product";
 import { useAddWishlistItem } from "../hooks/useUser";
+import Marketing from "../features/SingleProduct/Marketing";
 
 function SingleProduct() {
   // validateProductInfo();
@@ -89,8 +90,6 @@ function SingleProduct() {
     );
   }
 
-  // console.log(product);
-
   return (
     <div className="bg-white">
       <main className="px-12 py-8 max-w-[134rem] m-auto grid grid-cols-[0.8fr_1fr] gap-40">
@@ -153,6 +152,12 @@ function SingleProduct() {
           <ProductReview productId={product.id} />
         </section>
       </main>
+      <Marketing
+        category={product.category.id}
+        brand={product.brand ? product.brand.name : ""}
+        price={product.price ? product.price : 0}
+        id = {product.id}
+      />
     </div>
   );
 }
