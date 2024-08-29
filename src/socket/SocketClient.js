@@ -35,12 +35,13 @@ class SocketClient {
 
   subscribe(destination, callback) {
     return this.client.subscribe(destination, (message) => {
-      callback(message.body);
+      callback(message);
     });
   }
 
   publish(destination, body) {
-    this.client.publish({ destination, body: JSON.stringify(body) });
+    console.log(123);
+    this.client.publish(destination, JSON.stringify(body));
   }
 }
 

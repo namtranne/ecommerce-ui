@@ -9,6 +9,8 @@ const ProductContext = createContext();
 
 function Products() {
   const { categoryId } = useParams();
+  const brand = localStorage.getItem("brand") || "";
+  console.log(brand);
   const [reviewProduct, setReviewProduct] = useState(null);
   const [data, setData] = useState({
     content: [],
@@ -22,7 +24,7 @@ function Products() {
   const [filter, setFilter] = useState({
     categoryId: categoryId,
     keyWord: "",
-    brand: "",
+    brand: brand,
     minPrice: 0,
     maxPrice: 999999999,
     sortBy: "price",

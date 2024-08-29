@@ -89,7 +89,7 @@ const OffersBlock = () => (
       className="col-span-6 row-span-12 bg-red-500 md:col-span-6 hover:z-20 relative"
     >
       <a
-        href="http://localhost:5173/products/1846" // PC & Laptops
+        href="https://g5tech.store/products/1846" // PC & Laptops
         className="flex flex-col justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -117,7 +117,7 @@ const OffersBlock = () => (
         relative"
     >
       <a
-        href="http://localhost:5173/products/1815" // Accessories
+        href="https://g5tech.store/products/1815" // Accessories
         className="flex flex-col justify-start items-center h-full text-3xl text-white"
       >
         <div>
@@ -142,7 +142,7 @@ const OffersBlock = () => (
         relative"
     >
       <a
-        href="http://localhost:5173/products/1789" // Smartphones and tablets
+        href="https://g5tech.store/products/1789" // Smartphones and tablets
         className="flex flex-row justify-end items-center h-full text-3xl text-white"
       >
         <img
@@ -173,7 +173,7 @@ const OffersBlock = () => (
       style={{ backgroundSize: "contain", height: "100%", width: "100%" }}
     >
       <a
-        href="http://localhost:5173/products/1801" // Cameras
+        href="https://g5tech.store/products/1801" // Cameras
         className="flex flex-col justify-start items-top h-full text-3xl text-white"
       >
         <div>
@@ -199,7 +199,7 @@ const OffersBlock = () => (
         md:col-span-3"
     >
       <a
-        href="http://localhost:5173/products/0" // Full shop
+        href="https://g5tech.store/products/0" // Full shop
         className="flex flex-col justify-center items-center h-full text-3xl text-white"
       >
         <div>

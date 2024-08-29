@@ -5,6 +5,7 @@ import BarLoader from "../../../ui/BarLoader";
 
 export function BrandFilter({ updateFilter }) {
   const { isLoading, data, error } = useBrand();
+  const brand = localStorage.getItem("brand") || "";
   if (isLoading) {
     return (
       <div className="mb-4">
@@ -17,7 +18,7 @@ export function BrandFilter({ updateFilter }) {
     <div className="mb-4">
       <p className="mb-1 text-xl font-bold">Brand</p>
       <Select
-        defaultValue={""}
+        defaultValue={brand}
         style={{ width: 120 }}
         // onChange={handleChange}
         options={data.map((brand) => ({

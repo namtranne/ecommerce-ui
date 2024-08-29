@@ -7,11 +7,13 @@ export default defineConfig(() => {
       outDir: "build",
     },
     plugins: [react()],
+    server: {
+      port: 3000, // Specify your desired port here
+    },
     resolve: {
       alias: {
-        '@': '/src',
+        "@": "/src",
       },
     },
   };
-  
 });

@@ -133,9 +133,9 @@ function Navbar() {
               <button
                 className={`mx-2 p-2 z-20 font-bold text-2xl text-[#99a0ac] hover:text-white`}
                 onClick={() => navigateTo("Home")}
-                >
-                  Home
-                </button>
+              >
+                Home
+              </button>
               <button
                 className={`mx-2 p-2 z-20 font-bold text-2xl ${
                   showModal ? "text-white" : "text-[#99a0ac]"
@@ -148,7 +148,9 @@ function Navbar() {
               </button>
               <div
                 className={`fixed top-16 w-3/4 left-1/2 transform -translate-x-1/2 bg-white border border-gray-300 rounded-md transition-opacity duration-500 ease-in-out ${
-                  showModal ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                  showModal
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none"
                 }`}
                 onMouseEnter={() => setShowModal(true)}
                 onMouseLeave={() => setShowModal(false)}
@@ -199,9 +201,7 @@ function Navbar() {
                     <button className="block w-full text-left pb-2">
                       Acer
                     </button>
-                    <button className="block w-full text-left pb-2">
-                      MSI
-                    </button>
+                    <button className="block w-full text-left pb-2">MSI</button>
                     <button className="block w-full text-left pb-2">
                       Xiaomi
                     </button>

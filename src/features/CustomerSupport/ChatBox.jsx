@@ -1,10 +1,27 @@
 import { Button } from "@mantine/core";
+import { useContext, useEffect, useState } from "react";
 import { MessageList, Input } from "react-chat-elements";
+import SocketClient from "../../socket/SocketClient";
+import SocketClientContext from "../../context/SocketClientContext";
 
 export default function ChatBox() {
+  const { client } = useContext(SocketClientContext);
+  const [message, setMessage] = useState("");
+  const handleSendMessage = () => {
+    try {
+      client.publish({
+        destination: `/app/chat/sendMessage/admin`,
+        body: message,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    setMessage("");
+  };
+
   return (
-    <div className="h-full py-4">
-      <div className="h-full flex flex-col bg-slate-400">
+    <div className="h-full py-4 ">
+      <div className="h-full w-full flex flex-col bg-slate-400">
         <MessageList
           className="message-list flex-1 w-full"
           lockable={true}
@@ -31,7 +48,11 @@ export default function ChatBox() {
           <Input
             placeholder="Type here..."
             multiline={true}
-            rightButtons=<Button>Send</Button>
+            rightButtons=<Button onClick={() => handleSendMessage()}>
+              Send
+            </Button>
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />{" "}
         </div>
       </div>
