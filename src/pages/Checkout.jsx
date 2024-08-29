@@ -24,6 +24,7 @@ const paymentMethods = [
 
 const Checkout = () => {
   const { isLoading, data: addresses } = useUserAddresses();
+  const [isMakingPayment, setIsMakingPayment] = useState(false);
   const { data: cartItems, isLoading: isLoadingCartItems } = useCart();
   const [paymentDropdownFocus, setPaymentDropdownFocus] = useState(false);
   const [addressesDropdownFocus, setAddressesDropdownFocus] = useState(false);
@@ -78,7 +79,6 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = async () => {
-    console.log(123);
     if (!address) {
       toast.error("Please select an address!");
     }
@@ -90,12 +90,14 @@ const Checkout = () => {
         paymentMethod: paymentMethod.name,
         address: convertAddress(address),
       };
+      setIsMakingPayment(true);
       const response = await authAxios.post("/payment/create_payment", data);
       window.location.href = response.data.url;
     } catch (err) {
       console.log(err);
       toast.error("There was an error creating the order");
     }
+    setIsMakingPayment(false);
   };
 
   if (isLoading || isLoadingCartItems) {
@@ -116,7 +118,7 @@ const Checkout = () => {
         <div>
           <ProfileButton
             buttonIcon={MdOutlineAddLocationAlt}
-            buttonName="Add Address"
+            buttonName={isLoading ? "Adding address..." : "Add Address"}
             onClick={handleAddClick}
             optionalClassName="mt-12 mb-4 mr-24 self-end"
           />
@@ -262,7 +264,7 @@ const Checkout = () => {
           style={{ backgroundColor: "#352f36", color: "#ffffff" }} // Tailwind's bg-blue-500 color
           onClick={() => handlePlaceOrder()}
         >
-          Place order
+          {isMakingPayment ? "Placing order..." : "Place order"}
         </motion.button>
       </motion.form>
     </div>

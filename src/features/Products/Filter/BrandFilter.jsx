@@ -6,6 +6,7 @@ import BarLoader from "../../../ui/BarLoader";
 export function BrandFilter({ updateFilter }) {
   const { isLoading, data, error } = useBrand();
   const brand = localStorage.getItem("brand") || "";
+  localStorage.removeItem("brand");
   if (isLoading) {
     return (
       <div className="mb-4">
