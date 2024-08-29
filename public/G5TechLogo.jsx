@@ -14,7 +14,7 @@ export const Logo = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="#929aab"
-      className="hover:fill-[#f7f7f7] hover:cursor-pointer w-fit h-24"
+      className="hover:fill-[#f7f7f7] hover:cursor-pointer w-fit h-full"
       onClick={() => navigateTo("Home")}
       xmlns:xlink="http://www.w3.org/1999/xlink"
       zoomAndPan="magnify"

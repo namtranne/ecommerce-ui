@@ -39,7 +39,12 @@ export default function PriceBox({
         className="text-white font-bold"
         text="Add to cart"
       />
-      <NeubrutalismButton className="text-white font-bold" text="Add to wishlist" background="red" />
+      <NeubrutalismButton
+        className="text-white font-bold"
+        text="Add to wishlist"
+        background="red"
+        onClick={handleAddToWishlist}
+      />
     </div>
   );
 }

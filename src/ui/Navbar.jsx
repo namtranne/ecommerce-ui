@@ -131,12 +131,12 @@ function Navbar() {
         <div className="fixed inset-0 bg-black opacity-60 z-10"></div>
       )} */}
       <header
-        className={`w-full flex justify-between items-center bg-[#393E46] top-0 z-40 ${
+        className={`w-full h-[10vh] flex justify-between items-center bg-[#393E46] top-0 z-40 ${
           showModal ? " z-20" : ""
         }`}
       >
-        <div className="flex-1 flex justify-start pl-4 py-2">
-          <Logo className="" />
+        <div className="flex-1 flex justify-start pl-4 py-2 h-full">
+          <Logo className="hover:fill-[#f7f7f7]" />
         </div>
         <nav className="flex py-3">
           <button
