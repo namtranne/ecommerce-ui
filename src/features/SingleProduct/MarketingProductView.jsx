@@ -22,7 +22,7 @@ function MarketingProductView({ products = [], isLoading }) {
   };
 
   const handleClick = (productId) => {
-    navigate(`/products/product-info?id=${productId}`); // Step 3: Adjust the path as needed
+    navigate(`/products/product-info?id=${productId}`);
   };
 
   if (isLoading) {

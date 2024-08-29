@@ -53,13 +53,13 @@ export const MyAccountControlPanel = ({ selectedIndex, setSelectedIndex }) => {
             )}
           </React.Fragment>
         ))}
-        <div>
+        {/* <div>
           <AccountControlOption
             optionIcon={CiLogout}
             optionName="Log Out"
             classNameAdd="rounded-b-3xl"
           />
-        </div>
+        </div> */}
       </motion.ul>
     </motion.div>
   );

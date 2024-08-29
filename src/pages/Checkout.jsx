@@ -10,6 +10,15 @@ import { formatPrice } from "../utils/product";
 import { toast } from "react-toastify";
 import cities from "../data/cities.json";
 import districts from "../data/districts.json";
+import { Spin } from "antd";
+
+const contentStyle = {
+  padding: 50,
+  background: "rgba(0, 0, 0, 0.05)",
+  borderRadius: 4,
+};
+
+const content = <div style={contentStyle} />;
 
 const paymentMethods = [
   {
@@ -99,7 +108,11 @@ const Checkout = () => {
   };
 
   if (isLoading || isLoadingCartItems) {
-    return <>Loading...</>;
+    return (
+      <Spin size="large" tip="Loading...">
+        {content}
+      </Spin>
+    );
   }
 
   return (
